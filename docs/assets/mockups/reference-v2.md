@@ -1,0 +1,11 @@
+# Reference revision v2
+
+Output: `home-classic-reference-v2.png` — two screens in one presentation, edited with built-in image generation from `../Cute Snake Garden Mobile Game UI.png`.
+
+User direction supersedes v1: preserve the reference mascot, typography, buttons, and composition; rename to Snake & Math; remove gameplay directional controls. Home Play leads to a separate Classic/MDAS mode picker, which is not drawn or implemented in this two-screen concept. Gameplay shown is Classic.
+
+This revision deliberately preserves reference artwork and is not an original-art replacement or rights clearance. No Android code changed.
+
+## Prompt
+
+Edit the supplied original two-phone Snake Garden reference image into a revised two-screen Snake & Math mockup. Preserve the original image extremely faithfully: same two Android phones, same framing, green blurred jungle background, same forest-green screen backgrounds, same foliage, same rendering style, same cream/lime chunky playful fonts, same shadows and dimensional buttons. LEFT HOME SCREEN: preserve the exact cute coiled snake mascot as shown, its pose, face, large eyes, lime body, spots, cream belly, tongue, rocks and leaves. Preserve the exact PLAY button, trophy BEST SCORE 1280 panel, THEMES and SETTINGS buttons, and tagline 'A little game of growth'. Only change main title from SNAKE GARDEN to 'SNAKE & MATH', arranged as SNAKE on first line and & MATH on second in same original cream/lime typography with leaf accents. Do not add mode cards or other UI; Play is intended to open a separate mode picker later, not shown here. RIGHT CLASSIC GAMEPLAY SCREEN: preserve same score 240, best 1280, round pause button, board frame, grid, snake pose and exact snake appearance, red apple and garden decoration. Change its small SNAKE GARDEN logo to SNAKE & MATH in matching lettering. Remove ALL FOUR directional control buttons and their arrow symbols completely, restoring forest background in their place. Retain the existing SWIPE TO MOVE instruction at bottom. Do not replace buttons with any other control. Keep all other details unchanged. Output polished landscape presentation containing exactly these two phone screens like original. No extra screens, no MDAS question, no new mascot interpretation, no layout redesign.
