@@ -13,6 +13,14 @@ Four columns, left to right:
 
 All fourteen requested pieces are present. Generated connectors are inset and not aligned to exact tile boundaries; edge fringe/stray pixels and inconsistent connector shading remain. Do not use naive equal-cell crops as a verified seamless atlas. After art review: clean edges, normalize connector widths and anchors, export regions, and validate actual assembled pieces and moving turns. No runtime or assembly validation performed.
 
+## Assembly prototype
+
+`../snake-assembly-prototype.html` now assembles these actual sheet regions instead of drawing a procedural body. The self-contained HTML embeds the atlas and backdrop. It includes turning and straight layouts, all four head/tail directions, individual pieces, optional grid, discrete cell stepping and PNG export.
+
+Source regions are remapped using piecewise source/destination coordinates to share a 160px logical tile and 80px connector width. Alpha cleanup retains the largest connected opaque component plus its immediate edge pixels per piece. This is prototype processing only; the original sheet remains untouched. Generated shading and shape inconsistencies may remain. It is not an approved production atlas or smooth movement implementation.
+
+Validation: JavaScript passed `node --check`; embedded PNG dimensions and tile mapping structure were checked locally. Browser visual verification was blocked: the local HTTP server could not bind in the sandbox, and direct file navigation was rejected by the browser URL policy. Open the HTML locally to review the actual result; do not treat the joins as visually verified.
+
 ## Generation prompt
 
 Create a GREEN SNAKE MODULAR GAME SPRITE SHEET draft for visual review. Input image 1 is gameplay art/style reference; input image 2 is approved face identity reference. Preserve cute glossy lime snake, dark green oval spots, cream-yellow lower jaw, huge expressive dark green eyes, friendly smile and tiny red forked tongue, clean shaded cartoon game rendering. True TRANSPARENT alpha background. Square high resolution sheet, precisely FOUR equal columns by FOUR equal rows, uniform cell sizing. Exactly fourteen isolated sprites, one per occupied cell, two empty cells. NO text, labels, grid lines, background, phone, UI, shadows outside sprites, full assembled snakes or extra objects. All pieces belong to ONE coordinated snake, matching body width, outline thickness and shading. Use subtle center highlights and darker edge shading that work on turns. Uniform body connection cross-section 44 percent of cell width, centered on connecting tile edges. Never draw a closing dark outline across an open connection: outlines only follow exposed outside silhouette. Parts should meet neighboring tiles cleanly without knobs, collars, rings, gaps or capped ends.
