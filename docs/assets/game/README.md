@@ -1,6 +1,17 @@
-# Snake & Math — asset review v1
+# Snake & Math — game assets
 
-Status: awaiting visual review. Only snake and background prepared; no app code or other assets created.
+Status: browser gameplay and final snake rendering approved on 2026-11-20. Android coding is deferred until the user resumes in Android Studio.
+
+## Current gameplay references
+
+- [Android handoff](../../android-prototype-handoff.md): start here for native work.
+- [Grid gameplay prototype](snake-grid-gameplay-prototype.html) and [behavior notes](grid-gameplay-prototype.md): approved Classic/MDAS baseline.
+- [Smooth-joins v3](path-snake/smooth-joins-v3.md): continuous shaded body/tail, sparse spots and rear-feathered head from `path-snake/snake_path_parts_v1.png`. Its body/tail image regions are unused.
+- [Final MDAS still](path-snake/grid-mdas-joins-v3.png): actual-code visual comparison.
+
+Use the [approved asset allowlist](../README.md) when preparing Android resources. Superseded tile, procedural-only and segmented studies have been moved into [the deprecated archive](../../archive/README.md), outside the active asset folders.
+
+## Home mascot and background
 
 | File | Dimensions | Format | Intended use |
 | --- | --- | --- | --- |
@@ -13,7 +24,7 @@ Generated with the built-in image generation tool using ../mockups/home-v3.png a
 
 Names use Android resource-compatible lowercase underscores. Once approved, copy to the Android module's res/drawable-nodpi directory (no Android module was modified in this task). Keep the snake PNG alpha; render with aspect ratio preserved. Background can fill the window with center crop; edge foliage may crop on different aspect ratios. Keep text, touch targets and the game grid in Compose, not baked into this image.
 
-The mascot is a static coiled illustration, not an animated or modular gameplay sprite. PRD sections 2.4 and 3.7 require the moving body to be drawn as a continuous rounded Canvas path with spots and face details. This asset supplies its visual direction; gameplay rendering remains future work after review.
+The mascot is a static coiled illustration, not an animated or modular gameplay sprite. The approved browser gameplay uses the head from the separate path-snake atlas and draws a continuous body/tail. Native rendering remains pending; see the current references above.
 
 ## Snake prompt
 

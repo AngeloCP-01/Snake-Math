@@ -1,6 +1,7 @@
 # Snake & Math — Design System
 
 **Source of truth:** `docs/assets/mockups/home-v3.png` and `docs/assets/mockups/mdas-gameplay-v3.png`.
+These mockups govern screen styling. The [current grid prototype](../assets/game/snake-grid-gameplay-prototype.html) and [smooth-joins v3](../assets/game/path-snake/smooth-joins-v3.md) govern the approved moving snake; see the [Android handoff](../android-prototype-handoff.md). Android coding is deferred.
 Colors were sampled from those images. Sizes are in **dp/sp** for a 390dp-wide phone (in the mockups, 1dp ≈ 1.75px).
 
 | File | What it is |
@@ -8,6 +9,11 @@ Colors were sampled from those images. Sizes are in **dp/sp** for a 390dp-wide p
 | `design-system.html` | Visual reference. Open it in a browser to see swatches, type and live component specimens. |
 | `tokens.json` | Machine-readable tokens: color, type, spacing, radius, elevation, sizes, board, motion. |
 | `README.md` | This spec. Read it before building any screen or component. |
+| `screens-prototype.html` | Seven PRD screens for phone/tablet, with gallery and click-through review. Proposed designs, awaiting review. |
+| `screen-designs.md` | Screen/layout decisions, interaction scope and verification notes. |
+| `previews/README.md` | Fourteen current browser-rendered screen exports; reference-only. |
+| `loading-prototype.html` | Live slithering mascot/rolling-zero-apple loading motion review, for portrait phone and landscape tablet. |
+| `loading-animation.md` | Loading motion contract, asset use and native handoff. |
 
 ---
 
@@ -52,10 +58,11 @@ Use a vertical gradient: `lime-300 #C1EB43` → `lime-400 #B1E630` → `lime-500
 ### Illustration
 | Token | Hex |
 |---|---|
-| Snake (provisional, see §5) fill / outline / spots | `#BEEF00 → #A5DC00 → #78B700` / `#174C03` / `#448E06`, `#65A700` |
-| Snake face, belly, eyes | Come from the head and mascot PNGs, not from tokens |
-| Apple body / shade / highlight / leaf | `#D41D21` / `#A81619` / `#F86257` / `#429E27` |
-| Apple number / outline | `#FCFAC3` / `#6A0F10` |
+| Snake body base / edge / center (see §5) | `#8ABA16` / `#739D0D` / about `#A9D91F` |
+| Snake spots / dark spots / shadow | `#72A71A` / `#649A16` / `#071611` at 40% |
+| Snake face | Comes from the head region of the atlas PNG, not from tokens |
+| Apple body / highlight / stem and leaf / shadow | `#D83D26` / `#F17D54` / `#749B36` / `#092019` at 40% |
+| Apple number / outline | `#FFF4D3` / `#9A271E` |
 | Trophy | `#FCCD20` → `#F5B10A` |
 | Rock / shade | `#80776A` / `#615D57` |
 
@@ -142,42 +149,84 @@ Each entry gives the anatomy, the size, then the tokens.
 ### Game board
 - **Frame:** 6dp, `leaf-400` with a `leaf-300` top highlight. Curls of leafy frame at all four corners.
 - **Field:** `#01411E`, with 1dp grid lines in `#0D5426`, radius 24 outside and 18 inside.
-- **Cells:** target **44dp**. On a phone this gives an **8 × 9** grid. Compute the column count as `floor(availableWidth / 44)`.
+- **Cells:** phones use **12 × 16** in portrait; tablets use **20 × 16** in landscape. Fit square cells to the available board rectangle; source-canvas pixels are not Android dp. Select the profile at session creation and retain it during the round. The mockup's 8 × 9 / 44dp layout is historical.
+- The prototype draws an unstyled checkerboard (`#1D3C2C` / `#203F2F`). The app uses the field above instead.
 - **Decorations:** grass tufts and small rocks only. They are drawn under the snake and apples and must never share a cell with either.
 
 ### Answer apple
-- About 1.15 × cell, in a glossy red. The leaf points up-right.
-- The number is centered in Baloo 2 ExtraBold at 0.5 × cell, cream, with a dark red outline at 0.06 × cell.
+- Drawn procedurally inside its cell, with no image (as in the prototype). Body `#D83D26`, highlight `#F17D54`, stem and leaf `#749B36`, soft shadow `#092019` at 40%.
+- The number is centered at 0.38 × cell, in `#FFF4D3` with a 2.5px `#9A271E` outline. Use Baloo 2 ExtraBold once the font is bundled.
 - All three apples look identical. Never style the correct one differently.
 
-### Snake (renderer spec) · IN PROGRESS
-> The gameplay snake art is still being designed in `docs/assets/game/` (`snake-assembly-prototype.html`, `gameplay-snake-v1.md`). Values here are **provisional** and track that prototype. Update this section when the art is approved.
+### Snake — approved smooth-joins v3
 
-**Hybrid rendering:** a raster head plus a body drawn on Canvas.
-- **Head:** the transparent PNG `snake_head_right_v1.png` (1254², faces right), drawn on top of the body.
-  - Fit its *visible* alpha bounds to the head footprint (currently about 2 × cell wide, tongue included). Don't scale the whole square to one cell.
-  - The neck anchor is about `(195, 675)` in source pixels. The body runs underneath the short neck stub to hide the seam.
-  - For other directions, rotate it about the head cell center. Directional face variants are a later art decision.
-- **Body:** one continuous rounded `Path` through cell centers; never stamp tiles or circles. Turn radius is about 0.5 × cell. Layers, bottom to top:
-  1. Shadow `#001D14` at 50%, offset 8 down
-  2. Outline `#174C03`
-  3. Vertical fill gradient `#BEEF00 → #A5DC00 → #78B700`
-  4. Highlight `#DCFF61` at 33%, offset up-left
-- **Spots:** oval spots alternating `#448E06` / `#65A700` on alternating sides of the centerline, kept inside the body width.
-- **Tail:** a tapered point at the end of the same shape. Outline `#174C03`, fill `#9DD400`, highlight stroke `#D8F75A`. No tail image.
-- **Collision** stays grid-based. The head art and tongue never enlarge the hit area.
-- **Open calibration:** body width relative to the cell, head scale, the neck join, and readability at a cell of about 44dp.
+Use [smooth-joins-v3.md](../assets/game/path-snake/smooth-joins-v3.md) as the renderer contract and the [current grid page](../assets/game/snake-grid-gameplay-prototype.html) as the moving visual reference. Superseded head artwork and body-pod studies are in [the deprecated archive](../archive/README.md). Only assets listed in [the approved allowlist](../assets/README.md) should be considered for Android resources.
 
-**Home mascot:** `docs/assets/game/snake_mascot_v1.png` (1254², transparent). It's a static illustration, not a gameplay sprite.
+- **Head:** original head region from `path-snake/snake_path_parts_v1.png`, cropped to visible bounds, with its rear attachment feathered over the body. Preserve the face, eyes, snout and tongue.
+- **Body and tail:** one swept silhouette with continuous local cross-section shading, sparse clipped oval spots and an integrated tapered tail. No body or tail image stamps.
+- **Alignment:** every part follows one rounded route derived from grid-cell centers. Interpolate visuals between logical ticks. Width is tunable; a one-cell footprint is not required.
+- **Collision:** integer grid cells remain authoritative; art width and tongue do not enlarge the hit area.
+- **Color:** the illustration tokens above reflect the current prototype; the exact continuous shading and spot formulas remain in its `smoothBody` function and the v3 specification.
+- **Validation:** visual study approved; Android appearance and frame timing remain to be measured.
+
+**Home mascot:** `docs/assets/game/snake_mascot_v1.png` (1254², transparent). It is a static illustration, not a gameplay sprite.
 
 ### Swipe hint
 - `— SWIPE TO MOVE —` in `label.m` cream, with 28dp dashes on both sides, centered under the board.
 - Fade it out after the first successful swipe.
 
+### Board state overlay
+- Centered over the board on a `forest-950` scrim at 25%. The card is `panel-900` at 93% with a 2dp `leaf-400` border, radius 18, at most 300dp wide.
+- Title is `title.s` at 24sp, cream. Body is Nunito 15/24 at 75% cream.
+- Copy from the prototype:
+
+  | State | Title | Body |
+  |---|---|---|
+  | ready | Swipe to begin | Swipe on the board to set your direction. |
+  | paused | Taking a breather | Press Resume when you're ready. |
+  | over | Game over | Score N · Press Restart to try again. |
+  | won | Garden complete! | Score N · Press Restart to play again. |
+
+- Hidden while running. It never blocks swipes on the board.
+
+### Feedback line
+- A single status line under the board, announced politely to screen readers. It replaces the swipe hint once play starts.
+- `label.m` in mixed case. Gold `gold-300` for gains, `red-300` for losses.
+- Messages:
+  - "+10 · Apple collected"
+  - "+10 · Correct answer!"
+  - "Not quite · the answer was N"
+  - "Collision · one life lost"
+  - "A fresh patch for your next apples." (when the pose resets for fairness)
+
 ### Background
 - A radial glow (`forest-800` center → `forest-900` → `forest-950` edges).
 - Layered leaf silhouettes on both sides (`foliage-600` far, `foliage-500` near).
 - Bright leaves in the bottom corners. Nothing busy behind any text.
+
+---
+
+## 5b. Gameplay rules (as implemented in the prototype)
+
+These are the reviewed Android prototype defaults. Numerical tuning and release polish remain adjustable; see the [handoff](../android-prototype-handoff.md) for the authoritative baseline and acceptance checks.
+
+- **Input:** swipe or drag only, with a 16px threshold; the dominant axis wins.
+  - Up to **2 turns are queued**. A reversal is rejected against the last queued direction.
+  - Turns apply at cell boundaries. The first swipe starts the round (state `ready` → `running`).
+- **Classic:** one apple; **+10** and grow per apple. A wall or self collision is game over. A full board is "Garden complete!".
+- **MDAS:** 5 lives and 3 distinct numbered apples.
+  - A correct answer gives **+10** and grows the snake.
+  - A wrong answer costs one life, with no growth, and moves to the next question.
+  - A collision costs one life and resets the snake and the question, then waits for a swipe.
+  - At 0 lives the game is over. There's no question timer.
+- **Questions:** forms `a + b × c`, `a × b − d`, `ab ÷ b + c`, `ab ÷ b × c`.
+  - Evaluated with an explicit precedence evaluator (× ÷ before + −, left to right), never by evaluating strings. Integer answers only.
+  - Wrong answers are distinct values within ±1–9 of the correct one, in a shuffled order.
+- **Fairness:**
+  - Apples spawn only on cells the head can reach.
+  - If the body encloses the head, the pose resets *without* a penalty before new apples spawn.
+  - Entering the vacating tail cell is legal unless that tick grows the snake.
+- **Lifecycle:** backgrounding auto-pauses; resuming needs an explicit tap. Use one frame loop, never one per restart. Best scores are per session in the prototype, and persist with DataStore in the app.
 
 ---
 
@@ -189,7 +238,7 @@ Each entry gives the anatomy, the size, then the tokens.
 - subtitle
 - mascot hero (about 300 × 240)
 - 24dp gap
-- PLAY
+- PLAY → separate mode selection screen (Classic Apple / MDAS Learning)
 - 20dp gap
 - BEST SCORE
 - 20dp gap
@@ -208,7 +257,15 @@ Each entry gives the anatomy, the size, then the tokens.
 - swipe hint
 - bottom inset
 
-**Classic gameplay** is the same without the mode chip and question card. The lives pill is hidden in Classic, so the board grows.
+**Classic gameplay** is the same without the MDAS question card and lives pill. Keep the selected device profile consistent between modes: 12 × 16 for phones or 20 × 16 for tablets.
+
+---
+
+### Tablet layout and orientation policy
+
+All seven main phone screens and the loading state are portrait only; all seven main tablet screens and the loading state are landscape only. The browser review uses fixed design frames; native orientation enforcement is pending Android implementation.
+
+In landscape gameplay, use a compact left rail for mode, lives and the persistent MDAS question. Expand the board to **20 × 16**, with square cells; at the 1024 × 768 reference size the outer board is approximately 704 × 566px. Keep the same snake proportions and shading. Pause/results preserve the wider field beneath their overlays. Home, mode selection and Settings retain the tablet layouts in the screen gallery.
 
 ---
 
@@ -220,8 +277,10 @@ Each entry gives the anatomy, the size, then the tokens.
 | `typography.scale` | `core/ui/theme/Type.kt`, as a `SnakeMathTypography` data class with `TextStyle`s |
 | `spacing`, `radius`, `size` | `core/ui/theme/Dimens.kt` |
 | Components | `core/ui/components/` (`PrimaryButton`, `PillButton`, `StatPanel`, `ScorePanel`, `RoundIconButton`, `ModeChip`, `LivesPill`, `QuestionCard`) |
-| Board, snake, apple | `core/ui/drawing/`, drawn on Compose `Canvas` from the `board` and `illustration` tokens |
-| Mascot, gameplay head, background | Approved PNGs from `docs/assets/game/` → `res/drawable-nodpi/` (keep alpha and aspect ratio) |
+| Board, snake, apple | `core/ui/drawing/`, drawn on Compose `Canvas` from the `board` and `illustration` tokens. The renderer reads an engine snapshot plus a render fraction (0–1 within the tick) |
+| Snake head | Atlas `path-snake/snake_path_parts_v1.png` → `res/drawable-nodpi/`. Load it once as an `ImageBitmap`, pre-feather the head region once, then draw it with `DrawScope.drawImage(image, srcOffset, srcSize, dstOffset, dstSize)` inside `withTransform { translate; rotate }` |
+| Game rules and question evaluator | Plain Kotlin in `core/game` and `core/math`, ported from the prototype's engine (no Compose dependency) |
+| Mascot, background | Approved PNGs from `docs/assets/game/` → `res/drawable-nodpi/` (keep alpha and aspect ratio) |
 | Leaves, rocks, trophy, icons | Vector drawables (`res/drawable/*.xml`) |
 
 Outlined, extruded lettering (logo) is not a plain `Text` style. Draw it twice: first a `drawStyle = Stroke(...)` pass in `ink-900`, then the fill pass on top. Or ship the logo as a vector drawable.
@@ -230,6 +289,8 @@ Outlined, extruded lettering (logo) is not a plain `Text` style. Draw it twice: 
 
 ## 8. Open items
 
-- **THEMES** appears in the mockup, but the requirements doc lists themes as out of scope. Either add it to the scope or swap the button for something else, such as "HOW TO PLAY".
-- **Not in the mockups yet:** the mode select screen (opened by PLAY), Pause, Game Over, and feedback for correct and wrong answers. Build them from these components.
-- **Gameplay art is in progress** (`docs/assets/game/`): the snake head, mascot and background are review v1. The apple, logo and decoration assets don't exist yet. The art is AI-generated from Freepik-styled references, which is not a rights clearance, so check the Freepik license before release.
+- **THEMES** is retained in the historical home mockup; a themes screen/skin selector is deferred beyond the initial Android prototype. Settings remains in product scope.
+- **Device calibration:** verify phone 12 × 16 portrait and tablet 20 × 16 landscape, including orientation behavior, cell size, answer readability, swipe feel and snake scale on devices before release.
+- **Screen review:** the [seven-screen gallery](screens-prototype.html) now proposes mode selection, pause, game over and settings alongside the home/gameplay layouts, for phone and landscape tablet. User approval and native layout validation remain pending.
+- **The prototype's chrome is unstyled.** Its HUD, buttons and fonts are placeholders. When building, use the components in §5, not the prototype's HTML styling.
+- **Art status** (`docs/assets/game/`): the final gameplay snake appearance is approved; its atlas, mascot and background are review masters. The apple is procedural in the prototype; production logo, icons and decorations remain pending. Reference-based generated art provenance is recorded in the asset notes. Visual approval is not publication rights clearance.

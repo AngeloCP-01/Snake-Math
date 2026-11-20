@@ -1,6 +1,6 @@
 # Separate home and MDAS mockups
 
-Built-in image generation edits using home-classic-reference-v2.png as reference. Files: home-v3.png and mdas-gameplay-v3.png. Home is a standalone rendering of the approved home design; gameplay is adapted to MDAS with five hearts, 5 + 3 × 2, three answers (11 correct; 16 and 13 distractors), and swipe-only controls. Visual concepts only; grid alignment is illustrative. No application code changed. Reference artwork retained per user direction.
+Built-in image generation edits using the earlier combined home/Classic presentation as reference. That source and the original inspiration files are preserved in [the deprecated archive](../../archive/README.md); they are outside the active asset folders. Current files: [home-v3.png](home-v3.png) and [mdas-gameplay-v3.png](mdas-gameplay-v3.png). Home is a standalone rendering of the approved home design; gameplay is adapted to MDAS with five hearts, 5 + 3 × 2, three answers (11 correct; 16 and 13 distractors), and swipe-only controls. Visual concepts only; grid alignment is illustrative. No application code changed. Reference artwork retained per user direction.
 
 ## Home prompt
 

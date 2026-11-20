@@ -1,5 +1,7 @@
 # Snake & Math: rendering and skin asset research
 
+> Historical research recommendation. The later approved renderer uses a continuous shaded body/tail and raster head; see [smooth-joins v3](../assets/game/path-snake/smooth-joins-v3.md) and [the Android handoff](../android-prototype-handoff.md). Technical comparisons below are retained for context.
+
 Date: 2026-11-19. Status: research and recommendation, not implementation approval. No new art or gameplay code produced.
 
 ## Conclusion

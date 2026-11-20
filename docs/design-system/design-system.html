@@ -148,9 +148,18 @@ figcaption{font:800 13px/1.3 var(--display);letter-spacing:.05em;color:var(--lim
 .board .field{display:block;width:250px;height:281px;border-radius:18px}
 .wip{margin-top:16px;padding:14px 18px;border-radius:14px;background:rgba(247,213,72,.08);box-shadow:inset 0 0 0 2px rgba(247,213,72,.45);font:700 14px/1.55 var(--body)}
 .wip b:first-child{display:inline-block;margin-right:10px;padding:3px 9px;border-radius:999px;background:var(--gold-300);color:var(--ink-800);font:800 12px/1.2 var(--display);letter-spacing:.08em}
+.wip.ok{background:rgba(166,218,36,.08);box-shadow:inset 0 0 0 2px rgba(166,218,36,.45)}
+.wip.ok b:first-child{background:var(--lime-400)}
+.wip a{color:var(--lime-300);font-weight:800;margin-left:6px}
+.overlay-card{width:230px;padding:18px;border-radius:18px;text-align:center;background:rgba(2,56,20,.93);box-shadow:inset 0 0 0 2px var(--leaf-400),0 10px 22px rgba(0,0,0,.35)}
+.overlay-card b{display:block;font:800 24px/1.15 var(--display);color:var(--cream-title)}
+.overlay-card span{display:block;margin-top:6px;font:700 14px/1.6 var(--body);color:rgba(247,242,187,.75)}
+.feedback{font:800 17px/1.2 var(--display);letter-spacing:.01em}
+.feedback.good{color:var(--gold-300)}.feedback.bad{color:var(--red-300)}
 .hybrid{display:grid;grid-template-columns:repeat(auto-fit,minmax(240px,1fr));gap:12px}
 .hybrid div{padding:16px;border-radius:16px;background:var(--panel-800);box-shadow:inset 0 0 0 2px var(--panel-line)}
-.hybrid b{display:block;font:800 16px/1.2 var(--display);color:var(--cream-title);margin-bottom:6px}
+.hybrid span b{color:var(--cream-title)}
+.hybrid > div > b{display:block;font:800 16px/1.2 var(--display);color:var(--cream-title);margin-bottom:6px}
 .hybrid span{font:700 13px/1.55 var(--body);color:rgba(247,242,187,.78)}
 .asset{display:block;border-radius:16px;background:repeating-conic-gradient(#0b3a20 0 25%,#0f4527 0 50%) 0 0/20px 20px;box-shadow:inset 0 0 0 1px rgba(88,180,55,.25)}
 .board svg.curl{position:absolute;width:40px;height:40px}
@@ -191,11 +200,11 @@ footer{padding:40px 0 64px;font:700 13px/1.6 var(--body);color:rgba(247,242,187,
 
 <div class="wrap">
 <header>
-  <div class="kicker">Design System · v1.0</div>
+  <div class="kicker">Design System · v1.2</div>
   <h1>Snake &amp; Math</h1>
   <p>The visual language for the Snake &amp; Math Android game: a glossy jungle toy box with chunky rounded type, lime for the primary action, gold for numbers and cream for reading. Colors were sampled from the v3 mockups. Sizes are in dp/sp for a 390dp phone. The written spec lives in <code>README.md</code> and the tokens in <code>tokens.json</code>.</p>
   <nav>
-    <a href="#source">Source</a><a href="#principles">Principles</a><a href="#color">Color</a><a href="#type">Type</a><a href="#space">Space &amp; shape</a><a href="#components">Components</a><a href="#game">Board &amp; snake</a><a href="#layout">Layout</a><a href="#rules">Do / Don't</a>
+    <a href="loading-prototype.html">Loading animation ↗</a><a href="screens-prototype.html">Seven screens ↗</a><a href="#source">Source</a><a href="#principles">Principles</a><a href="#color">Color</a><a href="#type">Type</a><a href="#space">Space &amp; shape</a><a href="#components">Components</a><a href="#game">Board &amp; snake</a><a href="#gameplay">Gameplay rules</a><a href="#layout">Layout</a><a href="#rules">Do / Don't</a>
   </nav>
 </header>
 
@@ -205,6 +214,16 @@ footer{padding:40px 0 64px;font:700 13px/1.6 var(--body);color:rgba(247,242,187,
     <figure><img src="../assets/mockups/home-v3.png" alt="Home screen mockup"><figcaption>Home · home-v3.png</figcaption></figure>
     <figure><img src="../assets/mockups/mdas-gameplay-v3.png" alt="MDAS gameplay mockup"><figcaption>MDAS gameplay · mdas-gameplay-v3.png</figcaption></figure>
   </div>
+</section>
+
+<section id="screens">
+  <h2>Seven screens · phone &amp; tablet<small>Home, mode selection, Classic, MDAS, Pause, Game Over and Settings. The approved phone Home is preserved; phones are portrait-only and tablets are landscape-only, with a wider 20 × 16 board. These are screen designs for review, not native Android implementation.</small></h2>
+  <div class="wip ok"><b>REVIEW</b><a href="screens-prototype.html">Open the seven-screen gallery ↗</a> · <a href="screens-prototype.html?device=tablet">Tablet layouts ↗</a> · <a href="previews/README.md">14 PNG exports ↗</a></div>
+</section>
+
+<section id="loading">
+  <h2>Loading · a little apple chase<small>A snake in the home mascot’s design slithers after a rolling apple marked 0, from left to right. Its spotted body bends in a travelling S-wave, led by the matching mascot-style face. Portrait phone and landscape tablet motion review; native implementation is pending.</small></h2>
+  <div class="wip ok"><b>MOTION REVIEW</b><a href="loading-prototype.html">Play the loading animation ↗</a> · <a href="loading-animation.md">Motion specification ↗</a></div>
 </section>
 
 <section id="principles">
@@ -348,53 +367,92 @@ footer{padding:40px 0 64px;font:700 13px/1.6 var(--body);color:rgba(247,242,187,
     <div class="stage"><div class="swipe-hint">SWIPE TO MOVE</div></div>
     <p class="spec"><code>label.m</code> cream with 28dp dashes on both sides, centered 16dp under the board. Fade it out after the first successful swipe.</p>
   </div>
+
+  <h3>Board state overlay</h3>
+  <div class="comp">
+    <div class="stage">
+      <div class="overlay-card"><b>Swipe to begin</b><span>Swipe on the board to set your direction.</span></div>
+      <div class="overlay-card"><b>Taking a breather</b><span>Press Resume when you're ready.</span></div>
+      <div class="overlay-card"><b>Game over</b><span>Score 120 · Press Restart to try again.</span></div>
+    </div>
+    <p class="spec">Centered over the board on a <code>forest-950</code> scrim at 25%. Card: <code>panel-900</code> at 93%, 2dp <code>leaf-400</code> border, radius 18, max width 300. <code>title.s</code> at 24sp cream, plus body in Nunito 15/24 at 75% cream. Shown for the states <b>ready</b>, <b>paused</b>, <b>over</b> and <b>won</b> ("Garden complete!"). Hidden while running. It never captures touches: swipes still reach the board.</p>
+  </div>
+
+  <h3>Feedback line</h3>
+  <div class="comp">
+    <div class="stage" style="flex-direction:column;gap:10px">
+      <div class="feedback good">+10 · Correct answer!</div>
+      <div class="feedback good">+10 · Apple collected</div>
+      <div class="feedback bad">Not quite · the answer was 11</div>
+      <div class="feedback bad">Collision · one life lost</div>
+    </div>
+    <p class="spec">A single status line under the board (<code>role="status"</code> / a polite live region). <code>label.m</code> in mixed case. Gold <code>gold-300</code> for gains, <code>red-300</code> for losses. It replaces the swipe hint once play starts. The wording above comes from the prototype.</p>
+  </div>
 </section>
 
 <section id="game">
   <h2>Board, snake &amp; apples<small>Built on Compose <code>Canvas</code>. The game logic is grid-based; the drawing is smooth.</small></h2>
-  <div class="wip"><b>IN PROGRESS</b>The gameplay art is still being designed in <code>docs/assets/game/</code> (see <code>snake-assembly-prototype.html</code> and <code>gameplay-snake-v1.md</code>). Snake proportions and colors below are <b>provisional</b>. The preview loads the live asset files, so it updates whenever they change.</div>
+  <div class="wip ok"><b>WORKING PROTOTYPE</b>The rendering and rules below come from <code>docs/assets/game/snake-grid-gameplay-prototype.html</code> (grid study D, smooth joins v3): Classic and MDAS are fully playable with swipe only. Its HUD and buttons are unstyled placeholders, so the screen chrome still follows this design system. <a href="../assets/game/snake-grid-gameplay-prototype.html">Play the prototype ↗</a></div>
 
   <div class="comp" style="grid-template-columns:1fr">
     <div class="stage" style="padding:22px;gap:22px">
       <figure><div class="crop" style="width:262px;height:286px;background-image:url(../assets/mockups/mdas-gameplay-v3.png);background-size:406.5px 609.8px;background-position:-72.2px -216.4px"></div><figcaption>Target · mockup board</figcaption></figure>
-      <figure><div class="board"><canvas class="field" data-board width="800" height="900"></canvas></div><figcaption>Current · assembled snake (head v1)</figcaption></figure>
+      <figure><div class="board"><canvas class="field" data-board width="800" height="900"></canvas></div><figcaption>Renderer specimen · illustrative grid</figcaption></figure>
+      <figure><img class="asset" src="../assets/game/path-snake/grid-mdas-joins-v3.png" alt="Prototype render" style="width:215px;height:286px;object-fit:cover"><figcaption>Prototype · actual render (12 × 16)</figcaption></figure>
     </div>
     <div class="spec">
-      <p><b>Frame:</b> 6dp, <code>leaf-300 → leaf-400 → foliage-500</code>, radius 24 outside and 18 inside, with curls of frame at the corners.</p>
-      <p style="margin-top:8px"><b>Field:</b> <code>#01411E</code>, 1dp grid in <code>#0D5426</code>. The target cell is <b>44dp</b>, giving <b>8 × 9</b> on a phone. Compute columns as <code>floor(availableWidth / 44)</code>.</p>
-      <p style="margin-top:8px"><b>Decorations:</b> grass tufts and small rocks, drawn under game pieces, never on a cell with the snake or an apple.</p>
-      <p style="margin-top:8px"><b>Answer apple:</b> <b>1.15 × cell</b>. Number at 0.5 × cell in cream with a dark red outline. All three apples look identical. <i>The apple art in this preview is a placeholder until the apple asset exists.</i></p>
+      <p><b>Frame:</b> 6dp, <code>leaf-300 → leaf-400 → foliage-500</code>, radius 24 outside and 18 inside, with curls of frame at the corners. <b>Field:</b> <code>#01411E</code>, 1dp grid in <code>#0D5426</code>. The prototype uses an unstyled checkerboard (<code>#1D3C2C</code> / <code>#203F2F</code>), which will be replaced by this field.</p>
+      <p style="margin-top:8px"><b>Device profiles:</b> phones are <b>portrait-only, 12 × 16</b>; tablets are <b>landscape-only, 20 × 16</b> in both game modes. Cells stay square. The specimen and original mockup above illustrate rendering only; the <a href="screens-prototype.html?device=tablet">current tablet screens</a> show the expanded field. Native orientation enforcement remains pending.</p>
+      <p style="margin-top:8px"><b>Decorations:</b> grass tufts and small rocks, drawn under game pieces, never on a cell with the snake or an apple. (Not in the prototype yet.)</p>
     </div>
   </div>
 
-  <h3>Snake rendering · hybrid (provisional)</h3>
+  <h3>Snake rendering · smooth joins v3</h3>
   <div class="hybrid">
-    <div><b>1 · Head</b><span>Transparent PNG <code>snake_head_right_v1.png</code> (1254², faces right). Drawn on top. Fit its visible bounds to the head footprint rather than scaling the whole square. Neck anchor ≈ <code>(195, 675)</code> in source pixels. Rotated about the head cell center for other directions; directional variants are a later art decision.</span></div>
-    <div><b>2 · Body</b><span>One continuous rounded Canvas path through cell centers, never stamped tiles. Layers: drop shadow <code>#001D14</code> 50% → outline <code>#174C03</code> → vertical fill <code>#BEEF00 → #A5DC00 → #78B700</code> → highlight <code>#DCFF61</code> 33% offset up-left. Corner radius ≈ 0.5 × cell.</span></div>
-    <div><b>3 · Spots</b><span>Oval spots alternating <code>#448E06</code> / <code>#65A700</code>, alternating sides of the centerline, kept well inside the body width.</span></div>
-    <div><b>4 · Tail</b><span>Tapered point at the end of the same shape: outline <code>#174C03</code>, fill <code>#9DD400</code>, highlight stroke <code>#D8F75A</code>. No tail image.</span></div>
+    <div><b>1 · Head</b><span>The <code>head</code> region of the atlas <code>path-snake/snake_path_parts_v1.png</code> (2172 × 724): source <code>(30, 155, 653, 445)</code>, visible bounds <code>(32, 159, 647, 436)</code>. It's top-down and faces right. Drop alpha below 70 at load. Feather the <b>rear 42%</b> with a transparency gradient; the eyes, snout and tongue stay opaque. Height <b>1.1 × body width</b>, anchored at 59% of its length, and drawn last.</span></div>
+    <div><b>2 · Body</b><span>One swept silhouette along the centerline, <b>0.70 × cell</b> wide, with <b>no outline</b>. Base <code>#8ABA16</code>. Cylindrical shading comes from 28 strips across the width, from <code>#739D0D</code> at the edges to about <code>#A9D91F</code> in the middle, with the light biased toward one side. Turns are quadratic with radius <code>min(0.36 × cell, 45% of each leg)</code>.</span></div>
+    <div><b>3 · Spots</b><span>Sparse ovals clipped to the body: radius ≈ 0.18 × width (1.24 : 0.85), spaced 0.9 × width, in lanes ±0.24 × width, with a slight wobble. They alternate <code>#72A71A</code>, with every third <code>#649A16</code>. They're anchored to the head end, so they travel with the snake.</span></div>
+    <div><b>4 · Tail &amp; shadow</b><span>The tail is the same silhouette tapering over <b>1.5 × width</b> (radius ∝ √(1−(1−t)²)) to a soft round tip, with no tail image. The shadow is a single stroke <code>#071611</code> at 40%, 0.8 × width, offset 4px down.</span></div>
   </div>
-  <p class="spec">Collision stays grid-based. The tongue and head art never enlarge the hit area. Final body width, head scale and neck join are being calibrated in the assembled prototype, so check readability at real board scale (cell ≈ 44dp).</p>
+  <p class="spec"><b>Motion:</b> logic moves one cell per <b>240ms</b> tick. The renderer interpolates the head along the cardinal segment, the tail follows its next cell (except on growing ticks), and the head rotation eases over the first 35% of a tick. Curves are visual only, and collision stays on the grid.</p>
 
-  <h3>Art assets · review v1</h3>
-  <div class="illus">
-    <figure><img class="asset" src="../assets/game/snake_mascot_v1.png" alt="Mascot" style="width:240px;height:240px"><figcaption>snake_mascot_v1.png · home hero</figcaption></figure>
-    <figure><img class="asset" src="../assets/game/snake_head_right_v1.png" alt="Gameplay head" style="width:160px;height:160px"><figcaption>snake_head_right_v1.png · gameplay head</figcaption></figure>
-    <figure><img class="asset" src="../assets/game/forest_background_v1.png" alt="Forest background" style="width:120px;height:267px;object-fit:cover"><figcaption>forest_background_v1.png · backdrop</figcaption></figure>
-    <figure><div class="crop" style="width:288px;height:115px;background-image:url(../assets/mockups/home-v3.png);background-size:512px 768px;background-position:-112px -85px"></div><figcaption>Logo lockup · mockup crop (no asset yet)</figcaption></figure>
+  <h3>Answer apple</h3>
+  <div class="comp">
+    <div class="stage"><canvas data-apples width="420" height="130" style="width:315px;height:97px"></canvas></div>
+    <p class="spec">Procedural (no image), drawn inside its cell. Body <code>#D83D26</code>, highlight <code>#F17D54</code>, stem and leaf <code>#749B36</code>, soft shadow <code>#092019</code> at 40%. The number is centered at 0.38 × cell, bold, in <code>#FFF4D3</code> with a 2.5px <code>#9A271E</code> outline. When the font is bundled, use Baloo 2 ExtraBold to match the system. All three apples look identical; the correct one is never highlighted.</p>
   </div>
-  <p class="spec">Copy approved PNGs to <code>res/drawable-nodpi</code>, keeping alpha and aspect ratio. Keep text, touch targets and the game grid in Compose, never baked into images. These are review masters, not a rights clearance.</p>
+
+  <h3>Art assets</h3>
+  <div class="illus">
+    <figure><img class="asset" src="../assets/game/path-snake/snake_path_parts_v1.png" alt="Snake parts atlas" style="width:330px;height:110px"><figcaption>snake_path_parts_v1.png · atlas (head used)</figcaption></figure>
+    <figure><img class="asset" src="../assets/game/path-snake/assembled-joins-curve-v3.png" alt="Curve render" style="width:200px;height:130px;object-fit:cover"><figcaption>assembled-joins-curve-v3 · render</figcaption></figure>
+    <figure><img class="asset" src="../assets/game/snake_mascot_v1.png" alt="Mascot" style="width:150px;height:150px"><figcaption>snake_mascot_v1.png · home hero</figcaption></figure>
+    <figure><img class="asset" src="../assets/game/forest_background_v1.png" alt="Forest background" style="width:90px;height:200px;object-fit:cover"><figcaption>forest_background_v1 · backdrop</figcaption></figure>
+  </div>
+  <p class="spec">The atlas supplies the gameplay <b>head only</b>; the body and tail use continuous procedural geometry. Superseded artwork is archived outside the active asset folders. Copy only the three runtime sources in the <a href="../assets/README.md">approved asset allowlist</a> to <code>res/drawable-nodpi</code> and load the atlas once as an <code>ImageBitmap</code>; <code>DrawScope.drawImage(srcOffset, srcSize, dstOffset, dstSize)</code> draws a region. These are review masters, not a rights clearance.</p>
+</section>
+
+<section id="gameplay">
+  <h2>Gameplay rules<small>The behavior the UI has to communicate, as implemented in the prototype. These are PRD defaults, not final release rules.</small></h2>
+  <div class="hybrid">
+    <div><b>Input</b><span>Swipe or drag only, with a 16px threshold and the dominant axis winning. Up to <b>2 turns are queued</b>, and a reversal is rejected against the last queued direction. Turns apply at cell boundaries. The first swipe starts the round.</span></div>
+    <div><b>Classic</b><span>One apple. <b>+10</b> and grow per apple. A wall or self collision means game over. Filling the board means "Garden complete!".</span></div>
+    <div><b>MDAS</b><span>Five lives and three distinct numbered apples. A correct answer gives <b>+10</b> and grows the snake. A wrong answer costs a life with no growth and moves to the next question. A collision costs a life and resets the snake and question, which then waits for a swipe. No timer.</span></div>
+    <div><b>Questions</b><span>Three operands, standard precedence (× ÷ before + −, left to right), integer results only. Forms: <code>a + b × c</code>, <code>a × b − d</code>, <code>ab ÷ b + c</code>, <code>ab ÷ b × c</code>. Wrong answers are within ±9 of the right one.</span></div>
+    <div><b>Fairness</b><span>Apples spawn only on cells the head can reach. If the body boxes the head in, the pose resets <b>without</b> a penalty. Entering the tail's cell is legal unless that tick grows the snake.</span></div>
+    <div><b>Lifecycle</b><span>Backgrounding the app auto-pauses, and resuming takes an explicit tap. One frame loop. Best scores are per session in the prototype (DataStore in the app).</span></div>
+  </div>
 </section>
 
 <section id="layout">
-  <h2>Screen layout · phone 390 × 844dp<small>Gutter 16dp. Gaps follow the spacing scale. The board takes the remaining height, snapped to whole cells.</small></h2>
+  <h2>Screen layout · portrait phone 390 × 844dp<small>Gutter 16dp. Gaps follow the spacing scale. Phone boards use 12 × 16 cells; landscape tablets use 20 × 16. All cells stay square.</small></h2>
   <div class="blueprint">
     <div>
       <div class="phone" data-blocks='[["status bar",0,30],["logo · 300×150",44,118],["subtitle · body.m",168,20],["mascot hero · 300×240",196,190],["PLAY · 296×64",404,52],["BEST SCORE · 270×78",474,62],["THEMES · SETTINGS · 48",554,40],["bottom inset",612,22]]'></div>
       <figcaption>Home</figcaption>
     </div>
     <div>
-      <div class="phone" data-blocks='[["status bar",0,30],["logo · score panel · pause",36,48],["mode chip · lives",94,32],["question card · ≥96",136,76],["board · 8×9 cells of 44dp",222,320],["SWIPE TO MOVE",554,20],["bottom inset",612,22]]'></div>
+      <div class="phone" data-blocks='[["status bar",0,30],["logo · score panel · pause",36,48],["mode chip · lives",94,32],["question card · ≥96",136,76],["board · 12×16 square cells",222,320],["SWIPE TO MOVE",554,20],["bottom inset",612,22]]'></div>
       <figcaption>MDAS gameplay (Classic hides the chip, lives and question card)</figcaption>
     </div>
   </div>
@@ -414,7 +472,7 @@ footer{padding:40px 0 64px;font:700 13px/1.6 var(--body);color:rgba(247,242,187,
   </div>
 </section>
 
-<footer>Snake &amp; Math Design System v1.0 · tokens: <code>tokens.json</code> · spec: <code>README.md</code> · open items (THEMES scope, missing screens, art originality) are listed in the README.</footer>
+<footer>Snake &amp; Math Design System v1.2 · tokens: <code>tokens.json</code> · spec: <code>README.md</code> · screen review: <a href="screens-prototype.html">seven screens for phone and tablet</a> · native validation and production art remain pending.</footer>
 </div>
 
 <script>
@@ -426,47 +484,42 @@ document.querySelectorAll('[data-sw]').forEach(el=>{
 document.querySelectorAll('[data-blocks]').forEach(el=>{
   el.innerHTML=JSON.parse(el.dataset.blocks).map(([t,y,h])=>`<div class="blk" style="top:${14+y}px;height:${h}px">${t}</div>`).join('');
 });
-// board preview: mockup board + hybrid snake (head PNG + continuous Canvas body), mirrors docs/assets/game/snake-assembly-prototype.html
+// board preview: renderer ported from docs/assets/game/snake-grid-gameplay-prototype.html (smooth joins v3), drawn on the system board
 (function(){
-  const cv=document.querySelector('[data-board]'), ctx=cv.getContext('2d'), S=100, C=8, R=9, c=v=>v*S+S/2;
-  const head=new Image(); head.src='../assets/game/snake_head_right_v1.png';
-  function rounded(points,r){const p=new Path2D();p.moveTo(...points[0]);for(let i=1;i<points.length-1;i++){const a=points[i-1],v=points[i],n=points[i+1];const la=Math.hypot(v[0]-a[0],v[1]-a[1]),lb=Math.hypot(n[0]-v[0],n[1]-v[1]),rr=Math.min(r,la/2,lb/2);p.lineTo(v[0]-(v[0]-a[0])*rr/la,v[1]-(v[1]-a[1])*rr/la);p.quadraticCurveTo(v[0],v[1],v[0]+(n[0]-v[0])*rr/lb,v[1]+(n[1]-v[1])*rr/lb);}p.lineTo(...points.at(-1));return p;}
-  function simplify(pts){return pts.filter((p,i)=>{if(i===0||i===pts.length-1)return true;const a=pts[i-1],n=pts[i+1];return !((a[0]===p[0]&&p[0]===n[0])||(a[1]===p[1]&&p[1]===n[1]));});}
-  function apple(x,y,n){ctx.save();ctx.translate(x,y);ctx.scale(1.15,1.15);
-    ctx.fillStyle='rgba(0,0,0,.25)';ctx.beginPath();ctx.ellipse(0,40,28,6,0,0,7);ctx.fill();
-    const g=ctx.createRadialGradient(-14,-14,4,0,0,46);g.addColorStop(0,'#F86257');g.addColorStop(.45,'#D41D21');g.addColorStop(1,'#A81619');
-    ctx.fillStyle=g;ctx.beginPath();ctx.moveTo(0,-20);ctx.bezierCurveTo(-20,-33,-43,-23,-41,4);ctx.bezierCurveTo(-39,31,-18,47,0,39);ctx.bezierCurveTo(18,47,39,31,41,4);ctx.bezierCurveTo(43,-23,20,-33,0,-20);ctx.fill();
-    ctx.strokeStyle='#5b3a1e';ctx.lineWidth=5;ctx.lineCap='round';ctx.beginPath();ctx.moveTo(0,-19);ctx.quadraticCurveTo(2,-34,8,-42);ctx.stroke();
-    ctx.fillStyle='#429E27';ctx.beginPath();ctx.moveTo(4,-30);ctx.bezierCurveTo(14,-45,32,-44,37,-37);ctx.bezierCurveTo(28,-26,14,-24,4,-30);ctx.fill();
-    ctx.font="800 44px 'Baloo 2', sans-serif";ctx.textAlign='center';ctx.textBaseline='middle';ctx.lineJoin='round';ctx.lineWidth=7;ctx.strokeStyle='#6A0F10';ctx.strokeText(n,0,8);ctx.fillStyle='#FCFAC3';ctx.fillText(n,0,8);ctx.restore();}
+  const cv=document.querySelector('[data-board]'), ctx=cv.getContext('2d'), CELL=100, C=8, R=9, W=CELL*.7;
+  const atlas=new Image(); atlas.src='../assets/game/path-snake/snake_path_parts_v1.png';
+  const HEAD=[32,159,647,436]; let head=null;
+  function prepareHead(){ // feather rear 42% (compositing only; no pixel reads, so it works from file://)
+    const [x,y,w,h]=HEAD,c=document.createElement('canvas');c.width=w;c.height=h;const q=c.getContext('2d');
+    q.drawImage(atlas,x,y,w,h,0,0,w,h);q.globalCompositeOperation='destination-in';
+    const m=q.createLinearGradient(0,0,w*.42,0);m.addColorStop(0,'rgba(0,0,0,0)');m.addColorStop(.12,'rgba(0,0,0,0)');m.addColorStop(1,'rgba(0,0,0,1)');q.fillStyle=m;q.fillRect(0,0,w,h);head=c;}
+  // tail → head cells (logical grid)
+  const cells=[[5,7],[5,6],[5,5],[4,5],[3,5],[2,5],[1,5],[1,4],[1,3],[1,2],[2,2],[3,2],[4,2],[5,2]];
+  function track(){const raw=cells.map(([x,y])=>({x:(x+.5)*CELL,y:(y+.5)*CELL})),pts=[];const add=(x,y)=>{if(!pts.length||Math.hypot(pts.at(-1).x-x,pts.at(-1).y-y)>.001)pts.push({x,y});};add(raw[0].x,raw[0].y);
+    for(let i=1;i<raw.length-1;i++){const v=raw[i],a=raw[i-1],b=raw[i+1],l1=Math.hypot(v.x-a.x,v.y-a.y),l2=Math.hypot(b.x-v.x,b.y-v.y),r=Math.min(CELL*.36,l1*.45,l2*.45),ax=v.x-(v.x-a.x)/l1*r,ay=v.y-(v.y-a.y)/l1*r,bx=v.x+(b.x-v.x)/l2*r,by=v.y+(b.y-v.y)/l2*r;add(ax,ay);for(let j=1;j<=10;j++){const t=j/10,u=1-t;add(u*u*ax+2*u*t*v.x+t*t*bx,u*u*ay+2*u*t*v.y+t*t*by);}}
+    add(raw.at(-1).x,raw.at(-1).y);let total=0;pts.forEach((p,i)=>{if(i)total+=Math.hypot(p.x-pts[i-1].x,p.y-pts[i-1].y);p.s=total;});return{points:pts,total};}
+  function at(t,s){const ps=t.points;if(s<0){const a=ps[0],b=ps[1],g=Math.atan2(b.y-a.y,b.x-a.x);return{x:a.x+Math.cos(g)*s,y:a.y+Math.sin(g)*s,angle:g};}s=Math.min(t.total,s);let lo=0,hi=ps.length-1;while(lo+1<hi){const m=(lo+hi)>>1;if(ps[m].s<s)lo=m;else hi=m;}const a=ps[lo],b=ps[hi],k=(s-a.s)/(b.s-a.s||1);return{x:a.x+(b.x-a.x)*k,y:a.y+(b.y-a.y)*k,angle:Math.atan2(b.y-a.y,b.x-a.x)};}
+  function body(sample,start,end,w){const layer=document.createElement('canvas');layer.width=cv.width;layer.height=cv.height;const g=layer.getContext('2d'),sec=[],n=Math.max(12,Math.ceil((end-start)/2));
+    for(let i=0;i<=n;i++){const d=start+(end-start)*i/n,p=sample(d),a=sample(Math.max(start,d-1)),b=sample(Math.min(end,d+1)),ang=Math.atan2(b.y-a.y,b.x-a.x),t=Math.max(0,Math.min(1,(d-start)/(w*1.5))),r=w*.5*Math.sqrt(1-(1-t)*(1-t));sec.push({x:p.x,y:p.y,nx:-Math.sin(ang),ny:Math.cos(ang),r});}
+    const ribbon=(lo,hi)=>{g.beginPath();sec.forEach((p,i)=>{const x=p.x+p.nx*p.r*lo,y=p.y+p.ny*p.r*lo;i?g.lineTo(x,y):g.moveTo(x,y);});for(let i=sec.length-1;i>=0;i--){const p=sec[i];g.lineTo(p.x+p.nx*p.r*hi,p.y+p.ny*p.r*hi);}g.closePath();};
+    g.save();ribbon(-1,1);g.fillStyle='#8ABA16';g.fill();g.clip();
+    for(let k=0;k<28;k++){const a=-1+k*2/28,b=-1+(k+1)*2/28,t=(a+b)/2,vol=Math.pow(Math.max(0,1-t*t),.6),li=Math.max(0,1-Math.abs(t+.27)/1.15);ribbon(a-.006,b+.006);g.fillStyle=`rgb(${Math.round(115+39*vol+9*li)},${Math.round(157+46*vol+7*li)},${Math.round(13+9*vol)})`;g.fill();}
+    let idx=0;for(let d=end-w*.75;d>start+w*.85;d-=w*.9,idx++){const p=sample(d),lane=(idx%2===0?-.24:.23)*w,rad=w*(.18+.025*Math.sin(idx*2.1));g.save();g.translate(p.x-Math.sin(p.angle)*lane,p.y+Math.cos(p.angle)*lane);g.rotate(p.angle+.22*Math.sin(idx*1.7));g.fillStyle=idx%3===0?'#649A16':'#72A71A';g.beginPath();g.ellipse(0,0,rad*1.24,rad*.85,0,0,7);g.fill();g.restore();}
+    g.restore();ctx.drawImage(layer,0,0);}
   function draw(){
-    ctx.fillStyle='#01411E';ctx.fillRect(0,0,800,900);
-    ctx.strokeStyle='#0D5426';ctx.lineWidth=3;for(let x=1;x<C;x++){ctx.beginPath();ctx.moveTo(x*S,0);ctx.lineTo(x*S,900);ctx.stroke();}for(let y=1;y<R;y++){ctx.beginPath();ctx.moveTo(0,y*S);ctx.lineTo(800,y*S);ctx.stroke();}
-    // snake cells, head first; drawn tail → head
-    const cells=[[5,2],[4,2],[3,2],[2,2],[1,2],[1,3],[1,4],[1,5],[2,5],[3,5],[4,5],[5,5],[5,6],[5,7]];
-    const pts=simplify(cells.map(([x,y])=>[c(x),c(y)]).reverse());
-    const p=rounded(pts,50), W=70;
-    ctx.lineCap='round';ctx.lineJoin='round';
-    ctx.save();ctx.translate(0,8);ctx.strokeStyle='#001D1480';ctx.lineWidth=W+14;ctx.stroke(p);ctx.restore();
-    ctx.strokeStyle='#174C03';ctx.lineWidth=W+12;ctx.stroke(p);
-    const fill=ctx.createLinearGradient(0,150,0,800);fill.addColorStop(0,'#BEEF00');fill.addColorStop(.5,'#A5DC00');fill.addColorStop(1,'#78B700');
-    ctx.strokeStyle=fill;ctx.lineWidth=W;ctx.stroke(p);
-    ctx.save();ctx.translate(-6,-7);ctx.strokeStyle='#DCFF6155';ctx.lineWidth=14;ctx.stroke(p);ctx.restore();
-    // spots along straight runs
-    let n=0;for(let i=0;i<pts.length-1;i++){const a=pts[i],b=pts[i+1],L=Math.hypot(b[0]-a[0],b[1]-a[1]),ang=Math.atan2(b[1]-a[1],b[0]-a[0]);
-      for(let d=50;d<L-40;d+=48){const t=d/L,off=(n++%2?9:-9);ctx.save();ctx.translate(a[0]+(b[0]-a[0])*t-Math.sin(ang)*off,a[1]+(b[1]-a[1])*t+Math.cos(ang)*off);ctx.rotate(ang+.2);ctx.fillStyle=n%2?'#448E06':'#65A700';ctx.beginPath();ctx.ellipse(0,0,14,10,0,0,7);ctx.fill();ctx.restore();}}
-    // tapered tail (prototype shape, scaled to body width)
-    {const a=pts[0],b=pts[1],ang=Math.atan2(b[1]-a[1],b[0]-a[0]),k=(W+12)/104;ctx.save();ctx.translate(...a);ctx.rotate(ang);ctx.scale(k,k);
-      ctx.beginPath();ctx.moveTo(45,-44);ctx.bezierCurveTo(0,-45,-65,-17,-95,0);ctx.bezierCurveTo(-65,17,0,45,45,44);ctx.closePath();ctx.fillStyle='#174C03';ctx.fill();
-      ctx.beginPath();ctx.moveTo(45,-35);ctx.bezierCurveTo(0,-36,-60,-12,-85,0);ctx.bezierCurveTo(-60,12,0,36,45,35);ctx.closePath();ctx.fillStyle='#9DD400';ctx.fill();
-      ctx.beginPath();ctx.moveTo(20,-21);ctx.quadraticCurveTo(-25,-16,-65,0);ctx.strokeStyle='#D8F75A';ctx.lineWidth=9;ctx.stroke();ctx.restore();}
-    // apples (placeholder art)
-    [[6,1,11],[0,3,16],[7,7,13]].forEach(([x,y,v])=>apple(c(x),c(y),v));
-    // head PNG: neck anchor (195,675) of the 1254px source; visible width ≈ 2 cells
-    if(head.complete&&head.naturalWidth){const end=pts.at(-1),sc=200/1216;ctx.drawImage(head,end[0]-195*sc,end[1]-675*sc,1254*sc,1254*sc);}
+    ctx.fillStyle='#01411E';ctx.fillRect(0,0,800,900);ctx.strokeStyle='#0D5426';ctx.lineWidth=3;
+    for(let x=1;x<C;x++){ctx.beginPath();ctx.moveTo(x*CELL,0);ctx.lineTo(x*CELL,900);ctx.stroke();}for(let y=1;y<R;y++){ctx.beginPath();ctx.moveTo(0,y*CELL);ctx.lineTo(800,y*CELL);ctx.stroke();}
+    [[6,1,11],[0,3,16],[7,7,13]].forEach(([x,y,v])=>window.paintApple(ctx,(x+.5)*CELL,(y+.5)*CELL,CELL/50,v));
+    const t=track(),sample=s=>at(t,s);
+    ctx.save();ctx.translate(0,8);ctx.strokeStyle='#07161166';ctx.lineWidth=W*.8;ctx.lineCap='round';ctx.lineJoin='round';ctx.beginPath();for(let i=0;i<=120;i++){const p=sample(t.total*i/120);i?ctx.lineTo(p.x,p.y):ctx.moveTo(p.x,p.y);}ctx.stroke();ctx.restore();
+    body(sample,-W*.5,t.total-W*.2,W);
+    if(head){const p=sample(t.total),h=W*1.1,w=h*HEAD[2]/HEAD[3];ctx.save();ctx.translate(p.x,p.y);ctx.rotate(p.angle);ctx.drawImage(head,-w*.59,-h/2,w,h);ctx.restore();}
   }
-  draw(); head.onload=draw; document.fonts&&document.fonts.ready.then(draw);
+  setTimeout(draw); atlas.onload=()=>{prepareHead();draw();}; document.fonts&&document.fonts.ready.then(()=>setTimeout(draw));
 })();
+// apple, ported from the prototype (cell = 50 units; k scales it)
+window.paintApple=function(ctx,x,y,k,v){ctx.save();ctx.translate(x,y);ctx.scale(k,k);ctx.fillStyle='#09201966';ctx.beginPath();ctx.ellipse(1,12,17,8,0,0,Math.PI*2);ctx.fill();ctx.fillStyle='#D83D26';ctx.beginPath();ctx.moveTo(0,-13);ctx.bezierCurveTo(-25,-25,-25,20,-7,20);ctx.quadraticCurveTo(0,24,7,20);ctx.bezierCurveTo(25,20,25,-25,0,-13);ctx.fill();ctx.fillStyle='#F17D54';ctx.beginPath();ctx.ellipse(-10,-4,3,6,.4,0,Math.PI*2);ctx.fill();ctx.fillStyle='#749B36';ctx.fillRect(-1,-23,3,10);ctx.beginPath();ctx.ellipse(7,-23,8,4,-.5,0,Math.PI*2);ctx.fill();if(v!=null){ctx.fillStyle='#FFF4D3';ctx.strokeStyle='#9A271E';ctx.lineWidth=2.5;ctx.lineJoin='round';ctx.font="800 19px 'Baloo 2', system-ui";ctx.textAlign='center';ctx.textBaseline='middle';ctx.strokeText(String(v),0,5);ctx.fillText(String(v),0,5);}ctx.restore();};
+(function(){const cv=document.querySelector('[data-apples]');if(!cv)return;const ctx=cv.getContext('2d');const draw=()=>{ctx.clearRect(0,0,cv.width,cv.height);ctx.fillStyle='#01411E';ctx.fillRect(0,0,cv.width,cv.height);[[70,11],[210,16],[350,13]].forEach(([x,v])=>window.paintApple(ctx,x,65,2.2,v));};draw();document.fonts&&document.fonts.ready.then(draw);})();
 </script>
 </body>
 </html>

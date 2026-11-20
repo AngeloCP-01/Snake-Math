@@ -6,6 +6,18 @@
 **Language:** Kotlin  
 **UI Framework:** Jetpack Compose
 
+**Handoff updated:** 2026-11-20
+
+**Status:** Browser gameplay and final snake appearance approved for the Android prototype. Documentation only at this handoff; Android implementation has not started. The user will move to Android Studio before coding begins.
+
+## Start here
+
+- [Android prototype handoff](android-prototype-handoff.md): approved references, renderer contract, implementation sequence and acceptance checks for the next session.
+- [Playable grid prototype](assets/game/snake-grid-gameplay-prototype.html): current Classic/MDAS behavior and snake appearance.
+- [Design system](design-system/README.md): home/gameplay screen styling and typography. The static mockups guide screen styling; the current playable prototype takes precedence for the moving snake.
+- [Final snake joins](assets/game/path-snake/smooth-joins-v3.md): approved continuous body/tail and blended head attachment.
+- [Approved assets](assets/README.md): explicit runtime sources and reference-only images; deprecated material is archived separately.
+
 ---
 
 # PART 1 — PROJECT OVERVIEW
@@ -40,7 +52,14 @@ The project is intended to be both a personal game and a portfolio project demon
 
 **Important:** Do not use React Native, Expo, or Flutter. The project will be developed as a native Android application using Kotlin.
 
-## 1.3 Controls
+## 1.3 Device Layout and Orientation
+
+- **Phones:** portrait only, with a **12-column × 16-row** board in both Classic and MDAS.
+- **Tablets:** landscape/horizontal only, with a **20-column × 16-row** board in both modes. The wider field uses tablet space while retaining square cells and the approved snake appearance.
+- These orientation requirements apply to all seven screens, including Home and Settings. Native enforcement and device classification will be implemented and verified in Android Studio.
+- Choose the board profile at session creation. Resizing a window must not change the number of cells during a running round.
+
+## 1.4 Controls
 
 The game will use **swipe gestures exclusively**.
 
@@ -112,13 +131,14 @@ MDAS stands for:
 **Correct answer:**
 
 - Increase the player's score.
+- Grow the snake by one cell.
 - Proceed to the next mathematical question.
 - Generate three new answer apples.
 
 **Incorrect answer:**
 
 - Deduct one life.
-- Apply the agreed question progression rule.
+- Generate the next question and three new answer apples; do not grow the snake.
 - Continue while the player has remaining lives.
 
 **Game over:**
@@ -126,16 +146,16 @@ MDAS stands for:
 - The game ends when the player loses all five lives.
 - Display the final score and a retry option.
 
-### Recommended MDAS Rules
+### Android Prototype MDAS Rules
 
-These are proposed defaults and should be confirmed before implementation:
+Carry forward the reviewed browser prototype behavior for the first Android prototype. Numerical tuning remains adjustable; difficulty progression is future work.
 
-| Situation              | Recommended behavior                      |
+| Situation              | Prototype behavior                        |
 | ---------------------- | ----------------------------------------- |
-| Correct answer         | Increase score and generate next question |
+| Correct answer         | Increase score, grow and generate next question |
 | Incorrect answer       | Lose one life and generate next question  |
-| Wall collision         | Lose one life and reset snake             |
-| Self collision         | Lose one life and reset snake             |
+| Wall collision         | Lose one life; reset snake/question; wait for a swipe |
+| Self collision         | Lose one life; reset snake/question; wait for a swipe |
 | Lives reach zero       | Game over                                 |
 | Question timer         | No timer initially                        |
 | Answer apple placement | Random reachable positions                |
@@ -162,7 +182,7 @@ Operators with equal precedence must be evaluated from left to right.
 For the first release:
 
 - Use integer operands.
-- Prefer exact integer division.
+- Use exact integer division in generated questions.
 - Avoid ambiguous expressions.
 - Generate exactly one correct answer.
 - Generate two distinct incorrect answers.
@@ -181,14 +201,23 @@ Difficulty progression can be implemented later.
 
 ## 2.3 Main Screens
 
+### Loading State
+
+Proposed visual treatment: a snake in the home mascot's design slithers after a rolling apple containing the numeral **0**, moving left to right in a loop. The long body bends in a travelling S-wave; moving the whole coiled mascot image does not satisfy this motion requirement. Use the same phone-portrait / tablet-landscape policy. Transition to Home when startup is ready; show no artificial progress percentage or minimum loading delay. See [the motion review](design-system/loading-prototype.html) and [specification](design-system/loading-animation.md). This motion proposal awaits visual approval.
+
 ### Home Screen
 
 - Snake & Math title.
 - Cartoon snake mascot.
-- Classic Apple mode selection.
-- MDAS Learning mode selection.
+- Primary PLAY button opening a separate mode-selection screen.
 - Best scores.
 - Settings.
+
+### Mode Selection Screen
+
+- Classic Apple and MDAS Learning choices.
+- Selecting a mode opens its gameplay screen, ready for the first swipe.
+- Return to home.
 
 ### Classic Gameplay
 
@@ -234,7 +263,7 @@ Keep settings minimal for the first version.
 
 ## 2.4 Visual Design Requirements
 
-Use the downloaded Snake & Math mockup image as the primary visual reference.
+Use [home-v3.png](assets/mockups/home-v3.png) and [mdas-gameplay-v3.png](assets/mockups/mdas-gameplay-v3.png) for screen styling. Preserve the approved mascot, forest palette, playful typography and button treatment. Use the current [grid gameplay prototype](assets/game/snake-grid-gameplay-prototype.html) for the moving snake, including its final smooth joins; older assembly studies are historical.
 
 **Visual direction: Cute Cartoon / Modern Minimalist**
 
@@ -255,6 +284,8 @@ Characteristics:
 The snake should look like a continuous cartoon character rather than a collection of disconnected circles.
 
 For gameplay, maintain grid-based logic but render the snake using smooth connected paths.
+
+The approved renderer combines a continuous shaded body and integrated tapered tail with the original gameplay head artwork, feathered at its rear attachment. Spaced spots replace tightly packed body pods. Snake width is a visual calibration choice, not a hard one-cell restriction; alignment and smooth assembly are the requirement. See [the renderer specification](assets/game/path-snake/smooth-joins-v3.md).
 
 The MDAS answer apples should contain clearly readable numerical labels.
 
@@ -470,6 +501,10 @@ Rendering responsibilities:
 
 The snake's logical body remains grid-based, but its appearance should use connected rounded paths.
 
+Use the approved [smooth-joins v3 specification](assets/game/path-snake/smooth-joins-v3.md): derive an open rounded route from visited grid-cell centers, interpolate visual travel between ticks, sweep continuous shaded body geometry with sparse spots, taper the tail within that same shape, and overlay the rear-feathered head from `snake_path_parts_v1.png`. The body and tail regions of that atlas are historical; the current renderer draws only its head region. Load and prepare artwork once, outside the draw loop.
+
+Keep the prototype's bounded turns and shared route for all parts. Decorative width, head art and tongue do not change logical collisions. Native visual fidelity, touch behavior and frame timing still require validation on Android.
+
 The renderer must not contain game rules or collision logic.
 
 ## 3.8 Collision Detection
@@ -646,16 +681,9 @@ sequenceDiagram
 
 ## Milestone 0 — Product Discovery and Technical Planning
 
-Finalize:
+Completed for the initial prototype: Classic/MDAS behavior, swipe controls, phone-portrait/tablet-landscape profiles and the final smooth snake rendering have been reviewed. Carry forward the tunable baseline in the [Android handoff](android-prototype-handoff.md). Difficulty progression and additional snake skins remain future work.
 
-- MDAS gameplay rules.
-- Difficulty progression.
-- Portrait/landscape decision.
-- Score system.
-- Collision behavior.
-- Visual design details.
-
-Do not begin implementation until the core requirements are clear.
+Current stopping point: documentation is prepared; Android coding is deferred until the user resumes in Android Studio. Approval of the browser prototype does not establish Android implementation or performance.
 
 ## Milestone 1 — Android Project Foundation
 
@@ -665,6 +693,7 @@ Do not begin implementation until the core requirements are clear.
 - Create application theme.
 - Implement navigation.
 - Create basic home screen.
+- Add the PLAY → mode selection → gameplay flow.
 
 ## Milestone 2 — Classic Game Engine
 
@@ -684,7 +713,7 @@ Do not begin implementation until the core requirements are clear.
 - Draw snake spots.
 - Draw snake head and face.
 - Draw apples.
-- Match the downloaded visual reference.
+- Match the approved smooth-joins v3 snake in the current grid prototype.
 
 ## Milestone 4 — Classic Gameplay UI
 
@@ -756,6 +785,7 @@ Do not begin implementation until the core requirements are clear.
 - Teacher dashboards.
 - 3D graphics.
 - Directional buttons.
+- Themes/skin selection in the initial Android prototype; the mockup's THEMES button is a visual reference, not implemented scope.
 
 ---
 
@@ -763,12 +793,7 @@ Do not begin implementation until the core requirements are clear.
 
 You are continuing development of my personal Android game project called **Snake & Math**.
 
-I have provided:
-
-1. This project handoff document.
-2. A downloaded UI mockup image that serves as the visual reference.
-
-Read the entire document and inspect the uploaded image before proceeding.
+Read this PRD and [the Android prototype handoff](android-prototype-handoff.md), then inspect the linked current prototype, final snake previews and screen mockups. All references are in the repository; an uploaded screenshot is not required.
 
 ## Important Instructions
 
@@ -778,7 +803,7 @@ Read the entire document and inspect the uploaded image before proceeding.
 - Controls must use swipe gestures only.
 - There are two game modes: Classic Apple and MDAS Learning.
 - MDAS starts with five lives and uses three answer apples, with one correct answer and two incorrect answers.
-- Preserve the cartoon green snake visual direction from the uploaded mockup.
+- Preserve the approved smooth body, tapered tail and blended original head from the current grid prototype.
 
 ## Development Approach
 
@@ -797,10 +822,6 @@ When guiding me:
 
 ## Where to Continue
 
-Start with **Milestone 0 — Product Discovery and Technical Planning**.
+The next implementation milestone is **Milestone 1 — Android Project Foundation**, following the handoff's incremental sequence. Product discovery for the initial prototype is complete; retain its approved decisions.
 
-First, review the project requirements and identify unresolved product decisions.
-
-Ask me the most important clarification questions before finalizing the detailed requirements.
-
-Do not start coding until Milestone 0 is complete and I explicitly approve moving forward.
+This session is documentation-only. Wait for the user's instruction to begin coding in Android Studio, then proceed step by step rather than generating the whole application at once.

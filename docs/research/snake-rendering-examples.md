@@ -1,5 +1,7 @@
 # Snake rendering examples — primary-source research
 
+> Historical research context. The approved implementation target is [smooth-joins v3](../assets/game/path-snake/smooth-joins-v3.md). Use [the active asset allowlist](../assets/README.md); superseded art/prototypes are in [the deprecated archive](../archive/README.md).
+
 Research date: 2026-11-19. Scope: actual rendering source and first-party graphics documentation. These examples demonstrate implementation families; they do not establish what proprietary Snake games use. No new game assets or app code were created.
 
 ## 1. Grid snake assembled from coordinated sprites

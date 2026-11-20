@@ -1,0 +1,79 @@
+{
+  "status": "Approved Android prototype sources and references",
+  "updated": "2026-11-20",
+  "path_base": "docs/assets",
+  "runtime_import_policy": "Only runtime_source entries may be copied to Android resources; prepare head according to smooth-joins v3. Reference and preview images are not runtime assets.",
+  "renderer_spec": "game/path-snake/smooth-joins-v3.md",
+  "assets": [
+    {
+      "path": "game/snake_mascot_v1.png",
+      "role": "runtime_source",
+      "usage": "Static home mascot",
+      "width": 1254,
+      "height": 1254,
+      "sha256": "9cd40317882d0fffd8c6135166888c979e600f089ce455cb53d61fd0e31639e8"
+    },
+    {
+      "path": "game/forest_background_v1.png",
+      "role": "runtime_source",
+      "usage": "Forest backdrop",
+      "width": 841,
+      "height": 1870,
+      "sha256": "e4955b04c535e22b3432cb89d142717048315987936edef7bfb8536989b4794c"
+    },
+    {
+      "path": "game/path-snake/snake_path_parts_v1.png",
+      "role": "runtime_source",
+      "usage": "Gameplay head region only; body/tail regions unused",
+      "width": 2172,
+      "height": 724,
+      "sha256": "4cb179135f1d06e1e20bcc23a7bbe640101a5a96d44572a231ff0c2f1f315795",
+      "head_source_rect": {
+        "x": 30,
+        "y": 155,
+        "width": 653,
+        "height": 445
+      }
+    },
+    {
+      "path": "mockups/home-v3.png",
+      "role": "screen_reference",
+      "usage": "Home layout and styling",
+      "width": 1024,
+      "height": 1536,
+      "sha256": "9c03cf456bc5b932a4ca94406e51d847c7be5a645aba911a8a3633a0f729e53f"
+    },
+    {
+      "path": "mockups/mdas-gameplay-v3.png",
+      "role": "screen_reference",
+      "usage": "MDAS layout and styling; current renderer overrides snake art",
+      "width": 1024,
+      "height": 1536,
+      "sha256": "bf587454ec1817f384eee36147160deae7c867bb7ddc77c9113c3187f1b76b82"
+    },
+    {
+      "path": "game/path-snake/assembled-joins-straight-v3.png",
+      "role": "renderer_preview",
+      "usage": "Final straight snake joins",
+      "width": 1000,
+      "height": 650,
+      "sha256": "6d3f749ce46aa824385557147f1b5753f578a8e7e31b83060adb806f79790315"
+    },
+    {
+      "path": "game/path-snake/assembled-joins-curve-v3.png",
+      "role": "renderer_preview",
+      "usage": "Final curved snake joins",
+      "width": 1000,
+      "height": 650,
+      "sha256": "4790393422630dc9451e5fc257f0e75a896656c3c2ca26a39638524385bc0863"
+    },
+    {
+      "path": "game/path-snake/grid-mdas-joins-v3.png",
+      "role": "renderer_preview",
+      "usage": "Final MDAS snake rendering",
+      "width": 600,
+      "height": 800,
+      "sha256": "86c9cac4e992f7545a7a0b8e4fba3c5bff21510cf397c66de2aeb1b2973368b4"
+    }
+  ]
+}
