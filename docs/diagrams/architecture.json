@@ -1,0 +1,193 @@
+{
+  "schema_version": 1,
+  "diagram_type": "architecture",
+  "meta": {
+    "title": "Snake & Math \u2014 proposed Android architecture",
+    "locale": "en",
+    "quality_profile": "showcase",
+    "legend": {
+      "mode": "auto",
+      "entries": {
+        "backend": {
+          "label": "In-process Kotlin logic"
+        },
+        "frontend": {
+          "label": "Android presentation"
+        },
+        "database": {
+          "label": "Local persistence"
+        }
+      }
+    }
+  },
+  "components": [
+    {
+      "id": "game_ui",
+      "type": "frontend",
+      "label": "Compose screens",
+      "sublabel": "State and user actions",
+      "pos": [
+        50,
+        90
+      ],
+      "size": [
+        210,
+        76
+      ]
+    },
+    {
+      "id": "game_vm",
+      "type": "frontend",
+      "label": "GameViewModel",
+      "sublabel": "Session and StateFlow owner",
+      "pos": [
+        440,
+        90
+      ],
+      "size": [
+        220,
+        76
+      ]
+    },
+    {
+      "id": "game_rules",
+      "type": "backend",
+      "label": "Game engine",
+      "sublabel": "Pure tick and rule transitions",
+      "pos": [
+        860,
+        90
+      ],
+      "size": [
+        220,
+        76
+      ]
+    },
+    {
+      "id": "canvas_view",
+      "type": "frontend",
+      "label": "Canvas renderer",
+      "sublabel": "Snapshots and interpolation",
+      "pos": [
+        50,
+        310
+      ],
+      "size": [
+        210,
+        76
+      ]
+    },
+    {
+      "id": "prefs_repo",
+      "type": "backend",
+      "label": "Preferences repository",
+      "sublabel": "Scores and settings contract",
+      "pos": [
+        440,
+        310
+      ],
+      "size": [
+        220,
+        76
+      ]
+    },
+    {
+      "id": "math_rules",
+      "type": "backend",
+      "label": "Math engine",
+      "sublabel": "Questions and exact evaluation",
+      "pos": [
+        860,
+        310
+      ],
+      "size": [
+        220,
+        76
+      ]
+    },
+    {
+      "id": "local_prefs",
+      "type": "database",
+      "label": "Preferences DataStore",
+      "sublabel": "One local instance",
+      "pos": [
+        440,
+        530
+      ],
+      "size": [
+        220,
+        76
+      ]
+    }
+  ],
+  "connections": [
+    {
+      "id": "ui_actions",
+      "from": "game_ui",
+      "to": "game_vm",
+      "label": "actions",
+      "variant": "emphasis"
+    },
+    {
+      "id": "vm_ticks",
+      "from": "game_vm",
+      "to": "game_rules",
+      "label": "commands / ticks",
+      "variant": "emphasis"
+    },
+    {
+      "id": "ui_drawing",
+      "from": "game_ui",
+      "to": "canvas_view",
+      "label": "render state",
+      "labelDy": 80
+    },
+    {
+      "id": "vm_preferences",
+      "from": "game_vm",
+      "to": "prefs_repo",
+      "label": "observe / update",
+      "labelDy": 80
+    },
+    {
+      "id": "rules_questions",
+      "from": "game_rules",
+      "to": "math_rules",
+      "label": "generate / validate",
+      "labelDy": 80
+    },
+    {
+      "id": "repository_store",
+      "from": "prefs_repo",
+      "to": "local_prefs",
+      "label": "Flow / atomic edit",
+      "labelDy": 80
+    }
+  ],
+  "cards": [
+    {
+      "dot": "cyan",
+      "title": "One app module",
+      "items": [
+        "All components run on-device.",
+        "No server or network dependency."
+      ]
+    },
+    {
+      "dot": "emerald",
+      "title": "One game state owner",
+      "items": [
+        "The ViewModel publishes engine snapshots.",
+        "Pure rules never import Android or Compose."
+      ]
+    },
+    {
+      "dot": "amber",
+      "title": "Separate rendering clock",
+      "items": [
+        "Canvas smooths movement between ticks.",
+        "Rendered geometry never decides collisions."
+      ]
+    }
+  ]
+}

@@ -1,5 +1,7 @@
 # Grid gameplay prototype — approved baseline
 
+**Historical movement rules:** this browser study has not been updated for the subsequent native decisions: wrap-around borders in both modes, Classic self-hit as its only failure, MDAS body pass-through with life loss only from incorrect answers, and age-guided arithmetic difficulty. Use [the PRD](../../snake-math-prd.md) and [architecture](../../architecture.md) for those targets; the behavior described below records what this HTML actually does.
+
 Approved for the Android prototype on 2026-11-20. The live page uses the continuous body/tail and blended head attachment described in [smooth-joins-v3.md](path-snake/smooth-joins-v3.md). See [the Android handoff](../../android-prototype-handoff.md) before beginning native work. Coding is deferred until the user resumes in Android Studio.
 
 Open `snake-grid-gameplay-prototype.html` in a browser. The file embeds the approved artwork, works without a server or packages. No Android application code or project dependencies were changed.

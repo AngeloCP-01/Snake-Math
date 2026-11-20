@@ -196,7 +196,7 @@ Use [smooth-joins-v3.md](../assets/game/path-snake/smooth-joins-v3.md) as the re
   - "+10 · Apple collected"
   - "+10 · Correct answer!"
   - "Not quite · the answer was N"
-  - "Collision · one life lost"
+  - "You bumped into your tail." (Classic game over; MDAS body crossings need no collision feedback)
   - "A fresh patch for your next apples." (when the pose resets for fairness)
 
 ### Background
@@ -208,7 +208,9 @@ Use [smooth-joins-v3.md](../assets/game/path-snake/smooth-joins-v3.md) as the re
 
 ## 5b. Gameplay rules (as implemented in the prototype)
 
-These are the reviewed Android prototype defaults. Numerical tuning and release polish remain adjustable; see the [handoff](../android-prototype-handoff.md) for the authoritative baseline and acceptance checks.
+For native arithmetic generation, the updated [PRD Section 2.2](../snake-math-prd.md#22-mathematical-question-generation) defines child-focused difficulty profiles. Native movement also supersedes the browser: both modes wrap across borders; Classic ends only on self-hit; MDAS passes through its body and loses lives only on incorrect answers. It keeps moving without resetting its pose/question on overlap. When necessary, MDAS apples may overlap the body; render their labels above it and the head above them. Classic instructions should say "Wrap around the edges. Avoid your own body." The single question pool and collision rules below remain a historical record of the browser prototype. Difficulty-selection UI still needs to be incorporated into the prepared flow.
+
+The following describes the earlier browser implementation, including superseded collision behavior. Numerical tuning and release polish remain adjustable; see the [handoff](../android-prototype-handoff.md) for native updates and acceptance checks.
 
 - **Input:** swipe or drag only, with a 16px threshold; the dominant axis wins.
   - Up to **2 turns are queued**. A reversal is rejected against the last queued direction.

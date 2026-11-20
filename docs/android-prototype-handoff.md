@@ -22,6 +22,10 @@ A [mascot loading animation](design-system/loading-prototype.html), with [motion
 
 ## Gameplay baseline to port
 
+**Native movement update, 2026-11-20:** the user confirmed wrap-around borders in both modes. Classic ends only on self-collision; MDAS passes through its own body with no pause/reset/penalty, and loses lives only on incorrect answers. These rules supersede the historical collision rows below. The browser HTML remains unchanged; use the PRD and architecture for native rules and wrap rendering.
+
+**Native arithmetic update, 2026-11-20:** [PRD Section 2.2](snake-math-prd.md#22-mathematical-question-generation) now defines selectable Easy (ages 6–7), Medium (8–9) and Hard (10–12) skill profiles. This supersedes the browser's single question pool for native generation. Numeric bounds and selection UI still need definition; the baseline below continues to describe the reviewed browser behavior.
+
 Rules remain a four-direction grid game. Swipes choose turns at cell boundaries; rendering interpolates between ticks. Rounded visual bends do not permit free steering or change occupied cells.
 
 | Item | Reviewed browser baseline |
@@ -44,12 +48,12 @@ Rules remain a four-direction grid game. Swipes choose turns at cell boundaries;
 
 The chosen device profiles are phone 12 × 16 / portrait and tablet 20 × 16 / landscape. Timing, scoring and art scale remain tuning values. Fit square cells to the available board rectangle; resizing must not silently change logical board dimensions during a round. The older playable browser study demonstrates the 12 × 16 phone profile; the screen review now shows both profiles. The former 44dp / 8 × 9 grid suggestion is superseded for this prototype.
 
-Preserve these edge cases:
+Native edge cases and historical differences:
 
-- Entering the current tail cell is legal only when that tail vacates on a non-growing tick.
+- In Classic, entering the current tail cell is legal only when that tail vacates on a non-growing tick. Check occupancy after wrapping the destination. MDAS allows all body crossings.
 - A filled Classic board completes the game.
-- The browser resets the snake pose without an extra life penalty if too few reachable spaces remain for the next set of apples. Carry this safety fallback into the prototype and review its UX before release.
-- Current distractors can be negative integers. Restricting the answer range or adding difficulty progression is a later product change.
+- The browser resets the pose if too few reachable spaces remain. Keep this fallback only for Classic and use wrap-aware reachability. Native MDAS never resets because of body coverage: prefer clear apple cells, then allow body-overlapping positions if needed, with three distinct apples away from the head and labels visible above the body.
+- Current browser distractors can be negative integers. Native answer/distractor ranges must follow the child-focused profiles and bounds agreed under PRD Section 2.2; do not copy negative distractors into every level by default. Automatic difficulty progression remains future work.
 
 ## Rendering and assets
 
@@ -62,6 +66,8 @@ Follow [smooth-joins v3](assets/game/path-snake/smooth-joins-v3.md) for the exac
 | `assets/game/forest_background_v1.png` | Portrait forest backdrop, crop at edges while preserving clear UI areas |
 
 Keep original PNGs unchanged. Later copy required art into `res/drawable-nodpi/`, preserve alpha and aspect ratio, and cache head cropping/masking. Body shading follows local path cross-sections rather than a screen-aligned gradient. All rendered parts share the same centerline and tangent calculations.
+
+Extend that shared route for native border wrapping using unwrapped coordinates/seam metadata and clipped translated copies, without a diagonal path across the field. MDAS body crossings render normally; apples/labels sit above the body and the head above them.
 
 Future skins can combine unique head artwork, body silhouette, markings and shading in a skin configuration. They need not be palette swaps. Additional skin artwork and a selector are outside the first Android prototype.
 
@@ -79,8 +85,8 @@ Use native Kotlin, Jetpack Compose and Canvas. Start with one application module
 
 ## Native acceptance checks
 
-- Both modes follow the baseline above; home PLAY opens the mode picker. Phones stay portrait with 12 × 16 cells, and tablets stay landscape with 20 × 16 cells, across navigation and device rotation.
-- Math tests cover precedence, equal-precedence order, exact division and unique options with exactly one correct answer. Engine tests cover growth, queued/reverse turns, tail-cell collision, lives, spawning and full-board completion.
+- Both modes follow the updated PRD, including selectable MDAS profiles and wrap-around on all edges. Classic ends only on self-hit; MDAS passes through its body and reaches game over only through incorrect answers. Home PLAY opens the mode picker. Phones stay portrait with 12 × 16 cells, and tablets stay landscape with 20 × 16 cells, across navigation and device rotation.
+- Math tests cover the selected profile, precedence, equal-precedence order, exact division and unique options with exactly one correct answer. Engine tests cover growth, queued/reverse turns, wrapping, Classic self-hit/tail occupancy, MDAS repeated-cell pass-through, answer-only life loss, dense-body apple placement and Classic full-board completion.
 - Head, body and tail stay aligned during straight movement and turns at several interpolation phases. Neck and tail have no obvious cap, gap or attachment seam; markings remain sparse and clipped inside the silhouette.
 - Swipe input is responsive; pause/resume/background/restart create no duplicate loop or unexpected catch-up movement.
 - Question, hearts and three answer labels stay readable on smaller screens. Safe-area insets and aspect-ratio changes preserve the board and usable touch targets.

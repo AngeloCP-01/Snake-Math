@@ -28,6 +28,8 @@ Orientation is now a product requirement: **phones portrait only, tablets landsc
 
 ## Interaction scope
 
+- **Movement rules — confirmed 2026-11-20:** both modes wrap at borders. Classic ends only on self-hit; native copy should explain wrapping and avoiding the body. MDAS passes through its body without a pause/reset/penalty; only incorrect answers cost lives. Existing browser code and exported PNGs still contain older wall-warning copy and need refreshing when the review screens are next revised. For dense MDAS boards, keep answer labels visible above any overlapping body.
+- **Home best scores — confirmed 2026-11-20:** the native Home panel shows both Classic and MDAS best scores, clearly labeled, using the existing panel treatment. The single score in the prepared exports is illustrative; those PNGs have not been regenerated for this binding clarification.
 - PLAY → mode selection → Classic or MDAS.
 - Pause → Resume or Restart retains the selected mode; Home returns to Home.
 - Results → Try Again retains the mode; MDAS results show all five hearts depleted.

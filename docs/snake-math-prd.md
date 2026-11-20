@@ -10,6 +10,8 @@
 
 **Status:** Browser gameplay and final snake appearance approved for the Android prototype. Documentation only at this handoff; Android implementation has not started. The user will move to Android Studio before coding begins.
 
+**Subsequent native rule updates, 2026-11-20:** both modes wrap across board edges. Classic ends only on self-collision; MDAS passes through its own body and loses lives only on incorrect answers. Section 2.2 defines selectable child-focused difficulty. The existing browser prototype retains earlier collision/question rules and is a historical reference for those behaviors.
+
 ## Start here
 
 - [Android prototype handoff](android-prototype-handoff.md): approved references, renderer contract, implementation sequence and acceptance checks for the next session.
@@ -92,7 +94,8 @@ Traditional Snake gameplay.
    - Score increases.
    - Snake grows longer.
    - Another apple appears.
-6. The game ends when the snake collides with itself or a wall.
+6. Crossing any board edge wraps the snake to the opposite edge; borders never end the round.
+7. The game ends only when the snake collides with its own body. Filling the board completes the round successfully.
 
 **Features:**
 
@@ -143,22 +146,29 @@ MDAS stands for:
 
 **Game over:**
 
-- The game ends when the player loses all five lives.
+- The game ends when the player loses all five lives through incorrect answers.
 - Display the final score and a retry option.
 
-### Android Prototype MDAS Rules
+**Movement and body overlap:**
 
-Carry forward the reviewed browser prototype behavior for the first Android prototype. Numerical tuning remains adjustable; difficulty progression is future work.
+- Crossing any board edge wraps the snake to the opposite edge.
+- The snake passes through its own body without a penalty, pause or position reset.
+- Body overlap alone leaves the current question, apples, score and lives unchanged; collecting an answer apple still applies the normal correct/incorrect-answer rule.
+- MDAS lives measure incorrect answers only, allowing children to focus on solving the question.
 
-| Situation              | Prototype behavior                        |
+### Native MDAS Rules
+
+These user-confirmed rules supersede the earlier browser prototype's wall/self-collision penalties. Numerical tuning remains adjustable; automatic difficulty progression is future work.
+
+| Situation              | Native behavior                           |
 | ---------------------- | ----------------------------------------- |
 | Correct answer         | Increase score, grow and generate next question |
 | Incorrect answer       | Lose one life and generate next question  |
-| Wall collision         | Lose one life; reset snake/question; wait for a swipe |
-| Self collision         | Lose one life; reset snake/question; wait for a swipe |
+| Cross a border         | Wrap to the opposite edge; no penalty     |
+| Pass through own body  | Continue normally; no life loss or reset  |
 | Lives reach zero       | Game over                                 |
 | Question timer         | No timer initially                        |
-| Answer apple placement | Random reachable positions                |
+| Answer apple placement | Three distinct reachable cells, excluding the head; prefer clear cells, with body overlap allowed if needed |
 | Starting lives         | 5                                         |
 
 The mathematical question should remain visible while the player controls the snake.
@@ -167,7 +177,9 @@ The three answer apples should be placed in positions that the snake can reasona
 
 ## 2.2 Mathematical Question Generation
 
-The MDAS engine must follow standard mathematical precedence.
+**Target audience:** Children aged **6–12** learning and practicing foundational arithmetic. MDAS uses three selectable difficulty levels aligned with the age bands below. Ages are guidance; players can choose a level that matches their current skills without entering their age.
+
+The MDAS engine must follow standard mathematical precedence whenever a question contains multiple operators.
 
 Example:
 
@@ -189,15 +201,20 @@ For the first release:
 - Randomize the position of the correct answer.
 - Validate every generated question before displaying it.
 
-Potential future difficulty levels:
+### Difficulty levels
 
-| Difficulty | Example             |
-| ---------- | ------------------- |
-| Easy       | 5 + 3 × 2           |
-| Medium     | 24 ÷ 4 + 6 × 2      |
-| Hard       | 45 - 6 × 3 + 24 ÷ 4 |
+| Difficulty | Suggested ages | Learning focus | Operators per question | Examples |
+| ---------- | -------------- | -------------- | ---------------------- | -------- |
+| Easy | 6–7 | Small-number addition and subtraction | Exactly one: `+` or `−` | `8 + 5`, `14 − 6` |
+| Medium | 8–9 | Larger addition/subtraction, multiplication tables and exact division | Exactly one: `+`, `−`, `×` or `÷` | `35 + 12`, `6 × 4`, `24 ÷ 6` |
+| Hard | 10–12 | Mixed operations and order of operations using manageable numbers | One or two: `+`, `−`, `×` or `÷` | `5 + 3 × 2`, `18 ÷ 3 + 4` |
 
-Difficulty progression can be implemented later.
+- Choose the MDAS difficulty before starting a round and retain it for that round. Retry/restart keeps the selected level.
+- Difficulty describes arithmetic skills, not a restriction based on a child's age. No age entry or age verification is required.
+- Define operand, intermediate-result, final-answer and distractor bounds for each level before implementing the generator. Age bands and digit counts alone do not establish suitable questions; the examples above illustrate the intended skills rather than specifying every allowed value.
+- Three-digit operands are no longer a blanket Hard-level rule. Number ranges should support mental arithmetic while the player steers.
+- These profiles supersede the browser prototype's single mixed-operation question pool for the native application. The prototype remains a reference for gameplay and rendering.
+- Manual difficulty selection is in scope; automatic progression or adaptive difficulty remains future work.
 
 ## 2.3 Main Screens
 
@@ -216,6 +233,7 @@ Proposed visual treatment: a snake in the home mascot's design slithers after a 
 ### Mode Selection Screen
 
 - Classic Apple and MDAS Learning choices.
+- Choose Easy, Medium or Hard before starting MDAS; reconcile this control with the prepared mode-selection layout during design review.
 - Selecting a mode opens its gameplay screen, ready for the first swipe.
 - Return to home.
 
@@ -505,24 +523,31 @@ Use the approved [smooth-joins v3 specification](assets/game/path-snake/smooth-j
 
 Keep the prototype's bounded turns and shared route for all parts. Decorative width, head art and tongue do not change logical collisions. Native visual fidelity, touch behavior and frame timing still require validation on Android.
 
+Extend the route for wrap-around movement: preserve continuous direction across an edge, clip/tile the drawing at the board boundaries and reappear on the opposite side. Do not draw a diagonal shortcut across the field. MDAS body crossings render normally, with readable answer apples above the body and the head above them.
+
 The renderer must not contain game rules or collision logic.
 
 ## 3.8 Collision Detection
 
 The engine should handle:
 
-- Wall collision.
-- Self collision.
+- Wrap-around movement at all four borders in both modes.
+- Classic self-collision, including after wrapping to the opposite edge.
+- MDAS self-overlap as normal movement, without collision penalties or pose resets.
 - Apple collection.
 - Answer apple collection.
 
-Important edge case:
+Use wrapped coordinates before checking Classic body occupancy or collecting an apple: `x = (x + columns) % columns`, `y = (y + rows) % rows` for a one-cell movement. Reachability also uses wrapped neighbors; the board edges are connected.
+
+Important Classic edge case:
 
 If the snake is not growing, its tail moves away during the next tick. Therefore, moving into the current tail cell can be legal.
 
 If the snake is growing, the tail remains in place, so moving into that cell is a collision.
 
 This should be covered by unit tests.
+
+MDAS may contain multiple body entries at the same cell; keep ordered body length separate from the number of distinct occupied cells. Body cells are traversable in MDAS. Spawn three answer apples at distinct cells away from the head, preferring cells clear of the body. If too few clear cells remain, place remaining apples over body cells and keep their labels visible; do not reset the snake or end the round because of body coverage.
 
 ## 3.9 Persistence
 
@@ -642,9 +667,9 @@ sequenceDiagram
 - Direction changes.
 - Reverse-direction prevention.
 - Snake growth.
-- Wall collision.
-- Self collision.
-- Tail-cell collision edge case.
+- Wrap-around movement at all four borders, including corner cells.
+- Classic self-collision, including a wrapped destination occupied by the body.
+- Classic tail-cell collision edge case.
 - Apple spawning.
 - Score calculation.
 - Pause and resume.
@@ -652,6 +677,8 @@ sequenceDiagram
 
 ## MDAS Tests
 
+- Selected difficulty controls allowed operators, operator count and agreed numeric bounds.
+- Retry/restart retains the selected MDAS difficulty.
 - Correct mathematical precedence.
 - Left-to-right evaluation.
 - Exact division.
@@ -662,7 +689,9 @@ sequenceDiagram
 - Starting lives equal five.
 - Correct answer scoring.
 - Incorrect answer life deduction.
-- Game over at zero lives.
+- Body pass-through, including repeated overlapping cells, with no life loss, pause, reset or question change from overlap alone.
+- Three distinct answer apples remain available even when fewer than three body-free cells remain.
+- Game over only when incorrect answers reduce lives to zero.
 
 ## UI Tests
 
