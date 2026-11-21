@@ -6,17 +6,19 @@
 ## Current position
 
 - **Completed baseline:** Milestone 0's initial browser discovery and visual references.
-- **Current milestone:** Milestone 1 — Android Project Foundation; M1.1 and M1.2 complete; next scope is M1.3 planning.
+- **Current milestone:** Milestone 1 — Android Project Foundation; M1.1–M1.3 complete. Next: M1.4 theme planning.
 - **Native implementation:** T-001 scaffold verified: build/lint passed (0 errors / 5 warnings), unit-test task `NO-SOURCE`, blank launcher observed on API 34 emulator, and actual Studio sync passed with JBR 25. Dev confirmed Rabbit 2 | 2026.2.2 Patch 2 from Help → About.
-- **Approved implementation tasks:** T-001, completed on 2026-11-21; [T-002](requirements/T-002-compose-configuration.md), separately approved by Dev on 2026-11-21 with implementation/native checks recorded in the T-002 worklog.
-- **Active implementation task:** None. [T-002](requirements/T-002-compose-configuration.md) completed on 2026-11-21: build/lint, API 34 tests/font scaling and Dev-confirmed Studio sync/preview. [Worklog](worklog/T-002-2026-11-21.md).
-- **Agreed proposals:** [P-001 — Kotlin Android foundation](requirements/P-001-kotlin-android-foundation.md), agreed on 2026-11-20 by Dev (M1.1); [P-002 — Compose configuration](requirements/P-002-jetpack-compose-configuration.md), agreed on 2026-11-21 by Dev (M1.2).
-- **Execution profile:** `sol-medium`, confirmed by Dev on 2026-11-21; exact runtime model ID unavailable.
+- **Approved implementation tasks:** T-001, completed on 2026-11-21; [T-002](requirements/T-002-compose-configuration.md), separately approved by Dev on 2026-11-21 with implementation/native checks recorded in the T-002 worklog; [T-003](requirements/T-003-package-structure.md), authorized by Dev on 2026-11-21 and complete.
+- **Active implementation task:** None. [T-003](requirements/T-003-package-structure.md) completed on 2026-11-21; documentation/source audit verified in its [worklog](worklog/T-003-2026-11-21.md).
+- **Agreed proposals:** [P-001 — Kotlin Android foundation](requirements/P-001-kotlin-android-foundation.md), agreed on 2026-11-20 by Dev (M1.1); [P-002 — Compose configuration](requirements/P-002-jetpack-compose-configuration.md), agreed on 2026-11-21 by Dev (M1.2); [P-003 — Package structure](requirements/P-003-package-structure.md), agreed on 2026-11-21 by Dev (M1.3).
+- **Last implementation profile:** T-003 `sol-medium`, confirmed by Dev on 2026-11-21; exact runtime model ID unavailable.
 - **Confirmed proposal choices:** Application ID and namespace `com.acp.snakemath`; minimum Android API 23 / Android 6.0 (Dev, 2026-11-20; P-001 D1–D2).
-- **Supporting decisions:** [DD-001 identity](decisions/DD-001-application-identity.md), [DD-002 minimum Android](decisions/DD-002-minimum-android-version.md), [DD-003 foundation build](decisions/DD-003-foundation-build-baseline.md).
+- **Supporting decisions:** [DD-001 identity](decisions/DD-001-application-identity.md), [DD-002 minimum Android](decisions/DD-002-minimum-android-version.md), [DD-003 foundation build](decisions/DD-003-foundation-build-baseline.md), [DD-005 package contract/audit](decisions/DD-005-package-structure.md).
 - **Result evidence:** [T-001 worklog](worklog/T-001-2026-11-21.md); environment limitations [ISS-001](issues/ISS-001-sandbox-gradle-access.md) and [ISS-002](issues/ISS-002-emulator-startup-instability.md).
 - **Approved M1.2 records:** P-002 agreed; accepted [DD-004 — Compose configuration](decisions/DD-004-compose-configuration.md); [T-002 — Configure Jetpack Compose](requirements/T-002-compose-configuration.md) separately approved by Dev on 2026-11-21 (“task approved”).
-- **Next action:** Begin separate Session A planning for M1.3 (package structure), using the PRD/architecture and existing templates. T-002 is complete; no M1.3 implementation authorized.
+- **Active planning:** None. P-003 agreed, T-003 separately authorized and complete. Next scope: M1.4 application theme, in a separate Session A.
+- **Next action:** Begin separate Session A proposal/task planning for M1.4; no theme implementation authorized.
+- **Documentation maintenance (2026-11-21):** Dev requested replacing all architecture Mermaid diagrams with directly viewable images. The six source diagrams are presented as eight embedded PNG figures, with [editable sources and verification](diagrams/architecture-figures/README.md). This presentation update does not advance the roadmap or approve the remaining architecture proposals.
 
 This is a roadmap tracker, not a detailed implementation plan or approval to start coding. Detailed proposals/tasks live in [requirements](requirements/); decisions, blockers and results link to their own records. Initial browser approval does not establish native behavior, testing or performance.
 
@@ -25,7 +27,7 @@ This is a roadmap tracker, not a detailed implementation plan or approval to sta
 | Milestone | Status | Proposal / task / worklog links |
 |---|---|---|
 | [0 — Product Discovery and Technical Planning](#milestone-0--product-discovery-and-technical-planning) | Initial prototype baseline complete; native planning review remains | [Handoff](android-prototype-handoff.md), [architecture draft](architecture.md) |
-| [1 — Android Project Foundation](#milestone-1--android-project-foundation) | In progress; M1.1–M1.2 done, next M1.3 planning | [P-001 agreed](requirements/P-001-kotlin-android-foundation.md); [T-001 done](requirements/T-001-project-setup.md); [worklog](worklog/T-001-2026-11-21.md); [P-002 agreed](requirements/P-002-jetpack-compose-configuration.md); [T-002 approved](requirements/T-002-compose-configuration.md) |
+| [1 — Android Project Foundation](#milestone-1--android-project-foundation) | In progress; M1.1–M1.3 done | [P-001 agreed](requirements/P-001-kotlin-android-foundation.md); [T-001 done](requirements/T-001-project-setup.md); [worklog](worklog/T-001-2026-11-21.md); [P-002 agreed](requirements/P-002-jetpack-compose-configuration.md); [T-002 done](requirements/T-002-compose-configuration.md); [P-003 agreed](requirements/P-003-package-structure.md); [T-003 done](requirements/T-003-package-structure.md) |
 | [2 — Classic Game Engine](#milestone-2--classic-game-engine) | Not started | No proposal/task records yet |
 | [3 — Custom Snake Rendering](#milestone-3--custom-snake-rendering) | Not started | No proposal/task records yet |
 | [4 — Classic Gameplay UI](#milestone-4--classic-gameplay-ui) | Not started | No proposal/task records yet |
@@ -63,7 +65,7 @@ This is a roadmap tracker, not a detailed implementation plan or approval to sta
 
 - [x] **M1.1** Create Kotlin Android project. — [T-001](requirements/T-001-project-setup.md), [worklog](worklog/T-001-2026-11-21.md).
 - [x] **M1.2** Configure Jetpack Compose. — Done; build/lint, API 34 red/green and full connected tests, native font-scale check passed; Dev confirmed Studio sync/preview on 2026-11-21. [Worklog](worklog/T-002-2026-11-21.md). Approved records: [P-002 agreed](requirements/P-002-jetpack-compose-configuration.md), [T-002 approved](requirements/T-002-compose-configuration.md), [DD-004](decisions/DD-004-compose-configuration.md).
-- [ ] **M1.3** Establish package structure.
+- [x] **M1.3** Establish package structure. — Done through [T-003](requirements/T-003-package-structure.md), authorized by Dev on 2026-11-21; documentation/source audit and preserved-source checks in the [worklog](worklog/T-003-2026-11-21.md).
 - [ ] **M1.4** Create application theme.
 - [ ] **M1.5** Implement navigation.
 - [ ] **M1.6** Create basic home screen.
@@ -129,7 +131,7 @@ This is a roadmap tracker, not a detailed implementation plan or approval to sta
 
 ## Detailed records
 
-P-001–P-002, T-001–T-002, DD-001–DD-004, ISS-001–ISS-002 and the T-001 worklog are linked above. Keep implementation detail and actual verification evidence in those records.
+P-001–P-003, T-001–T-003, DD-001–DD-005, ISS-001–ISS-002 and the T-001/T-002 worklogs are linked above. P-003 is agreed; T-003 is complete. See the [T-003 worklog](worklog/T-003-2026-11-21.md). Keep implementation detail and actual verification evidence in those records.
 
 | Record | Folder | Template |
 |---|---|---|

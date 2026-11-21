@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en"><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1"><title>Session lifecycle: start, pause and resume</title><style>html,body{margin:0;padding:0;background:#FCFAF1;color:#023E21;}.frame{width:100%;min-width:0;max-width:100%;}.diagram-container{width:100%;overflow-x:auto;}svg{display:block;width:960px;min-width:960px;height:940px;}@media print{.diagram-container{overflow-x:visible;}svg{width:100%;min-width:0;height:auto;}}</style></head><body><main class="frame"><div class="diagram-container"><svg viewBox="0 0 960 940" xmlns="http://www.w3.org/2000/svg" role="img" aria-labelledby="04-session-controls-title 04-session-controls-desc"><title id="04-session-controls-title">Session lifecycle: start, pause and resume</title><desc id="04-session-controls-desc">A first swipe starts a ready round; pausing retains the prior status and returning to the foreground never resumes automatically.</desc><defs><marker id="arrow" markerWidth="8" markerHeight="6" refX="7" refY="3" orient="auto"><polygon points="0 0, 8 3, 0 6" fill="#47634F"/></marker><marker id="arrow-accent" markerWidth="8" markerHeight="6" refX="7" refY="3" orient="auto"><polygon points="0 0, 8 3, 0 6" fill="#155E2B"/></marker><marker id="arrow-link" markerWidth="8" markerHeight="6" refX="7" refY="3" orient="auto"><polygon points="0 0, 8 3, 0 6" fill="#47634F"/></marker></defs><rect width="960" height="940" fill="#FCFAF1"/><text x="48" y="48" font-family="Segoe UI, Arial, sans-serif" font-size="28" font-weight="600" fill="#023E21" text-anchor="start">Session lifecycle: start, pause and resume</text>
+<text x="48" y="76" font-family="Segoe UI, Arial, sans-serif" font-size="12" font-weight="400" fill="#47634F" text-anchor="start">SNAKE &amp; MATH / PROPOSED ARCHITECTURE</text>
+<circle cx="200" cy="180" r="6" fill="#023E21"/>
+<path d="M 200 188 L 200 284" fill="none" stroke="#47634F" stroke-width="1.5" marker-end="url(#arrow)"/>
+<path d="M 328 320 L 632 320" fill="none" stroke="#47634F" stroke-width="1.5" marker-end="url(#arrow)"/>
+<path d="M 800 284 L 800 180 Q 800 172 792 172 L 720 172 Q 712 172 712 180 L 712 284" fill="none" stroke="#47634F" stroke-width="1.5" marker-end="url(#arrow)"/>
+<path d="M 200 396 L 200 480 Q 200 488 208 488 L 392 488 Q 400 488 400 496 L 400 596" fill="none" stroke="#47634F" stroke-width="1.5" marker-end="url(#arrow)"/>
+<path d="M 768 396 L 768 504 Q 768 512 760 512 L 568 512 Q 560 512 560 520 L 560 596" fill="none" stroke="#47634F" stroke-width="1.5" marker-end="url(#arrow)"/>
+<path d="M 356 652 L 56 652 Q 48 652 48 644 L 48 356 Q 48 348 56 348 L 80 348" fill="none" stroke="#47634F" stroke-width="1.5" marker-end="url(#arrow)"/>
+<path d="M 604 652 L 904 652 Q 912 652 912 644 L 912 356 Q 912 348 904 348 L 880 348" fill="none" stroke="#47634F" stroke-width="1.5" marker-end="url(#arrow)"/>
+<path d="M 480 596 L 480 448 Q 480 440 472 440 L 296 440 Q 288 440 288 432 L 288 396" fill="none" stroke="#47634F" stroke-width="1.5" marker-end="url(#arrow)"/>
+<rect x="211.0" y="222" width="106.0" height="22" rx="2" fill="#FCFAF1"/>
+<text x="264" y="236" font-family="Segoe UI, Arial, sans-serif" font-size="12" font-weight="400" fill="#47634F" text-anchor="middle">CREATE ROUND</text>
+<rect x="430.75" y="278" width="98.5" height="22" rx="2" fill="#FCFAF1"/>
+<text x="480" y="292" font-family="Segoe UI, Arial, sans-serif" font-size="12" font-weight="400" fill="#47634F" text-anchor="middle">FIRST SWIPE</text>
+<rect x="695.5" y="108" width="121.0" height="40" rx="2" fill="#FCFAF1"/>
+<text x="756" y="122" font-family="Segoe UI, Arial, sans-serif" font-size="12" font-weight="400" fill="#47634F" text-anchor="middle">BORDER WRAP /</text>
+<text x="756" y="140" font-family="Segoe UI, Arial, sans-serif" font-size="12" font-weight="400" fill="#47634F" text-anchor="middle">MDAS BODY PASS</text>
+<rect x="82.5" y="432" width="91.0" height="40" rx="2" fill="#FCFAF1"/>
+<text x="128" y="446" font-family="Segoe UI, Arial, sans-serif" font-size="12" font-weight="400" fill="#47634F" text-anchor="middle">PAUSE /</text>
+<text x="128" y="464" font-family="Segoe UI, Arial, sans-serif" font-size="12" font-weight="400" fill="#47634F" text-anchor="middle">BACKGROUND</text>
+<rect x="611.5" y="456" width="121.0" height="40" rx="2" fill="#FCFAF1"/>
+<text x="672" y="470" font-family="Segoe UI, Arial, sans-serif" font-size="12" font-weight="400" fill="#47634F" text-anchor="middle">PAUSE / BACK /</text>
+<text x="672" y="488" font-family="Segoe UI, Arial, sans-serif" font-size="12" font-weight="400" fill="#47634F" text-anchor="middle">BACKGROUND</text>
+<rect x="128.25" y="614" width="143.5" height="22" rx="2" fill="#FCFAF1"/>
+<text x="200" y="628" font-family="Segoe UI, Arial, sans-serif" font-size="12" font-weight="400" fill="#47634F" text-anchor="middle">RESUME: WAS READY</text>
+<rect x="676.75" y="614" width="158.5" height="22" rx="2" fill="#FCFAF1"/>
+<text x="756" y="628" font-family="Segoe UI, Arial, sans-serif" font-size="12" font-weight="400" fill="#47634F" text-anchor="middle">RESUME: WAS RUNNING</text>
+<rect x="377.75" y="402" width="68.5" height="22" rx="2" fill="#FCFAF1"/>
+<text x="412" y="416" font-family="Segoe UI, Arial, sans-serif" font-size="12" font-weight="400" fill="#47634F" text-anchor="middle">RESTART</text>
+<g data-node="READY"><rect x="80" y="284" width="248" height="112" rx="8" fill="#FFFFFF" stroke="#9BAA9E" stroke-width="1.4"/>
+<text x="204.0" y="320" font-family="Segoe UI, Arial, sans-serif" font-size="16" font-weight="600" fill="#023E21" text-anchor="middle">READY</text>
+<text x="204.0" y="344" font-family="Segoe UI, Arial, sans-serif" font-size="12" font-weight="400" fill="#47634F" text-anchor="middle">No moving loop</text>
+</g>
+<g data-node="RUNNING"><rect x="632" y="284" width="248" height="112" rx="8" fill="#F0F6CF" stroke="#155E2B" stroke-width="1.4"/>
+<text x="756.0" y="320" font-family="Segoe UI, Arial, sans-serif" font-size="16" font-weight="600" fill="#023E21" text-anchor="middle">RUNNING</text>
+<text x="756.0" y="344" font-family="Segoe UI, Arial, sans-serif" font-size="12" font-weight="400" fill="#47634F" text-anchor="middle">One owned tick job</text>
+</g>
+<g data-node="PAUSED"><rect x="356" y="596" width="248" height="112" rx="8" fill="#FFFFFF" stroke="#9BAA9E" stroke-width="1.4"/>
+<text x="480.0" y="632" font-family="Segoe UI, Arial, sans-serif" font-size="16" font-weight="600" fill="#023E21" text-anchor="middle">PAUSED</text>
+<text x="480.0" y="656" font-family="Segoe UI, Arial, sans-serif" font-size="12" font-weight="400" fill="#47634F" text-anchor="middle">Frozen interval and queued turns</text>
+</g>
+<line x1="48" y1="840" x2="912" y2="840" stroke="#9BAA9E"/>
+<text x="48" y="864" font-family="Segoe UI, Arial, sans-serif" font-size="12" font-weight="400" fill="#47634F" text-anchor="start">Resume is explicit and restores READY or RUNNING according to the state before pausing.</text>
+<text x="48" y="882" font-family="Segoe UI, Arial, sans-serif" font-size="12" font-weight="400" fill="#47634F" text-anchor="start">Borders and MDAS self-overlap keep RUNNING; neither deducts lives nor resets the round.</text></svg></div></main></body></html>

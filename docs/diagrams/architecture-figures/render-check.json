@@ -1,0 +1,130 @@
+[
+  {
+    "file": "01-system.html",
+    "title": "System and dependency map",
+    "width": 960,
+    "height": 1000,
+    "outside": [],
+    "textCount": 32,
+    "footer": [
+      "Solid: commands/delegation. Dashed: returned state. All components run in-process.",
+      "The game and math engines have no Android, Compose or persistence dependencies."
+    ],
+    "pngWidth": 1920,
+    "pngHeight": 2000,
+    "htmlSha256": "0dc47ec85fd9e179958782f13310b939fe8e4fa76acc82db6967c0a24f12f9a1",
+    "pngSha256": "d7720685aae8d71555fa127836ddefc7c4e6fc1a2f95eccd23f137b715b9a72d"
+  },
+  {
+    "file": "02-navigation.html",
+    "title": "Navigation and screen ownership",
+    "width": 960,
+    "height": 960,
+    "outside": [],
+    "textCount": 32,
+    "footer": [
+      "Pause / Back = Pause control or system Back. Round ends = game over or completion.",
+      "Try Again retains the mode. Home disposes the session. Pause/results are not new rounds."
+    ],
+    "pngWidth": 1920,
+    "pngHeight": 1920,
+    "htmlSha256": "812d25736e6ae7f6d1df1b954119eee46121f222b4b0c8a93383af9992dd66ee",
+    "pngSha256": "1abde67cf1d9e41e9c9e76c737ada16e8998fb6058fa3c910f33125f100ca6e2"
+  },
+  {
+    "file": "03-domain-model.html",
+    "title": "Domain state and transition contract",
+    "width": 960,
+    "height": 1080,
+    "outside": [],
+    "textCount": 37,
+    "footer": [
+      "Conceptual fields, not finalized Kotlin signatures. No inheritance or cardinality is implied.",
+      "A sealed mode-specific state separates Classic apples from MDAS lives, questions and answers."
+    ],
+    "pngWidth": 1920,
+    "pngHeight": 2160,
+    "htmlSha256": "b341e8a7168faf7ec0abce1542b565e7eee51090b4c3c9a879773555720faaed",
+    "pngSha256": "652cdf90f21712d577d5ca372298e87c29f453e44f20020b6c31b229dfd55b50"
+  },
+  {
+    "file": "04-session-controls.html",
+    "title": "Session lifecycle: start, pause and resume",
+    "width": 960,
+    "height": 940,
+    "outside": [],
+    "textCount": 21,
+    "footer": [
+      "Resume is explicit and restores READY or RUNNING according to the state before pausing.",
+      "Borders and MDAS self-overlap keep RUNNING; neither deducts lives nor resets the round."
+    ],
+    "pngWidth": 1920,
+    "pngHeight": 1880,
+    "htmlSha256": "b97a428ed2b1b5a23290d2e2b4b768928391e79c1fb84aafdc579330b79a6ab5",
+    "pngSha256": "8faead8fd8af9d4c31b891edcc4733a5b0bdf3b40c54518069f426a82531e346"
+  },
+  {
+    "file": "05-session-outcomes.html",
+    "title": "Session lifecycle: results, retry and disposal",
+    "width": 960,
+    "height": 1000,
+    "outside": [],
+    "textCount": 26,
+    "footer": [
+      "All four original disposal paths remain: READY, PAUSED, GAME_OVER and COMPLETED.",
+      "Retry keeps the selected mode, MDAS difficulty and board profile; a new round starts READY."
+    ],
+    "pngWidth": 1920,
+    "pngHeight": 2000,
+    "htmlSha256": "19896538dfb6dcb2b20e96d854499743ecf66b2b150720547234858eef0d557b",
+    "pngSha256": "3663cac24dec0841cee93998d200c6056b71c083586b381b9b5ac717c0290f06"
+  },
+  {
+    "file": "06-input-sequence.html",
+    "title": "Commands and ticks: queueing a swipe",
+    "width": 960,
+    "height": 820,
+    "outside": [],
+    "textCount": 15,
+    "footer": [
+      "Solid: request/command. Dashed: returned state or response. Time flows downward.",
+      "One authoritative state; no UI or renderer decides gameplay outcomes."
+    ],
+    "pngWidth": 1920,
+    "pngHeight": 1640,
+    "htmlSha256": "f1ffe525689ff82df2c10bf443a721b39ddd14f903993408c572a02abeb5848e",
+    "pngSha256": "f00f9389e7ca10ad4cc4699362949a75518cad547cfcd5521b3d9b5bb067527a"
+  },
+  {
+    "file": "07-tick-sequence.html",
+    "title": "Commands and ticks: commit and publish",
+    "width": 960,
+    "height": 1192,
+    "outside": [],
+    "textCount": 26,
+    "footer": [
+      "Solid: request/command. Dashed: returned state or response. Time flows downward.",
+      "One authoritative state; no UI or renderer decides gameplay outcomes."
+    ],
+    "pngWidth": 1920,
+    "pngHeight": 2384,
+    "htmlSha256": "f90e8aeecd911e74d622021ea1e33761e1c640fd3f37cebd48ba0c4375d71357",
+    "pngSha256": "bb2e6e23044f12d7294b96593bce61cb8dbc80af1db83366826dd0d3d7a88308"
+  },
+  {
+    "file": "08-rendering.html",
+    "title": "Rendering and adaptive layout",
+    "width": 960,
+    "height": 1280,
+    "outside": [],
+    "textCount": 21,
+    "footer": [
+      "All head, body and tail geometry uses one route. The clock changes visual interpolation only.",
+      "Wrap seams use clipped translated copies; MDAS body crossings retain readable answer labels."
+    ],
+    "pngWidth": 1920,
+    "pngHeight": 2560,
+    "htmlSha256": "4cd54c611dedac06d7d4752866e461cefbae9f5bc9d79c40d0a1db4e0adcad31",
+    "pngSha256": "f19655e2abc32bd095f6f61b4bde00a11cfff51fde72ddc88995540501c21c06"
+  }
+]

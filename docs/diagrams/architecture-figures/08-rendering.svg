@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg viewBox="0 0 960 1280" xmlns="http://www.w3.org/2000/svg" role="img" aria-labelledby="08-rendering-title 08-rendering-desc" id="d-08-rendering-root"><title id="08-rendering-title">Rendering and adaptive layout</title><desc id="08-rendering-desc">Committed state and the frame clock produce one render frame; a shared route feeds body, head and apples into Canvas without affecting rules.</desc><defs>
+      <style>#d-08-rendering-root { color: #023E21; }
+      #d-08-rendering-root .diagram-container { width:100%;overflow-x:auto; }
+      @media print {
+#d-08-rendering-root .diagram-container { overflow-x:visible; }
+}</style><marker id="d-08-rendering-arrow" markerWidth="8" markerHeight="6" refX="7" refY="3" orient="auto"><polygon points="0 0, 8 3, 0 6" fill="#47634F"/></marker><marker id="d-08-rendering-arrow-accent" markerWidth="8" markerHeight="6" refX="7" refY="3" orient="auto"><polygon points="0 0, 8 3, 0 6" fill="#155E2B"/></marker><marker id="d-08-rendering-arrow-link" markerWidth="8" markerHeight="6" refX="7" refY="3" orient="auto"><polygon points="0 0, 8 3, 0 6" fill="#47634F"/></marker></defs><rect width="960" height="1280" fill="#FCFAF1"/><text x="48" y="48" font-family="Segoe UI, Arial, sans-serif" font-size="28" font-weight="600" fill="#023E21" text-anchor="start">Rendering and adaptive layout</text>
+<text x="48" y="76" font-family="Segoe UI, Arial, sans-serif" font-size="12" font-weight="400" fill="#47634F" text-anchor="start">SNAKE &amp; MATH / PROPOSED ARCHITECTURE</text>
+<path d="M 264 236 L 264 272 Q 264 280 272 280 L 368 280 Q 376 280 376 288 L 376 352" fill="none" stroke="#47634F" stroke-width="1.5" marker-end="url(#d-08-rendering-arrow)"/>
+<path d="M 728 236 L 728 296 Q 728 304 720 304 L 592 304 Q 584 304 584 312 L 584 352" fill="none" stroke="#47634F" stroke-width="1.5" marker-end="url(#d-08-rendering-arrow)"/>
+<path d="M 376 448 L 376 496 Q 376 504 368 504 L 272 504 Q 264 504 264 512 L 264 576" fill="none" stroke="#47634F" stroke-width="1.5" marker-end="url(#d-08-rendering-arrow)"/>
+<path d="M 584 448 L 584 496 Q 584 504 592 504 L 744 504 Q 752 504 752 512 L 752 576" fill="none" stroke="#47634F" stroke-width="1.5" marker-end="url(#d-08-rendering-arrow)"/>
+<path d="M 192 672 L 192 800" fill="none" stroke="#47634F" stroke-width="1.5" marker-end="url(#d-08-rendering-arrow)"/>
+<path d="M 336 672 L 336 728 Q 336 736 344 736 L 536 736 Q 544 736 544 744 L 544 800" fill="none" stroke="#47634F" stroke-width="1.5" marker-end="url(#d-08-rendering-arrow)"/>
+<path d="M 896 624 L 912 624 Q 920 624 920 632 L 920 1080 Q 920 1088 912 1088 L 704 1088" fill="none" stroke="#47634F" stroke-width="1.5" marker-end="url(#d-08-rendering-arrow)"/>
+<path d="M 192 896 L 192 968 Q 192 976 200 976 L 392 976 Q 400 976 400 984 L 400 1040" fill="none" stroke="#47634F" stroke-width="1.5" marker-end="url(#d-08-rendering-arrow)"/>
+<path d="M 544 896 L 544 1040" fill="none" stroke="#47634F" stroke-width="1.5" marker-end="url(#d-08-rendering-arrow)"/>
+<rect x="759.25" y="262" width="113.5" height="22" rx="2" fill="#FCFAF1"/>
+<text x="816" y="276" font-family="Segoe UI, Arial, sans-serif" font-size="12" font-weight="400" fill="#47634F" text-anchor="middle">FRACTION ONLY</text>
+<g data-node="SNAP"><rect x="64" y="140" width="400" height="96" rx="8" fill="#FFFFFF" stroke="#9BAA9E" stroke-width="1.4"/>
+<text x="264.0" y="176" font-family="Segoe UI, Arial, sans-serif" font-size="16" font-weight="600" fill="#023E21" text-anchor="middle">Committed state + planned move</text>
+<text x="264.0" y="200" font-family="Segoe UI, Arial, sans-serif" font-size="12" font-weight="400" fill="#47634F" text-anchor="middle">Authoritative grid snapshot</text>
+</g>
+<g data-node="CLOCK"><rect x="544" y="140" width="352" height="96" rx="8" fill="#FFFFFF" stroke="#9BAA9E" stroke-width="1.4"/>
+<text x="720.0" y="176" font-family="Segoe UI, Arial, sans-serif" font-size="16" font-weight="600" fill="#023E21" text-anchor="middle">Monotonic frame clock</text>
+<text x="720.0" y="200" font-family="Segoe UI, Arial, sans-serif" font-size="12" font-weight="400" fill="#47634F" text-anchor="middle">Visual fraction only</text>
+</g>
+<g data-node="FRAME"><rect x="280" y="352" width="400" height="96" rx="8" fill="#F0F6CF" stroke="#155E2B" stroke-width="1.4"/>
+<text x="480.0" y="388" font-family="Segoe UI, Arial, sans-serif" font-size="16" font-weight="600" fill="#023E21" text-anchor="middle">RenderFrame + route history</text>
+<text x="480.0" y="412" font-family="Segoe UI, Arial, sans-serif" font-size="12" font-weight="400" fill="#47634F" text-anchor="middle">Shared visual input</text>
+</g>
+<g data-node="ROUTE"><rect x="64" y="576" width="400" height="96" rx="8" fill="#FFFFFF" stroke="#9BAA9E" stroke-width="1.4"/>
+<text x="264.0" y="612" font-family="Segoe UI, Arial, sans-serif" font-size="16" font-weight="600" fill="#023E21" text-anchor="middle">Rounded centerline + tangents</text>
+<text x="264.0" y="636" font-family="Segoe UI, Arial, sans-serif" font-size="12" font-weight="400" fill="#47634F" text-anchor="middle">Shared geometry</text>
+</g>
+<g data-node="APPLES"><rect x="616" y="576" width="280" height="96" rx="8" fill="#FFFFFF" stroke="#9BAA9E" stroke-width="1.4"/>
+<text x="756.0" y="612" font-family="Segoe UI, Arial, sans-serif" font-size="16" font-weight="600" fill="#023E21" text-anchor="middle">Apples + number labels</text>
+<text x="756.0" y="636" font-family="Segoe UI, Arial, sans-serif" font-size="12" font-weight="400" fill="#47634F" text-anchor="middle">Readable above the body</text>
+</g>
+<g data-node="BODY"><rect x="64" y="800" width="256" height="96" rx="8" fill="#FFFFFF" stroke="#9BAA9E" stroke-width="1.4"/>
+<text x="192.0" y="836" font-family="Segoe UI, Arial, sans-serif" font-size="16" font-weight="600" fill="#023E21" text-anchor="middle">Continuous body + tail</text>
+<text x="192.0" y="860" font-family="Segoe UI, Arial, sans-serif" font-size="12" font-weight="400" fill="#47634F" text-anchor="middle">Shading, spots and taper</text>
+</g>
+<g data-node="HEAD"><rect x="416" y="800" width="256" height="96" rx="8" fill="#FFFFFF" stroke="#9BAA9E" stroke-width="1.4"/>
+<text x="544.0" y="836" font-family="Segoe UI, Arial, sans-serif" font-size="16" font-weight="600" fill="#023E21" text-anchor="middle">Prepared atlas head</text>
+<text x="544.0" y="860" font-family="Segoe UI, Arial, sans-serif" font-size="12" font-weight="400" fill="#47634F" text-anchor="middle">Rear-feathered attachment</text>
+</g>
+<g data-node="CANVAS"><rect x="304" y="1040" width="400" height="96" rx="8" fill="#FFFFFF" stroke="#9BAA9E" stroke-width="1.4"/>
+<text x="504.0" y="1076" font-family="Segoe UI, Arial, sans-serif" font-size="16" font-weight="600" fill="#023E21" text-anchor="middle">Compose Canvas</text>
+<text x="504.0" y="1100" font-family="Segoe UI, Arial, sans-serif" font-size="12" font-weight="400" fill="#47634F" text-anchor="middle">Draws snapshots; never changes rules</text>
+</g>
+<line x1="48" y1="1180" x2="912" y2="1180" stroke="#9BAA9E"/>
+<text x="48" y="1204" font-family="Segoe UI, Arial, sans-serif" font-size="12" font-weight="400" fill="#47634F" text-anchor="start">All head, body and tail geometry uses one route. The clock changes visual interpolation only.</text>
+<text x="48" y="1222" font-family="Segoe UI, Arial, sans-serif" font-size="12" font-weight="400" fill="#47634F" text-anchor="start">Wrap seams use clipped translated copies; MDAS body crossings retain readable answer labels.</text></svg>

@@ -8,6 +8,9 @@ are later work.
 Progress and verification evidence live in [the task tracker](docs/task-tracker.md)
 and [T-002](docs/requirements/T-002-compose-configuration.md).
 
+For contributor placement and ownership, see the canonical [package map](docs/architecture.md#4-package-structure-and-construction).
+Planned directories appear when approved work adds their first useful source file.
+
 ## Local setup
 
 Use Android Studio compatible with Android Gradle Plugin 9.4.0, with:
