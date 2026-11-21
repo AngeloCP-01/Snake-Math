@@ -1,20 +1,22 @@
 # Snake & Math — Task tracker
 
-**Updated:** 2026-11-20  
+**Updated:** 2026-11-21
 **Purpose:** The single place to check development progress. The milestone order and checklist items below come from [PRD Part 6 — Development Roadmap](snake-math-prd.md#part-6--development-roadmap). Keep the PRD focused on product requirements; update progress here.
 
 ## Current position
 
 - **Completed baseline:** Milestone 0's initial browser discovery and visual references.
-- **Current milestone:** Milestone 1 — Android Project Foundation; M1.1 task review in Session A.
-- **Native implementation:** Not started.
-- **Approved implementation tasks:** None yet.
-- **Active implementation task:** None.
-- **Agreed proposal:** [P-001 — Kotlin Android foundation](requirements/P-001-kotlin-android-foundation.md), agreed on 2026-11-20 by Dev; M1.1 only.
-- **Task awaiting approval:** [T-001 — Create Kotlin Android project](requirements/T-001-project-setup.md), simple; recommended Session B profile `sol-medium`.
+- **Current milestone:** Milestone 1 — Android Project Foundation; M1.1 complete, M1.2 in Session A task review.
+- **Native implementation:** T-001 scaffold verified: build/lint passed (0 errors / 5 warnings), unit-test task `NO-SOURCE`, blank launcher observed on API 34 emulator, and actual Studio sync passed with JBR 25. Dev confirmed Rabbit 2 | 2026.2.2 Patch 2 from Help → About.
+- **Approved implementation tasks:** T-001, approved by Dev and completed on 2026-11-21; no later implementation task is approved.
+- **Active implementation task:** None. [T-001 — Create Kotlin Android project](requirements/T-001-project-setup.md) is done.
+- **Agreed proposals:** [P-001 — Kotlin Android foundation](requirements/P-001-kotlin-android-foundation.md), agreed on 2026-11-20 by Dev (M1.1); [P-002 — Compose configuration](requirements/P-002-jetpack-compose-configuration.md), agreed on 2026-11-21 by Dev (M1.2).
+- **Execution profile:** `sol-medium`, confirmed by Dev on 2026-11-21; exact runtime model ID unavailable.
 - **Confirmed proposal choices:** Application ID and namespace `com.acp.snakemath`; minimum Android API 23 / Android 6.0 (Dev, 2026-11-20; P-001 D1–D2).
 - **Supporting decisions:** [DD-001 identity](decisions/DD-001-application-identity.md), [DD-002 minimum Android](decisions/DD-002-minimum-android-version.md), [DD-003 foundation build](decisions/DD-003-foundation-build-baseline.md).
-- **Next action:** Review and explicitly approve T-001, then hand off to a separate Session B. Do not implement during this Session A.
+- **Result evidence:** [T-001 worklog](worklog/T-001-2026-11-21.md); environment limitations [ISS-001](issues/ISS-001-sandbox-gradle-access.md) and [ISS-002](issues/ISS-002-emulator-startup-instability.md).
+- **Active planning records:** P-002 agreed; accepted [DD-004 — Compose configuration](decisions/DD-004-compose-configuration.md); [T-002 — Configure Jetpack Compose](requirements/T-002-compose-configuration.md) drafted for separate review. Dev's proposal approval does not approve T-002.
+- **Next action:** Review and explicitly approve T-002, then hand off to a new Session B with recommended `sol-medium` profile. Requested planning profile: `sol-high`; exact runtime mapping unavailable. No M1.2 implementation is authorized yet.
 
 This is a roadmap tracker, not a detailed implementation plan or approval to start coding. Detailed proposals/tasks live in [requirements](requirements/); decisions, blockers and results link to their own records. Initial browser approval does not establish native behavior, testing or performance.
 
@@ -23,7 +25,7 @@ This is a roadmap tracker, not a detailed implementation plan or approval to sta
 | Milestone | Status | Proposal / task / worklog links |
 |---|---|---|
 | [0 — Product Discovery and Technical Planning](#milestone-0--product-discovery-and-technical-planning) | Initial prototype baseline complete; native planning review remains | [Handoff](android-prototype-handoff.md), [architecture draft](architecture.md) |
-| [1 — Android Project Foundation](#milestone-1--android-project-foundation) | Planning | [P-001 agreed](requirements/P-001-kotlin-android-foundation.md); [T-001 awaiting approval](requirements/T-001-project-setup.md) |
+| [1 — Android Project Foundation](#milestone-1--android-project-foundation) | In progress; M1.1 done, M1.2 task review | [P-001 agreed](requirements/P-001-kotlin-android-foundation.md); [T-001 done](requirements/T-001-project-setup.md); [worklog](worklog/T-001-2026-11-21.md); [P-002 agreed](requirements/P-002-jetpack-compose-configuration.md); [T-002 draft](requirements/T-002-compose-configuration.md) |
 | [2 — Classic Game Engine](#milestone-2--classic-game-engine) | Not started | No proposal/task records yet |
 | [3 — Custom Snake Rendering](#milestone-3--custom-snake-rendering) | Not started | No proposal/task records yet |
 | [4 — Classic Gameplay UI](#milestone-4--classic-gameplay-ui) | Not started | No proposal/task records yet |
@@ -57,10 +59,10 @@ This is a roadmap tracker, not a detailed implementation plan or approval to sta
 
 ## Milestone 1 — Android Project Foundation
 
-**Status:** Planning — [P-001](requirements/P-001-kotlin-android-foundation.md) is agreed for M1.1 only. [T-001](requirements/T-001-project-setup.md) awaits separate task approval; native implementation has not started.
+**Status:** In progress — M1.1 is done through [T-001](requirements/T-001-project-setup.md), with build/lint, API 34 startup, actual Studio sync and displayed IDE-version evidence in the [worklog](worklog/T-001-2026-11-21.md). M1.2 proposal [P-002](requirements/P-002-jetpack-compose-configuration.md) is agreed by Dev on 2026-11-21; [T-002](requirements/T-002-compose-configuration.md) awaits separate task approval in Session A.
 
-- [ ] **M1.1** Create Kotlin Android project.
-- [ ] **M1.2** Configure Jetpack Compose.
+- [x] **M1.1** Create Kotlin Android project. — [T-001](requirements/T-001-project-setup.md), [worklog](worklog/T-001-2026-11-21.md).
+- [ ] **M1.2** Configure Jetpack Compose. — Planning: [P-002 agreed](requirements/P-002-jetpack-compose-configuration.md), [T-002 draft](requirements/T-002-compose-configuration.md), [DD-004](decisions/DD-004-compose-configuration.md).
 - [ ] **M1.3** Establish package structure.
 - [ ] **M1.4** Create application theme.
 - [ ] **M1.5** Implement navigation.
@@ -127,7 +129,7 @@ This is a roadmap tracker, not a detailed implementation plan or approval to sta
 
 ## Detailed records
 
-No filled proposal, task, decision, issue or worklog records exist yet. As records are created, link them in the milestone overview and beside the relevant checklist items; keep implementation detail in those records.
+P-001, T-001, DD-001–DD-003, ISS-001–ISS-002 and the T-001 worklog are linked above. Keep implementation detail and actual verification evidence in those records.
 
 | Record | Folder | Template |
 |---|---|---|

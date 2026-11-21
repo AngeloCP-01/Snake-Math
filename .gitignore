@@ -1,0 +1,14 @@
+# Gradle and Kotlin state
+.gradle/
+.kotlin/
+build/
+
+# Local Android SDK and IDE configuration
+local.properties
+.idea/
+*.iml
+
+# Local operating-system files
+.DS_Store
+Thumbs.db
+Desktop.ini
