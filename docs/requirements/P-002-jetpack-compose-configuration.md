@@ -3,10 +3,11 @@
 **Proposed by:** Codex, for Dev's review · **Date:** 2026-11-21 · **Status:** agreed on 2026-11-21 by Dev
 
 **Roadmap scope:** M1.2 only — Configure Jetpack Compose.  
-**Session:** A — proposal agreed; task drafting authorized, task approval pending.  
+**Session:** A — proposal and T-002 approved; ready for a new implementation Session B.
+
 **Planning profile:** Requested `sol-high`. This session identifies as Codex based on GPT-6; its exact runtime model ID/profile mapping is unavailable, so a Sol mapping is not asserted.
 
-Dev owns product intent and approval. Dev confirmed the visible setup marker in D1 and then replied “approve” to the explicit request for overall P-002 agreement on 2026-11-21. This agrees the proposal and authorizes task drafting; it does not approve the resulting task or begin implementation. Accepted choices are recorded in [DD-004](../decisions/DD-004-compose-configuration.md). [T-002](T-002-compose-configuration.md) is drafted for separate review. Implementation belongs to a new Session B after task approval.
+Dev owns product intent and approval. Dev confirmed the visible setup marker in D1 and then replied “approve” to the explicit request for overall P-002 agreement on 2026-11-21. Dev separately replied “task approved” to T-002's review request on the same date. Accepted choices are recorded in [DD-004](../decisions/DD-004-compose-configuration.md). [T-002](T-002-compose-configuration.md) is approved and ready for implementation in a new Session B.
 
 ## 1. Purpose, as I understand it
 
@@ -102,7 +103,7 @@ These scoped engineering recommendations are accepted through Dev's overall prop
 
 **User decision — confirmed on 2026-11-21 by Dev:** “yes agree with visible setup marker”. Select A: show the minimal visible setup marker. No additional rationale was supplied.
 
-**Review status:** D1 resolved and overall proposal agreed on 2026-11-21 by Dev. Dev's subsequent “approve” answered the explicit overall-agreement question covering Compose configuration, preview support and the Activity smoke test. T-002 requires separate approval.
+**Review status:** D1 resolved and overall proposal agreed on 2026-11-21 by Dev. Dev's subsequent “approve” answered the explicit overall-agreement question covering Compose configuration, preview support and the Activity smoke test. T-002 was then separately approved on 2026-11-21 by Dev; implementation remains for a new Session B.
 
 ## 7. How we will know it works
 

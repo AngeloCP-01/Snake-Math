@@ -29,4 +29,4 @@ Dev explicitly chose the visible setup marker, then approved P-002 overall after
 
 ## Consequences
 
-T-002 must verify actual compiler/dependency compatibility, build/lint, Studio sync/preview and native rendering/test results separately. No exact BOM combination has been built during planning. Replace the marker through later approved UI work; it is not Home or theme approval. T-002 needs separate task approval and a new Session B before implementation.
+T-002 must verify actual compiler/dependency compatibility, build/lint, Studio sync/preview and native rendering/test results separately. No exact BOM combination has been built during planning. Replace the marker through later approved UI work; it is not Home or theme approval. Dev separately approved T-002 on 2026-11-21; implementation requires a new Session B.
