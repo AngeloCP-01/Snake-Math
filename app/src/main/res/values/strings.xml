@@ -1,3 +1,4 @@
 <resources>
     <string name="app_name">Snake &amp; Math</string>
+    <string name="compose_ready">Compose ready</string>
 </resources>

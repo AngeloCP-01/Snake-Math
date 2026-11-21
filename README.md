@@ -1,12 +1,12 @@
 # Snake & Math
 
-Native Android Snake game project using Kotlin. The current T-001 foundation
-contains one `:app` module and a blank platform Activity for startup verification.
-Compose configuration begins in M1.2; the application theme, screens, engines,
-navigation and persistence are later work.
+Native Android Snake game project using Kotlin and Jetpack Compose. The M1.2
+setup hosts a plain `Snake & Math` / `Compose ready` marker in the production
+Activity. The application theme, screens, engines, navigation and persistence
+are later work.
 
 Progress and verification evidence live in [the task tracker](docs/task-tracker.md)
-and [T-001](docs/requirements/T-001-project-setup.md).
+and [T-002](docs/requirements/T-002-compose-configuration.md).
 
 ## Local setup
 
@@ -58,6 +58,8 @@ From the repository root on Windows:
 .\gradlew.bat --version
 .\gradlew.bat projects
 .\gradlew.bat :app:assembleDebug :app:testDebugUnitTest :app:lintDebug
+.\gradlew.bat :app:assembleDebugAndroidTest
+.\gradlew.bat :app:connectedDebugAndroidTest
 .\gradlew.bat :app:dependencyInsight --dependency kotlin-stdlib --configuration debugRuntimeClasspath
 .\gradlew.bat :app:buildEnvironment
 ```
@@ -67,9 +69,25 @@ On macOS/Linux, use `./gradlew` with the same arguments.
 - Debug APK: `app/build/outputs/apk/debug/app-debug.apk`
 - Lint report: `app/build/reports/lint-results-debug.html`
 
-There are no unit or instrumented tests in this startup scaffold. A `NO-SOURCE`
-test task means no tests ran; it does not establish gameplay coverage. Compose
-and its dependencies will be introduced in a separately approved M1.2 task.
+`MainActivityTest.launcherDisplaysComposeSetupMarker` launches the production
+Activity and asserts that both marker strings are displayed. It never supplies
+test-owned content. Connected tests require a booted emulator or device; set
+`ANDROID_SERIAL` to select a target if several are connected. There are no unit
+tests yet: `NO-SOURCE` means no unit tests ran and provides no gameplay coverage.
+
+Compose uses the Kotlin-matched compiler plugin and BOM-managed UI/Foundation
+libraries. Activity hosting and AndroidX Test versions are pinned separately.
+Preview support is available at compile time; full tooling is debug-only.
+See the [T-002 worklog](docs/worklog/T-002-2026-11-21.md) for actual versions,
+compatibility corrections and verification results.
+
+## Studio preview
+
+Sync the Gradle project after dependency changes. Open
+`app/src/main/java/com/acp/snakemath/app/SnakeMathApp.kt`, select **Split** or
+**Design**, and build/refresh `SnakeMathAppPreview`. Both marker strings should
+render without a repository, device or running game. Record successful Gradle
+sync and visible preview separately; an APK build alone verifies neither.
 
 Inspect the APK using the installed SDK tools:
 
@@ -93,7 +111,9 @@ $deviceSerial = '<selected emulator or device serial>'
 & "$env:ANDROID_HOME/platform-tools/adb.exe" -s $deviceSerial shell pidof com.acp.snakemath
 ```
 
-Observe a blank Activity without a startup crash. This window is expected at
-M1.1 and is not an application screen design. Record device/API, install and
+Observe both marker strings on white, clear of system bars, without a startup
+crash. Increase the device font size and verify both strings remain readable,
+then restore the original setting. This is setup content, not an application
+screen design. Record device/API, install and
 launch results, and observed-window evidence separately from build and IDE sync.
 An existing process alone does not verify the visible window.
