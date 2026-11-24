@@ -1,6 +1,6 @@
 # ISS-003 Repeated Back to Home removes the start destination
 
-**Found by:** Codex standards reviewer; reproduced by primary reviewer · **Date:** 2026-11-22 · **Status:** fixed in working tree, verified 2026-11-24; uncommitted
+**Found by:** Codex standards reviewer; reproduced by primary reviewer · **Date:** 2026-11-22 · **Status:** fixed in `600596d`, verified 2026-11-24; [PR #3](https://github.com/AngeloCP-01/Snake-Math/pull/3) open against main
 
 ## Symptom
 

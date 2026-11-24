@@ -97,6 +97,11 @@ visual approval or completion of all T-004 device acceptance.
 
 ## Limits and next handoff
 
+**Published, 2026-11-24:** implementation commit `600596d` is pushed on
+`feature/m1-theme-navigation-home`; [PR #3](https://github.com/AngeloCP-01/Snake-Math/pull/3)
+is open against `main`, with native screenshot and verification evidence.
+No merge performed. The unrelated decision-template edit remains uncommitted.
+
 **Publication authorization, 2026-11-24:** Dev requested commit and PR to `main`
 after checking the corrections. Pre-publication verification passed again:
 [25 native tests](pr-checks-tests.xml), [build output](pr-checks-build.txt),
