@@ -1,0 +1,18 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<testsuites tests="1" failures="1" errors="0" skipped="0" time="0.000" timestamp="2026-11-22T15:37:51" hostname="localhost">
+  <testsuite name="com.acp.snakemath.feature.home.HomeScreenTest" tests="1" failures="1" errors="0" skipped="0" time="11.697" timestamp="2026-11-22T15:37:51" hostname="localhost">
+    <properties>
+      <property name="device" value="emulator-5554" />
+    </properties>
+    <testcase name="homeFitsReferencePhoneWithoutScrolling" classname="com.acp.snakemath.feature.home.HomeScreenTest" time="11.697">
+      <failure>java.lang.AssertionError: Text overflows: PLAY; size=87 x 61; width=true; height=false; paragraphWidth=228.0; paragraphHeight=61.0; lines=[[0.0, 86.66797, 0.0, 61.0]]; truncated=false; constraints=Constraints(minWidth = 0, maxWidth = 228, minHeight = 0, maxHeight = 516)
+	at org.junit.Assert.fail(Assert.java:89)
+	at org.junit.Assert.assertTrue(Assert.java:42)
+	at org.junit.Assert.assertFalse(Assert.java:65)
+	at com.acp.snakemath.feature.home.HomeFitAssertionsKt.assertTextFits(HomeFitAssertions.kt:28)
+	at com.acp.snakemath.feature.home.HomeScreenTest.assertFits(HomeScreenTest.kt:51)
+	at com.acp.snakemath.feature.home.HomeScreenTest.homeFitsReferencePhoneWithoutScrolling(HomeScreenTest.kt:29)
+</failure>
+    </testcase>
+  </testsuite>
+</testsuites>

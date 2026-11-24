@@ -1,0 +1,25 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<testsuites tests="7" failures="0" errors="0" skipped="0" time="0.000" timestamp="2026-11-22T14:15:37" hostname="localhost">
+  <testsuite name="com.acp.snakemath.app.MainActivityTest" tests="1" failures="0" errors="0" skipped="0" time="21.158" timestamp="2026-11-22T14:15:37" hostname="localhost">
+    <properties>
+      <property name="device" value="emulator-5554" />
+    </properties>
+    <testcase name="launcherDisplaysHome" classname="com.acp.snakemath.app.MainActivityTest" time="21.158" />
+  </testsuite>
+  <testsuite name="com.acp.snakemath.app.navigation.SnakeMathNavigationTest" tests="3" failures="0" errors="0" skipped="0" time="25.395" timestamp="2026-11-22T14:15:37" hostname="localhost">
+    <properties>
+      <property name="device" value="emulator-5554" />
+    </properties>
+    <testcase name="playOpensModesAndBackReturnsHome" classname="com.acp.snakemath.app.navigation.SnakeMathNavigationTest" time="11.360" />
+    <testcase name="homeIsStartAndRapidActionsKeepOneTarget" classname="com.acp.snakemath.app.navigation.SnakeMathNavigationTest" time="7.689" />
+    <testcase name="settingsOpensSettingsAndSystemBackReturnsHome" classname="com.acp.snakemath.app.navigation.SnakeMathNavigationTest" time="6.346" />
+  </testsuite>
+  <testsuite name="com.acp.snakemath.feature.home.HomeScreenTest" tests="3" failures="0" errors="0" skipped="0" time="16.816" timestamp="2026-11-22T14:15:37" hostname="localhost">
+    <properties>
+      <property name="device" value="emulator-5554" />
+    </properties>
+    <testcase name="actionsDispatchSeparateCallbacks" classname="com.acp.snakemath.feature.home.HomeScreenTest" time="6.265" />
+    <testcase name="missingScoresAreUnavailable" classname="com.acp.snakemath.feature.home.HomeScreenTest" time="6.032" />
+    <testcase name="scoresRetainModeAssociation" classname="com.acp.snakemath.feature.home.HomeScreenTest" time="4.519" />
+  </testsuite>
+</testsuites>

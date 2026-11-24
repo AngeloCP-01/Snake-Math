@@ -1,6 +1,7 @@
 import org.jetbrains.kotlin.gradle.dsl.JvmTarget
 
 plugins {
+    alias(libs.plugins.serialization)
     alias(libs.plugins.android.application)
     alias(libs.plugins.compose.compiler)
 }
@@ -30,6 +31,9 @@ android {
 }
 
 dependencies {
+    implementation(libs.navigation.compose)
+    implementation(libs.serialization.json)
+    androidTestImplementation(libs.navigation.testing)
     implementation(platform(libs.compose.bom))
     implementation(libs.compose.ui)
     implementation(libs.compose.foundation)

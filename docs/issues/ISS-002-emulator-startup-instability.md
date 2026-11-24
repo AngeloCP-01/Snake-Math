@@ -37,5 +37,7 @@ the problem recurs; this run provides no gameplay or performance evidence.
 
 ## Related
 
+T-004 recurrence, 2026-11-22: starting the installed API 36 tablet reached ADB but did not complete boot; the task-started emulator was stopped. API 34 later displayed “Process system isn't responding” during normal screenshot launches. Its UI hierarchy identified `android:id/aerr_wait`; choosing Wait follows the established workaround. The Activity was resumed, with no Java app crash in the sampled AndroidRuntime output. See [T-004 native verification](../verification/T-004/README.md) and its diagnostic frame. This does not invalidate the separately completed seven-test API 34 instrumented suite, and does not prove API 36 behavior.
+
 - [T-001](../requirements/T-001-project-setup.md)
 - [T-001 worklog](../worklog/T-001-2026-11-21.md)

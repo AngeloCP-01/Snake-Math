@@ -1,4 +1,18 @@
 <resources>
     <string name="app_name">Snake &amp; Math</string>
-    <string name="compose_ready">Compose ready</string>
+    <string name="logo_snake">SNAKE</string>
+    <string name="logo_math">&amp; MATH</string>
+    <string name="home_subtitle">A little game of growth</string>
+    <string name="play">PLAY</string>
+    <string name="settings">Settings</string>
+    <string name="modes">Modes</string>
+    <string name="back_home">Back to Home</string>
+    <string name="modes_unavailable">Mode selection will be available in a later update.</string>
+    <string name="settings_unavailable">Settings will be available in a later update.</string>
+    <string name="best_scores">BEST SCORES</string>
+    <string name="classic_best">Classic best</string>
+    <string name="mdas_best">MDAS best</string>
+    <string name="score_unavailable">%1$s, unavailable</string>
+    <string name="score_description">%1$s, %2$d</string>
+    <string name="unavailable_value">—</string>
 </resources>

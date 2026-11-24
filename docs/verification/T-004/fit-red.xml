@@ -1,0 +1,54 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<testsuites tests="8" failures="5" errors="0" skipped="0" time="0.000" timestamp="2026-11-22T14:39:51" hostname="localhost">
+  <testsuite name="com.acp.snakemath.feature.home.HomeScreenTest" tests="8" failures="5" errors="0" skipped="0" time="49.832" timestamp="2026-11-22T14:39:51" hostname="localhost">
+    <properties>
+      <property name="device" value="emulator-5554" />
+    </properties>
+    <testcase name="homeFitsReferencePhoneWithoutScrolling" classname="com.acp.snakemath.feature.home.HomeScreenTest" time="12.646">
+      <failure>java.lang.AssertionError: Assert failed: The component with Text + InputText + EditableText contains 'Settings' (ignoreCase: false) is not displayed!
+	at androidx.compose.ui.test.AssertionsKt.assertIsDisplayed(Assertions.kt:34)
+	at com.acp.snakemath.feature.home.HomeScreenTest.assertFits(HomeScreenTest.kt:48)
+	at com.acp.snakemath.feature.home.HomeScreenTest.homeFitsReferencePhoneWithoutScrolling(HomeScreenTest.kt:29)
+</failure>
+    </testcase>
+    <testcase name="actionsDispatchSeparateCallbacks" classname="com.acp.snakemath.feature.home.HomeScreenTest" time="6.140" />
+    <testcase name="homeFitsSmallPhoneWithoutScrolling" classname="com.acp.snakemath.feature.home.HomeScreenTest" time="4.914">
+      <failure>java.lang.AssertionError: Assert failed: The component with Text + InputText + EditableText contains 'PLAY' (ignoreCase: false) is not displayed!
+	at androidx.compose.ui.test.AssertionsKt.assertIsDisplayed(Assertions.kt:34)
+	at com.acp.snakemath.feature.home.HomeScreenTest.assertFits(HomeScreenTest.kt:48)
+	at com.acp.snakemath.feature.home.HomeScreenTest.homeFitsSmallPhoneWithoutScrolling(HomeScreenTest.kt:28)
+</failure>
+    </testcase>
+    <testcase name="missingScoresAreUnavailable" classname="com.acp.snakemath.feature.home.HomeScreenTest" time="6.626" />
+    <testcase name="homeFitsSmallPhoneWithLargeTextWithoutScrolling" classname="com.acp.snakemath.feature.home.HomeScreenTest" time="4.327">
+      <failure>java.lang.AssertionError: Assert failed: The component with Text + InputText + EditableText contains 'PLAY' (ignoreCase: false) is not displayed!
+	at androidx.compose.ui.test.AssertionsKt.assertIsDisplayed(Assertions.kt:34)
+	at com.acp.snakemath.feature.home.HomeScreenTest.assertFits(HomeScreenTest.kt:48)
+	at com.acp.snakemath.feature.home.HomeScreenTest.homeFitsSmallPhoneWithLargeTextWithoutScrolling(HomeScreenTest.kt:31)
+</failure>
+    </testcase>
+    <testcase name="scoresRetainModeAssociation" classname="com.acp.snakemath.feature.home.HomeScreenTest" time="4.297" />
+    <testcase name="homeFitsTabletWithoutScrolling" classname="com.acp.snakemath.feature.home.HomeScreenTest" time="6.275">
+      <failure>java.lang.AssertionError: Failed to assert count of nodes.
+Reason: Did not expect any node but found '1' node that satisfies: (ScrollBy is defined)
+Node found:
+Node #433 at (l=0.0, t=0.0, r=1024.0, b=704.0)px
+IsTraversalGroup = 'true'
+VerticalScrollAxisRange = 'ScrollAxisRange(value=0.0, maxValue=0.0, reverseScrolling=false)'
+Actions = [ScrollBy, ScrollByOffset]
+Has 6 children, 1 sibling
+
+	at androidx.compose.ui.test.AssertionsKt.assertCountEquals(Assertions.kt:282)
+	at com.acp.snakemath.feature.home.HomeScreenTest.assertFits(HomeScreenTest.kt:53)
+	at com.acp.snakemath.feature.home.HomeScreenTest.homeFitsTabletWithoutScrolling(HomeScreenTest.kt:30)
+</failure>
+    </testcase>
+    <testcase name="homeFitsReferencePhoneWithLargeTextWithoutScrolling" classname="com.acp.snakemath.feature.home.HomeScreenTest" time="4.607">
+      <failure>java.lang.AssertionError: Assert failed: The component with Text + InputText + EditableText contains 'Settings' (ignoreCase: false) is not displayed!
+	at androidx.compose.ui.test.AssertionsKt.assertIsDisplayed(Assertions.kt:34)
+	at com.acp.snakemath.feature.home.HomeScreenTest.assertFits(HomeScreenTest.kt:48)
+	at com.acp.snakemath.feature.home.HomeScreenTest.homeFitsReferencePhoneWithLargeTextWithoutScrolling(HomeScreenTest.kt:32)
+</failure>
+    </testcase>
+  </testsuite>
+</testsuites>

@@ -1,0 +1,58 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<testsuites tests="25" failures="0" errors="0" skipped="0" time="0.000" timestamp="2026-11-24T11:42:01" hostname="localhost">
+  <testsuite name="com.acp.snakemath.app.MainActivityTest" tests="1" failures="0" errors="0" skipped="0" time="9.503" timestamp="2026-11-24T11:42:01" hostname="localhost">
+    <properties>
+      <property name="device" value="emulator-5554" />
+    </properties>
+    <testcase name="launcherDisplaysHome" classname="com.acp.snakemath.app.MainActivityTest" time="9.503" />
+  </testsuite>
+  <testsuite name="com.acp.snakemath.app.navigation.SnakeMathNavigationTest" tests="8" failures="0" errors="0" skipped="0" time="47.495" timestamp="2026-11-24T11:42:01" hostname="localhost">
+    <properties>
+      <property name="device" value="emulator-5554" />
+    </properties>
+    <testcase name="staleSettingsActionCannotStackAfterModes" classname="com.acp.snakemath.app.navigation.SnakeMathNavigationTest" time="6.865" />
+    <testcase name="playOpensModesAndBackReturnsHome" classname="com.acp.snakemath.app.navigation.SnakeMathNavigationTest" time="6.679" />
+    <testcase name="homeIsStartAndRapidActionsKeepOneTarget" classname="com.acp.snakemath.app.navigation.SnakeMathNavigationTest" time="7.190" />
+    <testcase name="repeatedModesBackRetainsHome" classname="com.acp.snakemath.app.navigation.SnakeMathNavigationTest" time="5.924" />
+    <testcase name="staleModesBackCannotPopSettings" classname="com.acp.snakemath.app.navigation.SnakeMathNavigationTest" time="5.653" />
+    <testcase name="settingsOpensSettingsAndSystemBackReturnsHome" classname="com.acp.snakemath.app.navigation.SnakeMathNavigationTest" time="4.437" />
+    <testcase name="stalePlayActionCannotStackAfterSettings" classname="com.acp.snakemath.app.navigation.SnakeMathNavigationTest" time="5.306" />
+    <testcase name="repeatedSettingsBackRetainsHome" classname="com.acp.snakemath.app.navigation.SnakeMathNavigationTest" time="5.441" />
+  </testsuite>
+  <testsuite name="com.acp.snakemath.core.ui.components.HomeComponentsTest" tests="3" failures="0" errors="0" skipped="0" time="11.884" timestamp="2026-11-24T11:42:01" hostname="localhost">
+    <properties>
+      <property name="device" value="emulator-5554" />
+    </properties>
+    <testcase name="scorePanelKeepsTrophyBesideBothModeValues" classname="com.acp.snakemath.core.ui.components.HomeComponentsTest" time="4.819" />
+    <testcase name="settingsHasMinimumWidthAndVisibleCreamIcon" classname="com.acp.snakemath.core.ui.components.HomeComponentsTest" time="3.395" />
+    <testcase name="playHasVisibleTopGloss" classname="com.acp.snakemath.core.ui.components.HomeComponentsTest" time="3.670" />
+  </testsuite>
+  <testsuite name="com.acp.snakemath.core.ui.components.HomeLogoTest" tests="1" failures="0" errors="0" skipped="0" time="3.671" timestamp="2026-11-24T11:42:01" hostname="localhost">
+    <properties>
+      <property name="device" value="emulator-5554" />
+    </properties>
+    <testcase name="titleRowsHaveCompactBaselineSpacing" classname="com.acp.snakemath.core.ui.components.HomeLogoTest" time="3.671" />
+  </testsuite>
+  <testsuite name="com.acp.snakemath.feature.home.HomeFitAssertionsTest" tests="3" failures="0" errors="0" skipped="0" time="12.707" timestamp="2026-11-24T11:42:01" hostname="localhost">
+    <properties>
+      <property name="device" value="emulator-5554" />
+    </properties>
+    <testcase name="separationRejectsOverlappingSiblings" classname="com.acp.snakemath.feature.home.HomeFitAssertionsTest" time="4.209" />
+    <testcase name="containmentRejectsChildHiddenByClipping" classname="com.acp.snakemath.feature.home.HomeFitAssertionsTest" time="4.124" />
+    <testcase name="textCheckRejectsInternalOverflow" classname="com.acp.snakemath.feature.home.HomeFitAssertionsTest" time="4.374" />
+  </testsuite>
+  <testsuite name="com.acp.snakemath.feature.home.HomeScreenTest" tests="9" failures="0" errors="0" skipped="0" time="37.632" timestamp="2026-11-24T11:42:01" hostname="localhost">
+    <properties>
+      <property name="device" value="emulator-5554" />
+    </properties>
+    <testcase name="homeFitsReferencePhoneWithoutScrolling" classname="com.acp.snakemath.feature.home.HomeScreenTest" time="4.870" />
+    <testcase name="actionsDispatchSeparateCallbacks" classname="com.acp.snakemath.feature.home.HomeScreenTest" time="4.115" />
+    <testcase name="homeFitsSmallPhoneWithoutScrolling" classname="com.acp.snakemath.feature.home.HomeScreenTest" time="5.327" />
+    <testcase name="missingScoresAreUnavailable" classname="com.acp.snakemath.feature.home.HomeScreenTest" time="3.792" />
+    <testcase name="homeFitsSmallPhoneWithLargeTextWithoutScrolling" classname="com.acp.snakemath.feature.home.HomeScreenTest" time="4.738" />
+    <testcase name="homeFitsTabletWithLargeTextWithoutScrolling" classname="com.acp.snakemath.feature.home.HomeScreenTest" time="4.031" />
+    <testcase name="scoresRetainModeAssociation" classname="com.acp.snakemath.feature.home.HomeScreenTest" time="2.895" />
+    <testcase name="homeFitsTabletWithoutScrolling" classname="com.acp.snakemath.feature.home.HomeScreenTest" time="3.960" />
+    <testcase name="homeFitsReferencePhoneWithLargeTextWithoutScrolling" classname="com.acp.snakemath.feature.home.HomeScreenTest" time="3.904" />
+  </testsuite>
+</testsuites>
