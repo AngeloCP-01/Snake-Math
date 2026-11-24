@@ -1,6 +1,6 @@
 # Mascot loading animation
 
-Status: visual motion proposal, awaiting review. Open [the live animation](loading-prototype.html). Android implementation remains deferred.
+Status reconciled 2026-11-24: this loading-motion proposal still awaits visual review and has no native implementation. Open [the live animation](loading-prototype.html). The native Home/navigation foundation exists independently; loading is outside T-004 and the agreed [P-005 entry-flow scope](../requirements/P-005-play-mode-gameplay-flow.md), whose T-005 task is separately approved for a new Session B.
 
 ## Visual direction
 

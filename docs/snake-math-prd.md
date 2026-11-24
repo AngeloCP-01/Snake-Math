@@ -6,16 +6,16 @@
 **Language:** Kotlin  
 **UI Framework:** Jetpack Compose
 
-**Handoff updated:** 2026-11-20
+**Requirements reconciled:** 2026-11-24
 
-**Status:** Browser gameplay and final snake appearance approved for the Android prototype. Documentation only at this handoff; Android implementation has not started. The user will move to Android Studio before coding begins.
+**Status:** Product requirements and native handoff. The Android foundation, Home and navigation shell now exist; implementation progress, approvals and exact verification gaps belong in the [task tracker](task-tracker.md) and linked worklogs. Browser approval establishes the visual/gameplay reference only, not native gameplay or performance acceptance.
 
 **Subsequent native rule updates, 2026-11-20:** both modes wrap across board edges. Classic ends only on self-collision; MDAS passes through its own body and loses lives only on incorrect answers. Section 2.2 defines selectable child-focused difficulty. The existing browser prototype retains earlier collision/question rules and is a historical reference for those behaviors.
 
 ## Start here
 
 - [Android prototype handoff](android-prototype-handoff.md): approved references, renderer contract, implementation sequence and acceptance checks for the next session.
-- [Playable grid prototype](assets/game/snake-grid-gameplay-prototype.html): current Classic/MDAS behavior and snake appearance.
+- [Playable grid prototype](assets/game/snake-grid-gameplay-prototype.html): approved moving-snake appearance and historical browser gameplay; the native wrap/body/difficulty rules below supersede its older behavior.
 - [Design system](design-system/README.md): home/gameplay screen styling and typography. The static mockups guide screen styling; the current playable prototype takes precedence for the moving snake.
 - [Final snake joins](assets/game/path-snake/smooth-joins-v3.md): approved continuous body/tail and blended head attachment.
 - [Approved assets](assets/README.md): explicit runtime sources and reference-only images; deprecated material is archived separately.
@@ -58,7 +58,7 @@ The project is intended to be both a personal game and a portfolio project demon
 
 - **Phones:** portrait only, with a **12-column × 16-row** board in both Classic and MDAS.
 - **Tablets:** landscape/horizontal only, with a **20-column × 16-row** board in both modes. The wider field uses tablet space while retaining square cells and the approved snake appearance.
-- These orientation requirements apply to all seven screens, including Home and Settings. Native enforcement and device classification will be implemented and verified in Android Studio.
+- These orientation requirements apply to all seven screens, including Home and Settings. The foundation requests orientation using stable phone/tablet classification; full native enforcement across supported APIs, navigation and rotation still requires the device checks recorded in the tracker. A request alone is not proof that the platform honors it.
 - Choose the board profile at session creation. Resizing a window must not change the number of cells during a running round.
 
 ## 1.4 Controls
@@ -216,6 +216,8 @@ For the first release:
 - These profiles supersede the browser prototype's single mixed-operation question pool for the native application. The prototype remains a reference for gameplay and rendering.
 - Manual difficulty selection is in scope; automatic progression or adaptive difficulty remains future work.
 
+**Agreed selection, 2026-11-24:** [P-005](requirements/P-005-play-mode-gameplay-flow.md) / [DD-010](decisions/DD-010-mdas-entry-difficulty.md) place Easy/Medium/Hard inline in the MDAS card, initially Easy on a fresh Modes visit. Changing level does not navigate; PLAY MDAS carries the selected level. Retain it while returning from either placeholder and through ordinary Activity recreation; leaving for Home discards it. No last-used preference is persisted. [DD-011](decisions/DD-011-shell-process-restoration.md) starts a new process at Home, including saved-task relaunch, with Easy on the next visit. T-005 is separately approved; implementation belongs in a new Session B. Operand, intermediate-result, final-answer and distractor limits remain to be agreed before generator implementation; no numerical bounds are approved by these entry decisions.
+
 ## 2.3 Main Screens
 
 ### Loading State
@@ -230,12 +232,18 @@ Proposed visual treatment: a snake in the home mascot's design slithers after a 
 - Best scores.
 - Settings.
 
+Show separate **Classic** and **MDAS** best scores with explicit labels in the established panel. Until a real persistence source is connected, show unavailable values with accessible descriptions rather than illustrative scores or fabricated saved zeroes. THEMES/skin selection remains deferred.
+
+Home must fit its title, subtitle, mascot, PLAY, both labeled scores and Settings within the safe drawing area **without scrolling**. Preserve native text, 16dp gutters and at least 48dp controls; adapt spacing/type and allocate remaining height to the mascot. Keep the tighter two-line title with matched outline/fill metrics and `0.8.em` line height, trimmed font padding and one accessible app-name label. These confirmed T-004 corrections supersede older mockup spacing and scrolling fallbacks: [DD-008](decisions/DD-008-home-fits-without-scrolling.md), [title correction evidence](verification/T-004/README.md#automated-checks). Finite tested layouts do not establish universal fit at arbitrary font/window sizes.
+
 ### Mode Selection Screen
 
 - Classic Apple and MDAS Learning choices.
 - Choose Easy, Medium or Hard before starting MDAS; reconcile this control with the prepared mode-selection layout during design review.
 - Selecting a mode opens its gameplay screen, ready for the first swipe.
 - Return to home.
+
+The list above describes the intended playable product. Dev agreed [P-005](requirements/P-005-play-mode-gameplay-flow.md) on 2026-11-24: [DD-009](decisions/DD-009-m17-navigation-foundation.md) defines M1.7 as a navigation foundation ending at clearly labeled non-playable destinations while engines/rendering remain later milestones. A destination shows its mode/MDAS level, “Gameplay is not available yet.”, “Back to modes” and “Home”. Explicit/system Back returns to the same Modes entry; Modes Back returns Home; Home removes intermediate entries. Invalid configuration returns to Modes without an invented level. Preserve first-action ownership and stale/repeated callback protection. This placeholder Back contract is distinct from future active-game Back/pause behavior. [T-005](requirements/T-005-play-mode-gameplay-flow.md) was separately approved on 2026-11-24; implementation has not started.
 
 ### Classic Gameplay
 
@@ -328,7 +336,7 @@ This allows:
 ## 3.2 Suggested Package Structure
 
 ```text
-com.example.snakemath/
+app/src/main/java/com/acp/snakemath/
 │
 ├── app/
 │   ├── MainActivity.kt
@@ -350,15 +358,19 @@ com.example.snakemath/
 │
 ├── feature/
 │   ├── home/
+│   ├── modes/
+│   ├── game/                     # Shared game owner/host and pause presentation
 │   ├── classic/
 │   ├── mdas/
 │   ├── settings/
 │   └── results/
 │
-└── MainApplication.kt
+└── MainApplication.kt             # Conditional on application-wide setup needs
 ```
 
 Initially, a single Gradle application module is sufficient. We can split it into multiple Gradle modules when the project grows.
+
+The application ID/namespace is accepted in [DD-001](decisions/DD-001-application-identity.md). The [canonical package map](architecture.md#4-package-structure-and-construction) distinguishes implemented files from future responsibilities. Create a directory only when approved work adds its first useful file; an application class/container is conditional, not mandatory scaffolding.
 
 ## 3.3 Core Components
 
@@ -423,49 +435,9 @@ Use Preferences DataStore.
 
 ## 3.4 Suggested Domain Models
 
-These are conceptual models, not finalized implementation code.
+Models must remain immutable and independent of Android/Compose. Keep grid coordinates, cardinal directions, selected mode/difficulty, round configuration and explicit game status separate from rendering geometry. The round state holds ordered snake cells, score and the relevant Classic collectible or MDAS lives/question/answers.
 
-```kotlin
-data class GridPoint(
-    val x: Int,
-    val y: Int
-)
-
-enum class Direction {
-    UP,
-    DOWN,
-    LEFT,
-    RIGHT
-}
-
-enum class GameMode {
-    CLASSIC,
-    MDAS
-}
-
-enum class GameStatus {
-    READY,
-    RUNNING,
-    PAUSED,
-    GAME_OVER,
-    COMPLETED
-}
-
-data class AnswerOption(
-    val id: String,
-    val value: Int,
-    val isCorrect: Boolean,
-    val position: GridPoint
-)
-
-data class MathQuestion(
-    val expression: String,
-    val correctAnswer: Int,
-    val options: List<AnswerOption>
-)
-```
-
-The final GameState should contain the relevant state for the selected mode, including the snake, score, lives, food or answer options, and game status.
+The [architecture's domain model](architecture.md#6-domain-state-and-transition-contract) is the single detailed proposal for future engine APIs. Its names/signatures remain conceptual until their tasks are approved. It separates unpositioned arithmetic options from engine-owned answer placements, and structured arithmetic from display text; do not reinstate the earlier sketch that duplicated a position inside each math option or suggested evaluating expression strings. This cleanup aligns the documents without approving that detailed API or creating model classes.
 
 ## 3.5 Game Loop
 
@@ -499,7 +471,7 @@ Prevent immediate 180-degree reversals.
 
 For example, if the snake is moving right, it should not immediately move left.
 
-Use a pending-direction mechanism to handle rapid swipes between movement ticks.
+Queue up to two valid turns, reject a reversal against the last queued direction (or current direction when the queue is empty), and apply at most one turn at each cell boundary. Calibrate the historical browser's pixel threshold for native density.
 
 ## 3.7 Canvas Rendering
 
@@ -568,84 +540,17 @@ Do not persist active gameplay sessions in the first release.
 
 ## 4.1 High-Level Architecture
 
-```mermaid
-flowchart TB
-    UI[Jetpack Compose UI]
-    VM[ViewModels]
-    UC[Game Use Cases]
-    ENGINE[Core Game Engine]
-    MATH[MDAS Engine]
-    REPO[Repository]
-    DS[Preferences DataStore]
-    CANVAS[Canvas Renderer]
-    INPUT[Swipe Gesture Handler]
+![Proposed gameplay ownership: Compose UI sends commands to a shared game ViewModel, pure engines decide outcomes and a repository owns preferences.](diagrams/architecture-figures/01-system.png)
 
-    UI --> VM
-    INPUT --> VM
-    VM --> UC
-    UC --> ENGINE
-    UC --> MATH
-    VM --> REPO
-    REPO --> DS
-    VM --> UI
-    UI --> CANVAS
-    ENGINE --> VM
-    MATH --> ENGINE
-```
+Reuse the maintained [architecture figures and editable sources](diagrams/architecture-figures/README.md), rather than a second set of divergent Mermaid contracts. This figure describes the proposed gameplay system, not the implemented Home shell. UI → ViewModel → pure game/math logic is the enforced boundary; repository contracts isolate persistence. Add use cases or a DI library only when concrete needs justify them, rather than treating the former diagram's use-case box as mandatory.
 
 ## 4.2 Classic Mode Flow
 
-```mermaid
-sequenceDiagram
-    participant Player
-    participant UI
-    participant VM
-    participant Engine
-
-    Player->>UI: Swipe direction
-    UI->>VM: Direction input
-    VM->>Engine: Update direction
-
-    loop While game is running
-        VM->>Engine: Advance movement
-        Engine-->>VM: Updated GameState
-        VM-->>UI: StateFlow update
-        UI->>UI: Redraw Canvas
-    end
-
-    Engine-->>VM: Apple collected or collision
-    VM-->>UI: Updated score or game-over state
-```
+Swipes become direction commands; the engine validates the queue and owns wrapped movement, collection, growth, scoring and Classic self-collision. The ViewModel owns the single loop and publishes immutable state; Canvas reads state and visual interpolation without deciding outcomes. The detailed proposed interval planning/commit order is maintained in [architecture §8](architecture.md#8-commands-ticks-and-concurrency), including late-input and stale-loop guards.
 
 ## 4.3 MDAS Mode Flow
 
-```mermaid
-sequenceDiagram
-    participant VM
-    participant Math
-    participant Engine
-    participant UI
-
-    VM->>Math: Generate question
-    Math-->>VM: Question and answer options
-    VM->>Engine: Initialize answer apples
-    VM->>UI: Display question and board
-
-    UI->>VM: Swipe direction
-    VM->>Engine: Advance movement
-
-    Engine-->>VM: Answer apple collected
-
-    alt Correct answer
-        VM->>Engine: Award points
-        VM->>Math: Generate next question
-    else Incorrect answer
-        VM->>Engine: Deduct one life
-        VM->>Math: Generate next question if lives remain
-    end
-
-    VM->>UI: Publish updated state
-```
+The selected difficulty configures arithmetic generation before a round. The pure math logic produces a validated question and three distinct options; game logic owns placements, collection, score, growth and lives. A committed answer transition produces a coherent next state: correct gives +10/growth, wrong loses one life without growth, and a next question appears while lives remain. Body overlap alone changes none of those outcomes. The ViewModel forwards commands and publishes the result; it must not expose an intermediate new question with old answer positions. See the [domain transition proposal](architecture.md#6-domain-state-and-transition-contract) and [movement/placement contract](architecture.md#8-commands-ticks-and-concurrency).
 
 ## 4.4 Architectural Rules
 
@@ -712,7 +617,7 @@ sequenceDiagram
 
 Completed for the initial prototype: Classic/MDAS behavior, swipe controls, phone-portrait/tablet-landscape profiles and the final smooth snake rendering have been reviewed. Carry forward the tunable baseline in the [Android handoff](android-prototype-handoff.md). Difficulty progression and additional snake skins remain future work.
 
-Current stopping point: documentation is prepared; Android coding is deferred until the user resumes in Android Studio. Approval of the browser prototype does not establish Android implementation or performance.
+This is the historical discovery baseline. Current native progress and remaining validation are tracked in [the tracker](task-tracker.md); browser approval does not establish Android gameplay or performance.
 
 ## Milestone 1 — Android Project Foundation
 
@@ -723,6 +628,8 @@ Current stopping point: documentation is prepared; Android coding is deferred un
 - Implement navigation.
 - Create basic home screen.
 - Add the PLAY → mode selection → gameplay flow.
+
+The agreed M1.7 delivery boundary is the non-playable navigation foundation in DD-009; actual gameplay engines/rendering/integration remain in M2–M6. Implementation progress/checklists belong in the tracker, not this roadmap.
 
 ## Milestone 2 — Classic Game Engine
 
@@ -851,6 +758,4 @@ When guiding me:
 
 ## Where to Continue
 
-The next implementation milestone is **Milestone 1 — Android Project Foundation**, following the handoff's incremental sequence. Product discovery for the initial prototype is complete; retain its approved decisions.
-
-This session is documentation-only. Wait for the user's instruction to begin coding in Android Studio, then proceed step by step rather than generating the whole application at once.
+Start with [AGENTS.md](../AGENTS.md), [the tracker](task-tracker.md) and its active proposal/task handoff. Preserve completed foundation work and the confirmed Home/title corrections. Follow the two-session protocol: proposal agreement, separate task approval, then implementation only in an authorized Session B. Dev agreed [P-005](requirements/P-005-play-mode-gameplay-flow.md); [T-005](requirements/T-005-play-mode-gameplay-flow.md) is separately approved for `sol-medium` execution in a new Session B. This document reconciliation does not start implementation.

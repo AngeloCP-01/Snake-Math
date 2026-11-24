@@ -1,10 +1,10 @@
 # Approved assets
 
-Updated 2026-11-20. This is the allowlist for the Android prototype. File version numbers reflect when the artwork was generated; the files below are the current approved sources. [The Android handoff](../android-prototype-handoff.md) describes their use.
+Reconciled 2026-11-24; artwork approval/provenance remains dated 2026-11-20. This is the allowlist for the Android prototype. File version numbers reflect when artwork was generated; the files below remain the approved sources. [The Android handoff](../android-prototype-handoff.md) describes their use.
 
 ## Runtime source artwork
 
-Only these three PNGs are candidates for later copying into Android `res/drawable-nodpi/`. Keep their alpha and aspect ratio. Android coding has not started.
+Only these three PNGs are allowlisted for Android `res/drawable-nodpi/`. T-004 already bundles the mascot and forest backdrop unchanged; the gameplay head atlas is still a future import. Keep source alpha/aspect ratio and manifest checksums. The agreed [P-005](../requirements/P-005-play-mode-gameplay-flow.md) adds no new raster artwork; its task is separately approved and implementation is pending a new Session B.
 
 | File | Use |
 | --- | --- |
@@ -16,7 +16,7 @@ Only these three PNGs are candidates for later copying into Android `res/drawabl
 
 | File | Use |
 | --- | --- |
-| [home-v3.png](mockups/home-v3.png) | Approved home composition and button/font treatment; PLAY opens mode selection |
+| [home-v3.png](mockups/home-v3.png) | Approved styling, subject to confirmed native dual-score/no-THEMES/no-scroll/tighter-title adaptations in the [design spec](../design-system/README.md); PLAY opens mode selection |
 | [mdas-gameplay-v3.png](mockups/mdas-gameplay-v3.png) | MDAS screen styling; the current prototype overrides the snake illustration |
 
 ## Final renderer previews — not runtime images
@@ -29,7 +29,7 @@ Only these three PNGs are candidates for later copying into Android `res/drawabl
 
 ## Current review pages
 
-- [Grid gameplay prototype](game/snake-grid-gameplay-prototype.html): approved Classic/MDAS behavior and moving snake.
+- [Grid gameplay prototype](game/snake-grid-gameplay-prototype.html): approved moving snake and historical browser behavior; current native wrap/body/difficulty rules are in the PRD.
 - [Design system](../design-system/README.md): screen styling and components.
 - [Seven-screen UI review](../design-system/screens-prototype.html): proposed phone/tablet layouts and [14 PNG exports](../design-system/previews/README.md). These are reference-only and remain outside the runtime asset allowlist.
 - [Asset manifest](asset-manifest.json): explicit image roles and SHA-256 checksums. Import runtime sources individually rather than copying this entire directory into an Android project.

@@ -19,4 +19,4 @@
 <The reason, and why the other options were rejected.>
 
 ## Consequences
-<What this makes easier or harder. What to check if this is revisited.>
+<What this makes easier or harder. What to check if this is revisited.>, 

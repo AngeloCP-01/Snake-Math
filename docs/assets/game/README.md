@@ -1,6 +1,6 @@
 # Snake & Math — game assets
 
-Status: browser gameplay and final snake rendering approved on 2026-11-20. Android coding is deferred until the user resumes in Android Studio.
+Status reconciled 2026-11-24: browser gameplay/final snake rendering were approved on 2026-11-20, with later native wrap/body/difficulty rules in the PRD. T-004 bundles the Home mascot/background in the native shell; gameplay rendering is still future work. See the [tracker](../../task-tracker.md) for current progress and coverage.
 
 ## Current gameplay references
 
@@ -22,7 +22,7 @@ Generated with the built-in image generation tool using ../mockups/home-v3.png a
 
 ## Android usage notes
 
-Names use Android resource-compatible lowercase underscores. Once approved, copy to the Android module's res/drawable-nodpi directory (no Android module was modified in this task). Keep the snake PNG alpha; render with aspect ratio preserved. Background can fill the window with center crop; edge foliage may crop on different aspect ratios. Keep text, touch targets and the game grid in Compose, not baked into this image.
+Names use Android resource-compatible lowercase underscores. The mascot/background already exist in the Android module's `res/drawable-nodpi/`, copied unchanged during T-004; the original browser asset-preparation task itself changed no Android source. Keep the snake PNG alpha and aspect ratio. Background can fill the window with center crop; edge foliage may crop on different aspect ratios. Keep text, touch targets and the game grid in Compose, not baked into this image.
 
 The mascot is a static coiled illustration, not an animated or modular gameplay sprite. The approved browser gameplay uses the head from the separate path-snake atlas and draws a continuous body/tail. Native rendering remains pending; see the current references above.
 

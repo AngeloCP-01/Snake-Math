@@ -1,6 +1,6 @@
 # ISS-004 Home fit checks can accept partially clipped content
 
-**Found by:** Codex standards and spec reviewers · **Date:** 2026-11-22 · **Status:** fixed in `600596d`, verified 2026-11-24; [PR #3](https://github.com/AngeloCP-01/Snake-Math/pull/3) open against main
+**Found by:** Codex standards and spec reviewers · **Date:** 2026-11-22 · **Status:** fixed in `600596d`, verified 2026-11-24; [PR #3](https://github.com/AngeloCP-01/Snake-Math/pull/3) merged as `08bb33c` on 2026-11-24. Broader T-004 device/Studio acceptance remains separate.
 
 ## Symptom
 

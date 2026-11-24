@@ -203,13 +203,14 @@ footer{padding:40px 0 64px;font:700 13px/1.6 var(--body);color:rgba(247,242,187,
   <div class="kicker">Design System · v1.2</div>
   <h1>Snake &amp; Math</h1>
   <p>The visual language for the Snake &amp; Math Android game: a glossy jungle toy box with chunky rounded type, lime for the primary action, gold for numbers and cream for reading. Colors were sampled from the v3 mockups. Sizes are in dp/sp for a 390dp phone. The written spec lives in <code>README.md</code> and the tokens in <code>tokens.json</code>.</p>
+  <p><b>Current guidance · 2026-11-24:</b> T-004 implements native theme/Home/navigation. Preserve no-scroll Home, both Classic/MDAS labels, unavailable live scores, no THEMES and the tighter <code>0.8em</code> title. Specimens below retain historical mockup proportions; the <a href="README.md">written specification</a>, <a href="../snake-math-prd.md">PRD</a> and <a href="../verification/T-004/review-fixes.md">native evidence</a> govern confirmed adaptations. Device/Studio acceptance remains partial. Dev agreed <a href="../requirements/P-005-play-mode-gameplay-flow.md">P-005</a>; <a href="../requirements/T-005-play-mode-gameplay-flow.md">T-005</a> is separately approved; implementation remains in a new Session B.</p>
   <nav>
     <a href="loading-prototype.html">Loading animation ↗</a><a href="screens-prototype.html">Seven screens ↗</a><a href="#source">Source</a><a href="#principles">Principles</a><a href="#color">Color</a><a href="#type">Type</a><a href="#space">Space &amp; shape</a><a href="#components">Components</a><a href="#game">Board &amp; snake</a><a href="#gameplay">Gameplay rules</a><a href="#layout">Layout</a><a href="#rules">Do / Don't</a>
   </nav>
 </header>
 
 <section id="source">
-  <h2>Source mockups<small>Everything on this page comes from these two screens. When in doubt, match them.</small></h2>
+  <h2>Source mockups<small>Original styling references. Confirmed native Home fit/title/score changes and current native gameplay rules take precedence where they differ.</small></h2>
   <div class="refs">
     <figure><img src="../assets/mockups/home-v3.png" alt="Home screen mockup"><figcaption>Home · home-v3.png</figcaption></figure>
     <figure><img src="../assets/mockups/mdas-gameplay-v3.png" alt="MDAS gameplay mockup"><figcaption>MDAS gameplay · mdas-gameplay-v3.png</figcaption></figure>
@@ -259,7 +260,7 @@ footer{padding:40px 0 64px;font:700 13px/1.6 var(--body);color:rgba(247,242,187,
 <section id="type">
   <h2>Typography<small><b>Baloo 2 ExtraBold</b> for everything with personality (logo, buttons, labels, numbers, math). <b>Nunito Bold</b> for quiet copy. Bundle both in <code>res/font/</code>.</small></h2>
   <div class="type-row" style="border-top:1px dashed rgba(88,180,55,.18)">
-    <div class="meta"><b>logo.home</b>Baloo 2 800 · 64/60 · upper<br>6dp ink outline + 4dp extrusion</div>
+    <div class="meta"><b>logo.home</b>Native: 0.8em line height at responsive font size<br>Historical specimen below uses older spacing<br>6dp ink outline + 4dp extrusion</div>
     <svg viewBox="0 0 330 140" style="width:330px;height:140px">
       <g font-family="'Baloo 2', sans-serif" font-weight="800" stroke-linejoin="round">
         <text x="12" y="62" font-size="70" fill="#03371F" stroke="#03371F" stroke-width="12" transform="translate(0 5)">SNAKE</text>
@@ -433,6 +434,7 @@ footer{padding:40px 0 64px;font:700 13px/1.6 var(--body);color:rgba(247,242,187,
 </section>
 
 <section id="gameplay">
+  <p class="spec"><b>Historical browser rules below:</b> the native target wraps at every edge, Classic ends only on self-hit, and MDAS passes through its body without penalty/reset; only wrong answers cost lives. Native arithmetic uses selectable Easy/Medium/Hard profiles with numeric bounds still awaiting agreement. Read the <a href="../snake-math-prd.md">PRD</a> for current rules; this browser study has not been ported to native gameplay.</p>
   <h2>Gameplay rules<small>The behavior the UI has to communicate, as implemented in the prototype. These are PRD defaults, not final release rules.</small></h2>
   <div class="hybrid">
     <div><b>Input</b><span>Swipe or drag only, with a 16px threshold and the dominant axis winning. Up to <b>2 turns are queued</b>, and a reversal is rejected against the last queued direction. Turns apply at cell boundaries. The first swipe starts the round.</span></div>
@@ -445,7 +447,7 @@ footer{padding:40px 0 64px;font:700 13px/1.6 var(--body);color:rgba(247,242,187,
 </section>
 
 <section id="layout">
-  <h2>Screen layout · portrait phone 390 × 844dp<small>Gutter 16dp. Gaps follow the spacing scale. Phone boards use 12 × 16 cells; landscape tablets use 20 × 16. All cells stay square.</small></h2>
+  <h2>Historical layout specimens · portrait phone 390 × 844dp<small>Native Home instead uses bounded no-scroll layout, responsive mascot/spacing, both mode scores, Settings only and the tighter title. Phone boards use 12 × 16 cells; landscape tablets use 20 × 16. All cells stay square.</small></h2>
   <div class="blueprint">
     <div>
       <div class="phone" data-blocks='[["status bar",0,30],["logo · 300×150",44,118],["subtitle · body.m",168,20],["mascot hero · 300×240",196,190],["PLAY · 296×64",404,52],["BEST SCORE · 270×78",474,62],["THEMES · SETTINGS · 48",554,40],["bottom inset",612,22]]'></div>
@@ -472,7 +474,7 @@ footer{padding:40px 0 64px;font:700 13px/1.6 var(--body);color:rgba(247,242,187,
   </div>
 </section>
 
-<footer>Snake &amp; Math Design System v1.2 · tokens: <code>tokens.json</code> · spec: <code>README.md</code> · screen review: <a href="screens-prototype.html">seven screens for phone and tablet</a> · native validation and production art remain pending.</footer>
+<footer>Snake &amp; Math Design System v1.2 · guidance reconciled 2026-11-24 · tokens: <code>tokens.json</code> · spec: <a href="README.md">README.md</a> · <a href="screens-prototype.html">gallery proposals</a> · T-004 foundation exists; broader device/Studio acceptance and native gameplay remain pending.</footer>
 </div>
 
 <script>

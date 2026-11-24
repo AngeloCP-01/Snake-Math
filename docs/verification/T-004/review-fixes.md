@@ -2,11 +2,12 @@
 
 **Scope:** ISS-003–ISS-005 and stale root README instructions, following the
 [2026-11-22 review](review.md). Correction continuation: 2026-11-24.
-**State:** Corrections verified; fresh read-only review has no remaining findings
-within this correction scope. Ready for independent review here. All changes remain
-uncommitted at correction review. Dev subsequently checked the result and
-explicitly authorized committing and opening a PR to `main`; that latest request
-supersedes the earlier no-commit/no-push instruction. Merge is not authorized.
+**Current state, reconciled 2026-11-24:** Corrections verified; fresh read-only
+review has no remaining findings within this correction scope. Dev subsequently
+authorized publication and merged PR #3 as `08bb33c`. Broader device/Studio
+acceptance remains pending, and no post-merge native rerun is claimed. The
+uncommitted/no-publication restrictions below describe the earlier correction
+review stage; the merge follow-up is the latest state.
 
 ## Changes for review
 
@@ -97,6 +98,8 @@ visual approval or completion of all T-004 device acceptance.
 
 ## Limits and next handoff
 
+**Merge follow-up, 2026-11-24:** Dev merged PR #3 as `08bb33c`. GitHub merge state and matching local/remote main were verified; app/build content matches the verified PR head. Publication notes below describe the earlier pre-merge state. Next Session A may prepare the M1.7 proposal; outstanding T-004 acceptance remains pending.
+
 **Published, 2026-11-24:** implementation commit `600596d` is pushed on
 `feature/m1-theme-navigation-home`; [PR #3](https://github.com/AngeloCP-01/Snake-Math/pull/3)
 is open against `main`, with native screenshot and verification evidence.
@@ -116,4 +119,5 @@ API 23 rendering, API 36/complete rotation validation, Studio sync/rendered IDE
 previews and full device screenshot coverage remain open as recorded previously.
 They are not inferred from bounded layout tests. No gameplay, persistence,
 dependency baseline or source raster assets were changed. M1.7 remains outside
-this correction. Review the published branch/PR; merge remains Dev's decision.
+this correction. The publication/merge restrictions above are historical; Dev's
+subsequent merge is recorded in the follow-up at the start of this section.

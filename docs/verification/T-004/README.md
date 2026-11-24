@@ -2,7 +2,7 @@
 
 2026-11-22; Session B, user-confirmed `sol-high`, exact runtime ID unavailable.
 
-**Latest correction evidence, 2026-11-24:** [Review corrections and handoff](review-fixes.md) cover ISS-003–ISS-005 and README fixes. Final build/lint passed; [25 native API 34 tests passed](revisions-final-tests.xml). [Current native Home](revisions-home-api34.png) preserves no-scroll behavior and the tighter title while restoring the missing reference details. Fresh read-only review has no remaining findings within that scope. Earlier evidence below is historical. Broader device/Studio coverage remains pending; no commit/push.
+**Latest correction evidence, 2026-11-24:** [Review corrections and handoff](review-fixes.md) cover ISS-003–ISS-005 and README fixes. Final build/lint passed; [25 native API 34 tests passed](revisions-final-tests.xml). [Current native Home](revisions-home-api34.png) preserves no-scroll behavior and the tighter title while restoring the missing reference details. Fresh read-only review has no remaining findings within that scope. Dev subsequently authorized publication and merged PR #3 as `08bb33c`; pre-publication [build](pr-checks-build.txt)/[25-test](pr-checks-tests.xml)/[lint](pr-checks-lint.txt) evidence is separate. No post-merge native rerun is claimed. Earlier evidence below is historical; broader device/Studio/visual coverage remains pending.
 
 ## Subsequent implementation review
 
@@ -21,7 +21,7 @@ Dev requested no scrolling after checking Home in the emulator. [DD-008](../../d
 
 ## Automated checks
 
-**Latest title-spacing follow-up:** [13-test final suite](logo-spacing-tests.xml) and [successful build/lint output](logo-spacing-build-checks.txt). The [new spacing test first failed](logo-spacing-red.xml) on the separate title boxes (358px baseline separation). Both title layers now share `SNAKE\n& MATH`, `0.8.em` line height and fixed line-height mode; fill spans preserve the two colors. Existing no-scroll layout tests remain green. Lint: zero errors/15 warnings; JVM tests: `NO-SOURCE`.
+**Historical title-spacing follow-up (before the 25-test correction suite):** [13-test suite](logo-spacing-tests.xml) and [successful build/lint output](logo-spacing-build-checks.txt). The [new spacing test first failed](logo-spacing-red.xml) on the separate title boxes (358px baseline separation). Both title layers now share `SNAKE\n& MATH`, `0.8.em` line height and fixed line-height mode; fill spans preserve the two colors. Existing no-scroll layout tests remained green. Lint: zero errors/15 warnings; JVM tests: `NO-SOURCE`.
 
 [Updated native title screenshot](home-logo-tight-api34.png), inspected on the existing API 34 phone emulator: the two title rows sit closer together without visible glyph overlap; colors/outline remain present and every Home action/score remains visible. The verified APK was reinstalled and opened for Dev.
 
@@ -47,7 +47,7 @@ Attempted on API 34 `Pixel_6_Pro_API_34`, emulator-5554, using reversible displa
 | Tablet 1024 × 768dp, font 1.0 | [failed capture](failed-captures/tablet.png) | — |
 | Tablet with airplane mode enabled before launch | [failed capture](failed-captures/tablet-offline.png) | — |
 
-Initial visual inspection found excessive Baloo line metrics; `LineHeightStyle.Trim.Both` was applied and passed build/UI tests, but its final visual result still needs capture/review. Home adapts the primary reference with two labeled unavailable scores and no THEMES action; the tablet composition remains proposed. Decorative mascot/background have null content descriptions; the layered logo exposes one app-name description. Actions specify minimum 48dp heights and constrained content scrolls; final native bounds review remains pending.
+At that initial stage, excessive Baloo line metrics were trimmed, Home used two labeled unavailable scores/no THEMES, and constrained content could scroll. This history is superseded by DD-008's no-scroll correction, the tighter-title follow-up and the final correction capture/tests linked at the top. The tablet composition's broader visual acceptance remains pending. Decorative mascot/background expose no redundant descriptions; the layered logo has one app-name description and controls retain at least 48dp targets.
 
 ## Remaining coverage
 

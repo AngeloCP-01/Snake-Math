@@ -1,7 +1,9 @@
 # Snake & Math — Design System
 
 **Source of truth:** `docs/assets/mockups/home-v3.png` and `docs/assets/mockups/mdas-gameplay-v3.png`.
-These mockups govern screen styling. The [current grid prototype](../assets/game/snake-grid-gameplay-prototype.html) and [smooth-joins v3](../assets/game/path-snake/smooth-joins-v3.md) govern the approved moving snake; see the [Android handoff](../android-prototype-handoff.md). Android coding is deferred.
+These mockups govern screen styling, subject to the confirmed native Home adaptations below. The [grid prototype](../assets/game/snake-grid-gameplay-prototype.html) and [smooth-joins v3](../assets/game/path-snake/smooth-joins-v3.md) govern the approved moving snake; native wrap/body/difficulty rules supersede the browser's older behavior. See the [Android handoff](../android-prototype-handoff.md).
+
+**Reconciled 2026-11-24:** T-004 implements the theme, bundled fonts/artwork, Home and temporary Modes/Settings routes. Preserve [DD-008's no-scroll Home](../decisions/DD-008-home-fits-without-scrolling.md), the tighter `0.8.em` two-line title and current native component details. Dev agreed [P-005](../requirements/P-005-play-mode-gameplay-flow.md), including its mode-card adaptations, inline MDAS levels and non-playable destination boundary; [T-005](../requirements/T-005-play-mode-gameplay-flow.md) is separately approved for implementation in a new Session B. Other gallery layouts and loading motion retain their proposal status. Native evidence and remaining API 23/API 36/rotation/Studio/visual gaps live in the [tracker](../task-tracker.md) and [T-004 worklog](../worklog/T-004-2026-11-22.md).
 Colors were sampled from those images. Sizes are in **dp/sp** for a 390dp-wide phone (in the mockups, 1dp ≈ 1.75px).
 
 | File | What it is |
@@ -74,7 +76,7 @@ Use a vertical gradient: `lime-300 #C1EB43` → `lime-400 #B1E630` → `lime-500
 
 | Role | Font | Size / line height (sp) | Notes |
 |---|---|---|---|
-| `logo.home` | Baloo 2 ExtraBold | 64 / 60 | Uppercase, two lines. 6dp `ink-900` outline, 4dp extrusion. "SNAKE" cream, "& MATH" lime gradient |
+| `logo.home` | Baloo 2 ExtraBold | 64 / 51.2 at reference size; line height `0.8em` | Responsive type size; matching outline/fill multiline metrics, no font padding, trimmed line-height edges. 6dp `ink-900` outline, 4dp extrusion. "SNAKE" cream, "& MATH" lime gradient |
 | `logo.compact` | Baloo 2 ExtraBold | 26 / 24 | The game header version of the logo, with a leaf sprig |
 | `math.expression` | Baloo 2 ExtraBold | 50 / 54 | Cream. Use real `×` and `÷` glyphs |
 | `button.primary` | Baloo 2 ExtraBold | 38 / 40 | Uppercase, `ink-800` |
@@ -85,7 +87,7 @@ Use a vertical gradient: `lime-300 #C1EB43` → `lime-400 #B1E630` → `lime-500
 | `label.s` | Baloo 2 ExtraBold | 14 / 16 | Uppercase: "SCORE", "BEST" |
 | `body.m` | Nunito Bold | 17 / 22 | Subtitle "A little game of growth" |
 
-Both fonts are on Google Fonts. Bundle them in `res/font/` rather than using downloadable fonts, so the first frame never shows a fallback font.
+Static Baloo 2 ExtraBold 800 and Nunito Bold 700 are bundled in `res/font/` with licenses and [provenance](../assets/font-sources.md). Preserve offline typography; API 23 rendering still needs its recorded native check.
 
 ---
 
@@ -106,7 +108,7 @@ Both fonts are on Google Fonts. Bundle them in `res/font/` rather than using dow
 Each entry gives the anatomy, the size, then the tokens.
 
 ### Logo lockup
-- **Home:** two uppercase lines centered, about 300 × 150dp. Leaf clusters at the top-left and right of "SNAKE", and at the left of "& MATH".
+- **Home:** two uppercase lines centered, using the tighter native `0.8em` line height. Scale type/spacing within the bounded Home layout rather than reserving the old fixed 150dp title box. Leaf clusters at the top-left and right of "SNAKE", and at the left of "& MATH". Expose one accessible app-name label.
 - **Compact:** about 112 × 56dp, top-left of the game header, with a small sprig above the "E".
 
 ### Primary button: PLAY
@@ -116,14 +118,14 @@ Each entry gives the anatomy, the size, then the tokens.
   - *pressed:* moves down 4dp.
   - *disabled:* 40% saturation, no lip.
 
-### Secondary pill button: THEMES, SETTINGS
+### Secondary pill button: SETTINGS
 - Pill, at least 136 × 48dp, `panel-800` fill, 2dp `panel-line` border.
 - 26dp cream icon followed by a `label.m` cream label.
-- Two side by side with a 16–20dp gap.
+- Native Home has Settings only. THEMES in historical references remains deferred; do not add a theme action.
 
-### Stat panel: BEST SCORE
-- 270 × 78dp, radius 16, `panel-800` with a 2dp border.
-- 48dp trophy on the left. Stacked `title.s` cream label over a `number.l` gold value, centered as a group.
+### Home stat panel: BEST SCORES
+- Rounded `panel-800` surface, radius 16, border/shadow/inner darkening from the native component. Adapt height to content rather than forcing the historical single-score 78dp frame.
+- Preserve the 48dp trophy and separate **Classic** / **MDAS** labels with their own gold values. Production currently shows an em dash plus an accessible unavailable description for each; illustrative 1280/360 values are not saved progress.
 
 ### Score panel: SCORE | BEST
 - 60dp tall, radius 16. Two equal columns split by a 2dp `panel-line` divider.
@@ -197,7 +199,7 @@ Use [smooth-joins-v3.md](../assets/game/path-snake/smooth-joins-v3.md) as the re
   - "+10 · Correct answer!"
   - "Not quite · the answer was N"
   - "You bumped into your tail." (Classic game over; MDAS body crossings need no collision feedback)
-  - "A fresh patch for your next apples." (when the pose resets for fairness)
+  - "A fresh patch for your next apples." (a Classic-only fairness pose reset; MDAS never resets because of body coverage)
 
 ### Background
 - A radial glow (`forest-800` center → `forest-900` → `forest-950` edges).
@@ -206,46 +208,47 @@ Use [smooth-joins-v3.md](../assets/game/path-snake/smooth-joins-v3.md) as the re
 
 ---
 
-## 5b. Gameplay rules (as implemented in the prototype)
+## 5b. Native gameplay rules (target; engines not yet implemented)
 
 For native arithmetic generation, the updated [PRD Section 2.2](../snake-math-prd.md#22-mathematical-question-generation) defines child-focused difficulty profiles. Native movement also supersedes the browser: both modes wrap across borders; Classic ends only on self-hit; MDAS passes through its body and loses lives only on incorrect answers. It keeps moving without resetting its pose/question on overlap. When necessary, MDAS apples may overlap the body; render their labels above it and the head above them. Classic instructions should say "Wrap around the edges. Avoid your own body." The single question pool and collision rules below remain a historical record of the browser prototype. Difficulty-selection UI still needs to be incorporated into the prepared flow.
 
-The following describes the earlier browser implementation, including superseded collision behavior. Numerical tuning and release polish remain adjustable; see the [handoff](../android-prototype-handoff.md) for native updates and acceptance checks.
+The [historical browser behavior notes](../assets/game/grid-gameplay-prototype.md) record what that study actually does. For Android, follow the [PRD](../snake-math-prd.md) and [handoff](../android-prototype-handoff.md):
 
-- **Input:** swipe or drag only, with a 16px threshold; the dominant axis wins.
+- **Input:** swipe only; the dominant axis wins. The browser's historical 16px threshold requires native density calibration, not direct copying as an Android pixel constant.
   - Up to **2 turns are queued**. A reversal is rejected against the last queued direction.
   - Turns apply at cell boundaries. The first swipe starts the round (state `ready` → `running`).
-- **Classic:** one apple; **+10** and grow per apple. A wall or self collision is game over. A full board is "Garden complete!".
+- **Classic:** one apple; **+10** and one-cell growth per apple. Wrap at every border; only self-collision ends the round. Filling the board completes it.
 - **MDAS:** 5 lives and 3 distinct numbered apples.
   - A correct answer gives **+10** and grows the snake.
   - A wrong answer costs one life, with no growth, and moves to the next question.
-  - A collision costs one life and resets the snake and the question, then waits for a swipe.
-  - At 0 lives the game is over. There's no question timer.
-- **Questions:** forms `a + b × c`, `a × b − d`, `ab ÷ b + c`, `ab ÷ b × c`.
-  - Evaluated with an explicit precedence evaluator (× ÷ before + −, left to right), never by evaluating strings. Integer answers only.
-  - Wrong answers are distinct values within ±1–9 of the correct one, in a shuffled order.
+  - Wrap at every border and pass through the body without a penalty, pause, reset or question change from overlap alone.
+  - Only incorrect answers reduce lives to zero and end the round. There's no question timer.
+- **Questions:** use the selected Easy/Medium/Hard skill profile, integer operands, exact division, standard precedence and equal-precedence left-to-right evaluation. Produce one correct answer and two distinct distractors, shuffled. Numeric bounds remain to be agreed; the historical ±1–9 distractor offset is not an approved native range.
 - **Fairness:**
-  - Apples spawn only on cells the head can reach.
-  - If the body encloses the head, the pose resets *without* a penalty before new apples spawn.
-  - Entering the vacating tail cell is legal unless that tick grows the snake.
-- **Lifecycle:** backgrounding auto-pauses; resuming needs an explicit tap. Use one frame loop, never one per restart. Best scores are per session in the prototype, and persist with DataStore in the app.
+  - Classic uses wrap-aware reachable unoccupied cells and its vacating-tail exception; fairness pose reset, where needed, is Classic-only.
+  - MDAS keeps three distinct apples away from the head, preferring body-free positions but allowing body overlap when needed. Labels render above the body; coverage never resets or ends MDAS.
+- **Lifecycle:** one logical coroutine loop per real session; backgrounding pauses and return requires explicit resume, with no catch-up burst. Interpolation is visual only. Separate mode bests will use DataStore when that later integration is approved; no persistence exists in the current shell.
 
 ---
 
 ## 6. Screen layouts (phone, 390 × 844dp)
 
-**Home**, top to bottom:
+**Native Home**, top to bottom, within the safe drawing area without scrolling:
 - status bar
-- logo (top about 70dp)
+- tighter responsive two-line logo (`0.8em` line height)
 - subtitle
-- mascot hero (about 300 × 240)
-- 24dp gap
+- mascot hero using the height left after controls/text are measured
+- responsive spacing on the 4dp grid
 - PLAY → separate mode selection screen (Classic Apple / MDAS Learning)
-- 20dp gap
-- BEST SCORE
-- 20dp gap
-- THEMES · SETTINGS
+- responsive spacing
+- BEST SCORES, explicitly labeled Classic and MDAS
+- responsive spacing
+- SETTINGS
 - bottom inset
+
+Preserve 16dp gutters and at least 48dp controls. Compact native spacing/type on constrained layouts supersedes the old fixed gaps and fixed mascot dimensions; tablet Home keeps its implemented two-column composition, with broader visual acceptance still pending. The Modes-only scrolling permission does not apply to Home.
+
+**Agreed Modes target:** P-005/DD-010 place Easy/Medium/Hard inline in the MDAS card, initially Easy per fresh visit, with accessible selection and age-guided skill descriptions. Stack phone cards and use landscape tablet columns when readable; Modes may scroll at constrained bounds/font scale while retaining 48dp controls. Scores are independently labeled/unavailable until persistence. Classic instructions explain wrapping/avoiding the body. PLAY reaches an honest non-playable mode/level panel under DD-009, not a game board. T-005 is approved; native implementation/visual fit awaits Session B verification; other gallery screens are not approved by this direction.
 
 **MDAS gameplay**, top to bottom:
 - header row: compact logo · score panel · pause, with a 12dp gap
@@ -293,6 +296,6 @@ Outlined, extruded lettering (logo) is not a plain `Text` style. Draw it twice: 
 
 - **THEMES** is retained in the historical home mockup; a themes screen/skin selector is deferred beyond the initial Android prototype. Settings remains in product scope.
 - **Device calibration:** verify phone 12 × 16 portrait and tablet 20 × 16 landscape, including orientation behavior, cell size, answer readability, swipe feel and snake scale on devices before release.
-- **Screen review:** the [seven-screen gallery](screens-prototype.html) now proposes mode selection, pause, game over and settings alongside the home/gameplay layouts, for phone and landscape tablet. User approval and native layout validation remain pending.
+- **Screen review:** [P-005](../requirements/P-005-play-mode-gameplay-flow.md) agrees the written Modes adaptation of the [seven-screen gallery](screens-prototype.html), pending T-005 implementation/validation. Other gallery screens and tablet Home visual acceptance remain under review; no whole-gallery approval is implied.
 - **The prototype's chrome is unstyled.** Its HUD, buttons and fonts are placeholders. When building, use the components in §5, not the prototype's HTML styling.
 - **Art status** (`docs/assets/game/`): the final gameplay snake appearance is approved; its atlas, mascot and background are review masters. The apple is procedural in the prototype; production logo, icons and decorations remain pending. Reference-based generated art provenance is recorded in the asset notes. Visual approval is not publication rights clearance.

@@ -1,6 +1,6 @@
 # Snake & Math — Android architecture
 
-**Status:** Updated 2026-11-21. The native foundation and Compose setup exist through T-002; actual versions and historical native verification are in the [T-002 worklog](worklog/T-002-2026-11-21.md). The package contract in Section 4 is accepted through [P-003](requirements/P-003-package-structure.md) and [DD-005](decisions/DD-005-package-structure.md). Detailed construction, navigation, lifecycle and other engineering choices remain proposed for review; package agreement does not approve them.
+**Status:** Reconciled 2026-11-24. The native foundation includes T-004's theme, bundled assets/fonts, Home and typed Home/Modes/Settings navigation shell. See the [tracker](task-tracker.md) and [T-004 worklog](worklog/T-004-2026-11-22.md) for approvals, merge and verification coverage; broader device/Studio acceptance remains partial. The package contract is accepted through [DD-005](decisions/DD-005-package-structure.md), integration choices through [DD-007](decisions/DD-007-home-foundation-integration.md), and no-scroll Home through [DD-008](decisions/DD-008-home-fits-without-scrolling.md). Detailed gameplay construction, lifecycle, rendering and persistence APIs below remain proposals. Dev agreed [P-005](requirements/P-005-play-mode-gameplay-flow.md) / DD-009–DD-011 for the M1.7 entry foundation; [T-005](requirements/T-005-play-mode-gameplay-flow.md) is separately approved for `sol-medium` execution in a new Session B; the flow is not yet implemented.
 
 **Read alongside:** [PRD](snake-math-prd.md), [Android handoff](android-prototype-handoff.md), [design system](design-system/README.md), [screen layouts](design-system/screen-designs.md).
 
@@ -39,11 +39,11 @@ These choices expand the PRD's recommendations into implementable boundaries wit
 
 ![System map: Compose sends commands to GameViewModel, which delegates to pure Kotlin engines and a preferences repository.](diagrams/architecture-figures/01-system.png)
 
-This diagram shows runtime interactions. The interactive diagram shows the call/delegation directions, with return values omitted for clarity. Home, mode selection and Settings also use the same preferences repository through their own ViewModels; the main diagram emphasizes gameplay.
+This diagram shows proposed future gameplay runtime interactions. The interactive diagram shows call/delegation directions, with return values omitted for clarity. Future Home, Modes and Settings may consume preferences through route-level state owners; no such repository or ViewModels exist in the current shell. Current Home receives immutable values/callbacks and displays unavailable bests. Introduce observable owners when concrete data/behavior requires them, rather than creating every future owner now.
 
 | Package/component | Owns | Must stay outside it |
 |---|---|---|
-| `app/` | Activity and root composition; future navigation and conditional application container/lifecycle/device adapters | Game rules and drawing geometry |
+| `app/` | Existing Activity, root composition and navigation; conditional future application container/lifecycle/device adapters | Game rules and drawing geometry |
 | `core/model/` | Grid points, directions, mode, configuration, immutable game state, events | Android types and screen dimensions |
 | `core/game/` | Command validation, ticks, turn queue, collision/growth/scoring/lives, placement and completion | Canvas, coroutine jobs and DataStore |
 | `core/math/` | Structured expression generation/evaluation, exact division and unique options | UI text parsing, resource access and platform randomness |
@@ -58,7 +58,7 @@ Allowed dependency direction is presentation → core models/engines and reposit
 
 ## 4. Package structure and construction
 
-The namespace/application ID is `com.acp.snakemath`, accepted in [DD-001](decisions/DD-001-application-identity.md). This is the canonical package map for the existing single `:app` module. Only the two production files marked existing are present today. All other entries are planned responsibilities; create each directory only when approved work adds its first useful file. Do not add empty classes, package READMEs or placeholder files to populate this tree.
+The namespace/application ID is `com.acp.snakemath`, accepted in [DD-001](decisions/DD-001-application-identity.md). This is the canonical package map for the existing single `:app` module. Existing production packages are `app/`, `app/navigation/`, `core/ui/theme/`, `core/ui/components/` and `feature/home/`. Other entries are planned responsibilities; create each directory only when approved work adds its first useful file. Do not add empty classes, package READMEs or placeholder files to populate this tree.
 
 ```text
 app/src/main/java/com/acp/snakemath/
@@ -66,21 +66,21 @@ app/src/main/java/com/acp/snakemath/
 │   ├── MainActivity.kt           # Existing: launcher and Compose host
 │   ├── SnakeMathApp.kt           # Existing: stateless root and private preview
 │   ├── AppContainer.kt           # Planned, conditional: application-wide wiring
-│   ├── navigation/              # Planned: routing and navigation boundaries
+│   ├── navigation/              # Existing: typed Home/Modes/Settings shell
 │   └── device/                  # Planned, conditional: platform adapters
-├── core/                        # Planned
+├── core/                        # UI foundation exists; domain engines planned
 │   ├── model/                   # Immutable shared grid/domain values
 │   ├── game/                    # Movement, turns, collisions, spawning, score/lives
 │   ├── math/                    # Arithmetic generation/evaluation and answers
 │   └── ui/
-│       ├── theme/               # Colors, typography, dimensions and shapes
-│       ├── components/          # Reusable presentation, state and callbacks
+│       ├── theme/               # Existing: custom colors, typography, dimensions
+│       ├── components/          # Existing: Home/shared foundation presentation
 │       └── drawing/             # Canvas geometry, interpolation, prepared artwork
 ├── data/                        # Planned
 │   ├── repository/              # Repository contracts and implementations initially
 │   └── preferences/             # DataStore construction, keys and storage mapping
-├── feature/                     # Planned: screen content/state and route ViewModels
-│   ├── home/                    # Home presentation
+├── feature/                     # Home exists; other features planned
+│   ├── home/                    # Existing: stateless Home and immutable UI state
 │   ├── modes/                   # Mode selection presentation
 │   ├── game/                    # Shared game owner/host and pause presentation
 │   ├── classic/                 # Classic HUD/content
@@ -94,17 +94,23 @@ app/src/main/java/com/acp/snakemath/
 
 Section 3 defines responsibilities and allowed dependency directions. Models and game/math engines remain pure Kotlin without Android, Compose, resource or persistence dependencies. Drawing consumes snapshots/models and never decides gameplay outcomes; reusable components forward events without repository access. Feature packages own presentation and appropriate route-level ViewModels, without duplicating the shared game session.
 
-Tests mirror production packages under `app/src/test/java/com/acp/snakemath/` or `app/src/androidTest/java/com/acp/snakemath/`. The existing `app/MainActivityTest.kt` in the instrumented tree matches the production `app` package; no empty unit-test tree is needed. Future bundled fonts go in `app/src/main/res/font/`; approved runtime PNGs go in `app/src/main/res/drawable-nodpi/`, following the [asset allowlist](assets/README.md). This task copies no assets.
+Tests mirror production packages under `app/src/test/java/com/acp/snakemath/` or `app/src/androidTest/java/com/acp/snakemath/`. Current instrumented tests cover the launcher, navigation, Home fit/behavior and shared rendering/title regressions; JVM tests remain `NO-SOURCE` in the recorded T-004 run. Bundled fonts are in `app/src/main/res/font/`; the approved Home mascot/background are in `app/src/main/res/drawable-nodpi/`, following the [asset allowlist](assets/README.md) and [font provenance](assets/font-sources.md). The gameplay atlas has not been imported.
 
-Detailed construction remains proposed: an application container, if needed, could construct the preferences repository/DataStore and engine factories, with a ViewModel factory creating one game owner per game back-stack entry. Engines receive explicit configuration and injectable randomness; screen content receives values/callbacks, and route-level code obtains ViewModels and collects flows. These construction, ViewModel and navigation APIs need their own approved tasks. A future module split remains deferred; package boundaries currently rely on review.
+Detailed construction remains proposed: an application container, if needed, could construct the preferences repository/DataStore and engine factories, with a ViewModel factory creating one game owner per game back-stack entry. Engines receive explicit configuration and injectable randomness; screen content receives values/callbacks, and future route-level code obtains ViewModels and collects flows where needed. Game construction, ViewModel and route APIs need their own approved tasks; reuse the existing navigation host rather than reinitializing it. A future module split remains deferred; package boundaries currently rely on review.
 
 ## 5. Navigation and screen ownership
 
-Use one Activity and Navigation Compose with four destinations: Home, Modes, Game(mode, difficulty), Settings. Difficulty applies only to MDAS and is selected before creating the round; Classic does not use an arithmetic level. Use stable typed route arguments when supported by the selected compatible navigation version. Mode/difficulty are route data; a mutable game state is never a navigation argument. Difficulty-selection UI must be reconciled with the prepared mode-selection design before its implementation tasks are drafted; a separate screen is not assumed here.
+**Implemented shell:** One Activity and Navigation Compose 2.9.7 with serializable Home, Modes and Settings routes. Home is the start; PLAY and Settings lead to temporary destinations. Originating-entry guards and typed non-inclusive return to Home protect repeated/stale callbacks. Modes has no choices yet, and no Game destination/session exists.
+
+**Agreed M1.7 target, ready for Session B:** [P-005](requirements/P-005-play-mode-gameplay-flow.md) and [DD-009](decisions/DD-009-m17-navigation-foundation.md) accept mode cards, non-playable mode destinations and explicit placeholder Back/Home behavior. [DD-010](decisions/DD-010-mdas-entry-difficulty.md) accepts inline Easy/Medium/Hard, initially Easy; retain selection while returning to the same Modes entry and across ordinary Activity recreation, reset it after Home. [DD-011](decisions/DD-011-shell-process-restoration.md) accepts new-process return to Home, including saved-task relaunch. These are accepted target behavior, not claims about the current host. T-005 is the separately approved implementation task, with `sol-medium` selected by Dev.
+
+**Future playable target:** Add Game(mode, difficulty) to the existing host. Difficulty applies only to MDAS and is selected before creating the round; Classic does not use an arithmetic level. Extend the existing typed route approach. Mode/difficulty are route data; mutable game state is never a navigation argument. Difficulty-selection UI must be agreed before selection implementation tasks are drafted; numeric generation bounds must be agreed before generator work.
 
 ![Navigation: Home opens Modes or Settings; Game owns pause and results overlays with retry and Home paths.](diagrams/architecture-figures/02-navigation.png)
 
-| Visual screen | State owner | Data and behavior |
+The table and figure describe future integrated gameplay ownership, not classes/routes already present or an approved requirement to scaffold them now.
+
+| Visual screen | Proposed future state owner | Data and behavior |
 |---|---|---|
 | Home | `HomeViewModel` | Both repository best scores in the existing best-score panel, clearly labeled Classic and MDAS; PLAY and Settings navigation. Both values also appear in Modes |
 | Mode selection | `ModesViewModel` | Both persisted bests; selected MDAS difficulty; starting a mode creates a fresh round |
@@ -233,12 +239,13 @@ Use local JUnit tests for pure engines and coroutine tests for ViewModel schedul
 ## 12. Decisions left for initialization and review
 
 - Foundation decisions are accepted: [DD-001 identity](decisions/DD-001-application-identity.md), [DD-002 minimum Android](decisions/DD-002-minimum-android-version.md), [DD-003 build baseline](decisions/DD-003-foundation-build-baseline.md), [DD-004 Compose configuration](decisions/DD-004-compose-configuration.md) and [DD-005 package contract](decisions/DD-005-package-structure.md). T-002 established the native Compose foundation; consult its [worklog](worklog/T-002-2026-11-21.md) and current build files for actual versions and verification evidence.
+- T-004 added the theme/navigation/Home foundation under [DD-007](decisions/DD-007-home-foundation-integration.md). Preserve [DD-008's no-scroll Home](decisions/DD-008-home-fits-without-scrolling.md), current component styling and the user-requested tighter multiline title (`0.8.em`), documented in its [worklog](worklog/T-004-2026-11-22.md). Reference mockups do not override those corrections.
 - Home best-score meaning is confirmed: show both Classic and MDAS with labels. Fresh-install sound/music defaults and system-Back behavior remain explicit engineering proposals for architecture review.
 - The MDAS age bands/skill levels are confirmed. Final numeric bounds and the difficulty-selection UI within the prepared flow need definition before generator/selection implementation tasks.
 - Native swipe threshold, font scaling, renderer sampling density and visual tuning are implementation calibrations against the supplied references.
 - Loading-motion approval, production audio/icon/logo assets and publication provenance remain tracked in the existing design/asset documents. Do not invent their approval or expand runtime asset allowlists.
 
-Continue proposal/task review against the PRD's milestone sequence and the verification contracts above. Android initialization and Compose setup are complete through T-002; the accepted package contract does not approve future feature implementation or the remaining detailed architecture proposals.
+T-005 is separately approved for agreed P-005 and ready for a new Session B using Dev-selected `sol-medium`. This approval covers the M1.7 foundation only; it does not approve other gallery screens or the remaining detailed gameplay architecture. Keep API 23/API 36/rotation/Studio/visual gaps open in the tracker/worklog.
 
 ## 13. Reference precedence and external guidance
 

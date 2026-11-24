@@ -2,6 +2,8 @@
 
 Status: proposed screen designs for review, 2026-11-20. These HTML mockups extend the existing design system; they are not a native Android implementation or a replacement for the approved game engine prototype.
 
+**Current interpretation, 2026-11-24:** T-004 implements native Home and the temporary Modes/Settings navigation shell. Native Home's two labeled unavailable bests, no-scroll layout, deferred THEMES and tighter `0.8.em` title override the historical gallery's single-score/fixed-spacing presentation. See [native evidence](../verification/T-004/review-fixes.md) and the [current design specification](README.md). Dev agreed [P-005](../requirements/P-005-play-mode-gameplay-flow.md)'s mode-card/difficulty/non-playable destination adaptations; [T-005](../requirements/T-005-play-mode-gameplay-flow.md) is separately approved; implementation/native validation remains future Session B work. The rest of the gallery remains proposed. Browser HTML/PNG exports remain historical visual references, not regenerated native specifications.
+
 Open [the screen gallery](screens-prototype.html), then choose Phone or Tablet. “Click through” opens one screen with working navigation and settings toggles. Each screen/device selection is reflected in the URL. The bottom arrows cycle review screens; they are outside the app frame and are not gameplay controls.
 
 ## Direction
@@ -30,7 +32,7 @@ Orientation is now a product requirement: **phones portrait only, tablets landsc
 
 - **Movement rules — confirmed 2026-11-20:** both modes wrap at borders. Classic ends only on self-hit; native copy should explain wrapping and avoiding the body. MDAS passes through its body without a pause/reset/penalty; only incorrect answers cost lives. Existing browser code and exported PNGs still contain older wall-warning copy and need refreshing when the review screens are next revised. For dense MDAS boards, keep answer labels visible above any overlapping body.
 - **Home best scores — confirmed 2026-11-20:** the native Home panel shows both Classic and MDAS best scores, clearly labeled, using the existing panel treatment. The single score in the prepared exports is illustrative; those PNGs have not been regenerated for this binding clarification.
-- PLAY → mode selection → Classic or MDAS.
+- Intended playable flow: PLAY → mode selection → Classic or MDAS, with difficulty chosen before an MDAS round. Current native PLAY still reaches a temporary Modes message. Agreed P-005 defines the smaller M1.7 navigation foundation: inline difficulty, initially Easy per visit, retained on return/recreation and discarded after Home/new process; mode destinations clearly state gameplay is unavailable. T-005 is separately approved; implementation awaits a new Session B.
 - Pause → Resume or Restart retains the selected mode; Home returns to Home.
 - Results → Try Again retains the mode; MDAS results show all five hearts depleted.
 - Sound/music switches update in-memory review state and expose accessible switch labels/states. Their hit areas are 48px high. Reload resets them.

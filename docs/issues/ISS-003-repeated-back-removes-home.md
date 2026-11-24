@@ -1,6 +1,6 @@
 # ISS-003 Repeated Back to Home removes the start destination
 
-**Found by:** Codex standards reviewer; reproduced by primary reviewer · **Date:** 2026-11-22 · **Status:** fixed in `600596d`, verified 2026-11-24; [PR #3](https://github.com/AngeloCP-01/Snake-Math/pull/3) open against main
+**Found by:** Codex standards reviewer; reproduced by primary reviewer · **Date:** 2026-11-22 · **Status:** fixed in `600596d`, verified 2026-11-24; [PR #3](https://github.com/AngeloCP-01/Snake-Math/pull/3) merged as `08bb33c` on 2026-11-24. Broader T-004 device/Studio acceptance remains separate.
 
 ## Symptom
 
@@ -18,7 +18,7 @@ Delivering the temporary Modes destination's captured Back to Home callback twic
 
 ## Fix or workaround
 
-Callbacks now check that their originating back-stack entry is still current. Return callbacks use typed non-inclusive pop to Home. Permanent regressions cover repeated Back from both temporary destinations, both stale mixed forward orders and a stale destination Back callback. All eight navigation cases passed in the final [25-test API 34 suite](../verification/T-004/revisions-final-tests.xml); [correction handoff](../verification/T-004/review-fixes.md). Dev subsequently authorized publication after checking the corrections; merge remains unapproved.
+Callbacks now check that their originating back-stack entry is still current. Return callbacks use typed non-inclusive pop to Home. Permanent regressions cover repeated Back from both temporary destinations, both stale mixed forward orders and a stale destination Back callback. All eight navigation cases passed in the final [25-test API 34 suite](../verification/T-004/revisions-final-tests.xml); [correction handoff](../verification/T-004/review-fixes.md). Dev subsequently authorized publication and merged PR #3 as `08bb33c`. Preserve these guards when M1.7 is approved and extends the host.
 
 The original review reproducer remains archived. Its failure is now covered by permanent `SnakeMathNavigationTest` cases; the historical review itself made no production changes.
 

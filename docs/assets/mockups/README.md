@@ -9,6 +9,8 @@ Only the current screen references remain in this folder:
 
 These are visual references, not Android background images or an implemented game. For the moving snake use [the approved grid prototype](../game/snake-grid-gameplay-prototype.html) and [smooth-joins v3](../game/path-snake/smooth-joins-v3.md). For screen components use [the design system](../../design-system/README.md).
 
+Confirmed native Home adaptations supersede the older image where they differ: dual Classic/MDAS score labels, unavailable values until persistence, deferred THEMES, bounded no-scroll fit and the tighter `0.8.em` title. See [the current PRD](../../snake-math-prd.md#home-screen) and [T-004 correction evidence](../../verification/T-004/review-fixes.md). PNGs remain unchanged provenance/reference artifacts; they do not override those decisions or establish native gameplay.
+
 [reference-v3.md](reference-v3.md) records generation provenance. Previous mockups, their prompts and original inspiration artwork are in [the deprecated archive](../../archive/README.md), outside the active asset folders. Reference-based visual approval does not establish publication rights clearance.
 
 See [the asset allowlist](../README.md) to distinguish runtime source PNGs from these reference images.

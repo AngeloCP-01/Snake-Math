@@ -12,6 +12,10 @@ and [T-004](docs/requirements/T-004-theme-navigation-home.md). See its
 [verification index](docs/verification/T-004/README.md) for actual checks and
 outstanding device/Studio coverage.
 
+[P-005](docs/requirements/P-005-play-mode-gameplay-flow.md) was agreed by Dev on
+2026-11-24 for the M1.7 navigation foundation. [T-005](docs/requirements/T-005-play-mode-gameplay-flow.md)
+was separately approved on 2026-11-24 for `sol-medium`; implementation remains a later Session B.
+
 For contributor placement and ownership, see the canonical [package map](docs/architecture.md#4-package-structure-and-construction).
 Planned directories appear when approved work adds their first useful source file.
 
