@@ -1,0 +1,78 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<testsuites tests="6" failures="5" errors="0" skipped="0" time="0.000" timestamp="2026-11-22T14:05:49" hostname="localhost">
+  <testsuite name="com.acp.snakemath.app.MainActivityTest" tests="1" failures="0" errors="0" skipped="0" time="10.008" timestamp="2026-11-22T14:05:49" hostname="localhost">
+    <properties>
+      <property name="device" value="emulator-5554" />
+    </properties>
+    <testcase name="launcherDisplaysComposeSetupMarker" classname="com.acp.snakemath.app.MainActivityTest" time="10.008" />
+  </testsuite>
+  <testsuite name="com.acp.snakemath.app.navigation.SnakeMathNavigationTest" tests="2" failures="2" errors="0" skipped="0" time="10.589" timestamp="2026-11-22T14:05:49" hostname="localhost">
+    <properties>
+      <property name="device" value="emulator-5554" />
+    </properties>
+    <testcase name="playOpensModesAndBackReturnsHome" classname="com.acp.snakemath.app.navigation.SnakeMathNavigationTest" time="4.941">
+      <failure>java.lang.AssertionError: Failed to inject touch input.
+Reason: Expected exactly '1' node but could not find any node that satisfies: (Text + InputText + EditableText contains 'PLAY' (ignoreCase: false))
+
+	at androidx.compose.ui.test.SemanticsNodeInteraction.fetchOneOrThrow(SemanticsNodeInteraction.kt:178)
+	at androidx.compose.ui.test.SemanticsNodeInteraction.fetchOneOrThrow$default(SemanticsNodeInteraction.kt:150)
+	at androidx.compose.ui.test.SemanticsNodeInteraction.fetchSemanticsNode(SemanticsNodeInteraction.kt:84)
+	at androidx.compose.ui.test.ActionsKt.performTouchInput(Actions.kt:402)
+	at androidx.compose.ui.test.AndroidActions.performClickImpl(Actions.android.kt:23)
+	at androidx.compose.ui.test.ActionsKt.performClick(Actions.kt:60)
+	at com.acp.snakemath.app.navigation.SnakeMathNavigationTest.playOpensModesAndBackReturnsHome(SnakeMathNavigationTest.kt:13)
+</failure>
+    </testcase>
+    <testcase name="settingsOpensSettingsAndSystemBackReturnsHome" classname="com.acp.snakemath.app.navigation.SnakeMathNavigationTest" time="5.648">
+      <failure>java.lang.AssertionError: Failed to inject touch input.
+Reason: Expected exactly '1' node but could not find any node that satisfies: (Text + InputText + EditableText contains 'Settings' (ignoreCase: false))
+
+	at androidx.compose.ui.test.SemanticsNodeInteraction.fetchOneOrThrow(SemanticsNodeInteraction.kt:178)
+	at androidx.compose.ui.test.SemanticsNodeInteraction.fetchOneOrThrow$default(SemanticsNodeInteraction.kt:150)
+	at androidx.compose.ui.test.SemanticsNodeInteraction.fetchSemanticsNode(SemanticsNodeInteraction.kt:84)
+	at androidx.compose.ui.test.ActionsKt.performTouchInput(Actions.kt:402)
+	at androidx.compose.ui.test.AndroidActions.performClickImpl(Actions.android.kt:23)
+	at androidx.compose.ui.test.ActionsKt.performClick(Actions.kt:60)
+	at com.acp.snakemath.app.navigation.SnakeMathNavigationTest.settingsOpensSettingsAndSystemBackReturnsHome(SnakeMathNavigationTest.kt:20)
+</failure>
+    </testcase>
+  </testsuite>
+  <testsuite name="com.acp.snakemath.feature.home.HomeScreenTest" tests="3" failures="3" errors="0" skipped="0" time="11.602" timestamp="2026-11-22T14:05:49" hostname="localhost">
+    <properties>
+      <property name="device" value="emulator-5554" />
+    </properties>
+    <testcase name="actionsDispatchSeparateCallbacks" classname="com.acp.snakemath.feature.home.HomeScreenTest" time="4.075">
+      <failure>java.lang.AssertionError: Action performScrollTo() failed.
+Reason: Expected exactly '1' node but could not find any node that satisfies: (Text + InputText + EditableText contains 'PLAY' (ignoreCase: false))
+
+	at androidx.compose.ui.test.SemanticsNodeInteraction.fetchOneOrThrow(SemanticsNodeInteraction.kt:178)
+	at androidx.compose.ui.test.SemanticsNodeInteraction.fetchOneOrThrow$default(SemanticsNodeInteraction.kt:150)
+	at androidx.compose.ui.test.SemanticsNodeInteraction.fetchSemanticsNode(SemanticsNodeInteraction.kt:84)
+	at androidx.compose.ui.test.ActionsKt.performScrollTo(Actions.kt:81)
+	at com.acp.snakemath.feature.home.HomeScreenTest.actionsDispatchSeparateCallbacks(HomeScreenTest.kt:38)
+</failure>
+    </testcase>
+    <testcase name="missingScoresAreUnavailable" classname="com.acp.snakemath.feature.home.HomeScreenTest" time="3.898">
+      <failure>java.lang.AssertionError: Failed: assertExists.
+Reason: Expected exactly '1' node but could not find any node that satisfies: (ContentDescription = 'Classic best, unavailable' (ignoreCase: false))
+
+	at androidx.compose.ui.test.SemanticsNodeInteraction.fetchOneOrThrow(SemanticsNodeInteraction.kt:178)
+	at androidx.compose.ui.test.SemanticsNodeInteraction.fetchOneOrThrow$default(SemanticsNodeInteraction.kt:150)
+	at androidx.compose.ui.test.SemanticsNodeInteraction.assertExists(SemanticsNodeInteraction.kt:125)
+	at androidx.compose.ui.test.SemanticsNodeInteraction.assertExists$default(SemanticsNodeInteraction.kt:124)
+	at com.acp.snakemath.feature.home.HomeScreenTest.missingScoresAreUnavailable(HomeScreenTest.kt:29)
+</failure>
+    </testcase>
+    <testcase name="scoresRetainModeAssociation" classname="com.acp.snakemath.feature.home.HomeScreenTest" time="3.629">
+      <failure>java.lang.AssertionError: Failed: assertExists.
+Reason: Expected exactly '1' node but could not find any node that satisfies: (ContentDescription = 'Classic best, 120' (ignoreCase: false))
+
+	at androidx.compose.ui.test.SemanticsNodeInteraction.fetchOneOrThrow(SemanticsNodeInteraction.kt:178)
+	at androidx.compose.ui.test.SemanticsNodeInteraction.fetchOneOrThrow$default(SemanticsNodeInteraction.kt:150)
+	at androidx.compose.ui.test.SemanticsNodeInteraction.assertExists(SemanticsNodeInteraction.kt:125)
+	at androidx.compose.ui.test.SemanticsNodeInteraction.assertExists$default(SemanticsNodeInteraction.kt:124)
+	at com.acp.snakemath.feature.home.HomeScreenTest.scoresRetainModeAssociation(HomeScreenTest.kt:21)
+</failure>
+    </testcase>
+  </testsuite>
+</testsuites>

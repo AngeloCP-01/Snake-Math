@@ -1,12 +1,19 @@
 # Snake & Math
 
-Native Android Snake game project using Kotlin and Jetpack Compose. The M1.2
-setup hosts a plain `Snake & Math` / `Compose ready` marker in the production
-Activity. The application theme, screens, engines, navigation and persistence
-are later work.
+Native Android Snake game project using Kotlin and Jetpack Compose. The T-004
+foundation hosts a responsive, non-scrolling Home with bundled fonts/artwork,
+separate Classic/MDAS best-score labels and a tighter two-line title. PLAY and
+Settings open temporary destinations with Back to Home. Production scores show
+unavailable values until persistence is implemented. Engines, gameplay, mode
+selection and operational settings remain later work.
 
 Progress and verification evidence live in [the task tracker](docs/task-tracker.md)
-and [T-002](docs/requirements/T-002-compose-configuration.md).
+and [T-004](docs/requirements/T-004-theme-navigation-home.md). See its
+[verification index](docs/verification/T-004/README.md) for actual checks and
+outstanding device/Studio coverage.
+
+For contributor placement and ownership, see the canonical [package map](docs/architecture.md#4-package-structure-and-construction).
+Planned directories appear when approved work adds their first useful source file.
 
 ## Local setup
 
@@ -69,25 +76,35 @@ On macOS/Linux, use `./gradlew` with the same arguments.
 - Debug APK: `app/build/outputs/apk/debug/app-debug.apk`
 - Lint report: `app/build/reports/lint-results-debug.html`
 
-`MainActivityTest.launcherDisplaysComposeSetupMarker` launches the production
-Activity and asserts that both marker strings are displayed. It never supplies
-test-owned content. Connected tests require a booted emulator or device; set
+`MainActivityTest.launcherDisplaysHome` launches the production Activity and
+checks PLAY plus both mode labels. Navigation tests check typed destinations,
+Back and stale/repeated callbacks. Home tests inject score values and exercise
+bounded layouts, full unclipped containment, text overflow and sibling separation;
+negative fixtures check that the assertions reject clipping/overlap. Component
+tests cover title spacing, action dimensions and rendered artwork details.
+Connected tests require a booted emulator or device; set
 `ANDROID_SERIAL` to select a target if several are connected. There are no unit
 tests yet: `NO-SOURCE` means no unit tests ran and provides no gameplay coverage.
 
 Compose uses the Kotlin-matched compiler plugin and BOM-managed UI/Foundation
 libraries. Activity hosting and AndroidX Test versions are pinned separately.
 Preview support is available at compile time; full tooling is debug-only.
-See the [T-002 worklog](docs/worklog/T-002-2026-11-21.md) for actual versions,
-compatibility corrections and verification results.
+See the [T-002 worklog](docs/worklog/T-002-2026-11-21.md) for the Compose baseline
+and [T-004 worklog](docs/worklog/T-004-2026-11-22.md) for navigation/font integration
+and current verification.
 
 ## Studio preview
 
 Sync the Gradle project after dependency changes. Open
-`app/src/main/java/com/acp/snakemath/app/SnakeMathApp.kt`, select **Split** or
-**Design**, and build/refresh `SnakeMathAppPreview`. Both marker strings should
-render without a repository, device or running game. Record successful Gradle
-sync and visible preview separately; an APK build alone verifies neither.
+`app/src/main/java/com/acp/snakemath/feature/home/HomeScreen.kt`, select **Split**
+or **Design**, and build/refresh `HomePreview`. It supplies sample scores and
+phone/small-phone/tablet/enlarged-text configurations without live navigation,
+repositories or a game loop. Component previews under `core/ui/components/`
+cover the logo, PLAY, Settings pill, score panel states,
+forest background and temporary destinations. Home's scoped type/dimension
+adjustments live in `HomeScreen.kt`; title line spacing lives in `HomeLogo.kt`.
+Record successful Gradle sync and visible preview separately; an APK build alone
+verifies neither.
 
 Inspect the APK using the installed SDK tools:
 
@@ -111,9 +128,11 @@ $deviceSerial = '<selected emulator or device serial>'
 & "$env:ANDROID_HOME/platform-tools/adb.exe" -s $deviceSerial shell pidof com.acp.snakemath
 ```
 
-Observe both marker strings on white, clear of system bars, without a startup
-crash. Increase the device font size and verify both strings remain readable,
-then restore the original setting. This is setup content, not an application
-screen design. Record device/API, install and
+Observe Home's title, subtitle, mascot, PLAY, both labeled unavailable scores and
+Settings together without scrolling, clear of system bars and without a startup
+crash. Check PLAY/Settings and explicit/system Back; repeated actions must keep a
+sensible stack. Increase font size and check all components remain fully visible,
+then restore the original setting. Phone/tablet orientation, offline artwork/fonts
+and the complete device coverage require separate observation. Record device/API, install and
 launch results, and observed-window evidence separately from build and IDE sync.
 An existing process alone does not verify the visible window.

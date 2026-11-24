@@ -1,0 +1,64 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg viewBox="0 0 960 1192" xmlns="http://www.w3.org/2000/svg" role="img" aria-labelledby="07-tick-sequence-title 07-tick-sequence-desc" id="d-07-tick-sequence-root"><title id="07-tick-sequence-title">Commands and ticks: commit and publish</title><desc id="07-tick-sequence-desc">Time runs top to bottom; message order, optional branches and returned values follow the architecture source.</desc><defs>
+      <style>#d-07-tick-sequence-root { color: #023E21; }
+      #d-07-tick-sequence-root .diagram-container { width:100%;overflow-x:auto; }
+      @media print {
+#d-07-tick-sequence-root .diagram-container { overflow-x:visible; }
+}</style><marker id="d-07-tick-sequence-arrow" markerWidth="8" markerHeight="6" refX="7" refY="3" orient="auto"><polygon points="0 0, 8 3, 0 6" fill="#47634F"/></marker><marker id="d-07-tick-sequence-arrow-accent" markerWidth="8" markerHeight="6" refX="7" refY="3" orient="auto"><polygon points="0 0, 8 3, 0 6" fill="#155E2B"/></marker><marker id="d-07-tick-sequence-arrow-link" markerWidth="8" markerHeight="6" refX="7" refY="3" orient="auto"><polygon points="0 0, 8 3, 0 6" fill="#47634F"/></marker></defs><rect width="960" height="1192" fill="#FCFAF1"/><text x="48" y="48" font-family="Segoe UI, Arial, sans-serif" font-size="28" font-weight="600" fill="#023E21" text-anchor="start">Commands and ticks: commit and publish</text>
+<text x="48" y="76" font-family="Segoe UI, Arial, sans-serif" font-size="12" font-weight="400" fill="#47634F" text-anchor="start">SNAKE &amp; MATH / PROPOSED ARCHITECTURE</text>
+<line x1="112" y1="212" x2="112" y2="1060" stroke="#9BAA9E" stroke-dasharray="4 4"/>
+<line x1="296" y1="212" x2="296" y2="1060" stroke="#9BAA9E" stroke-dasharray="4 4"/>
+<line x1="480" y1="212" x2="480" y2="1060" stroke="#9BAA9E" stroke-dasharray="4 4"/>
+<line x1="664" y1="212" x2="664" y2="1060" stroke="#9BAA9E" stroke-dasharray="4 4"/>
+<line x1="848" y1="212" x2="848" y2="1060" stroke="#9BAA9E" stroke-dasharray="4 4"/>
+<rect x="448" y="352" width="328" height="224" rx="4" fill="none" stroke="#9BAA9E"/>
+<text x="460" y="376" font-family="Consolas, monospace" font-size="12" font-weight="400" fill="#023E21" text-anchor="start">OPT  MDAS needs next question</text>
+<rect x="256" y="808" width="648" height="244" rx="4" fill="none" stroke="#9BAA9E"/>
+<text x="268" y="832" font-family="Consolas, monospace" font-size="12" font-weight="400" fill="#023E21" text-anchor="start">OPT  Score increased</text>
+<path d="M 296 292 L 480 292" fill="none" stroke="#47634F" stroke-width="1.5" marker-end="url(#d-07-tick-sequence-arrow)"/>
+<path d="M 480 436 L 664 436" fill="none" stroke="#47634F" stroke-width="1.5" marker-end="url(#d-07-tick-sequence-arrow)"/>
+<path d="M 664 524 L 480 524" fill="none" stroke="#47634F" stroke-width="1.5" stroke-dasharray="5 4" marker-end="url(#d-07-tick-sequence-arrow)"/>
+<path d="M 480 640 L 296 640" fill="none" stroke="#47634F" stroke-width="1.5" stroke-dasharray="5 4" marker-end="url(#d-07-tick-sequence-arrow)"/>
+<path d="M 296 748 L 112 748" fill="none" stroke="#47634F" stroke-width="1.5" stroke-dasharray="5 4" marker-end="url(#d-07-tick-sequence-arrow)"/>
+<path d="M 296 900 L 848 900" fill="none" stroke="#47634F" stroke-width="1.5" marker-end="url(#d-07-tick-sequence-arrow)"/>
+<path d="M 848 996 L 296 996" fill="none" stroke="#47634F" stroke-width="1.5" stroke-dasharray="5 4" marker-end="url(#d-07-tick-sequence-arrow)"/>
+<rect x="308.75" y="238" width="158.5" height="40" rx="2" fill="#FCFAF1"/>
+<text x="388.0" y="252" font-family="Segoe UI, Arial, sans-serif" font-size="12" font-weight="400" fill="#47634F" text-anchor="middle">Commit planned move</text>
+<text x="388.0" y="270" font-family="Segoe UI, Arial, sans-serif" font-size="12" font-weight="400" fill="#47634F" text-anchor="middle">at interval end</text>
+<rect x="489.0" y="382" width="166.0" height="40" rx="2" fill="#FCFAF1"/>
+<text x="572.0" y="396" font-family="Segoe UI, Arial, sans-serif" font-size="12" font-weight="400" fill="#47634F" text-anchor="middle">Generate + validate</text>
+<text x="572.0" y="414" font-family="Segoe UI, Arial, sans-serif" font-size="12" font-weight="400" fill="#47634F" text-anchor="middle">expression / options</text>
+<rect x="481.5" y="470" width="181.0" height="40" rx="2" fill="#FCFAF1"/>
+<text x="572.0" y="484" font-family="Segoe UI, Arial, sans-serif" font-size="12" font-weight="400" fill="#47634F" text-anchor="middle">Exact integer question</text>
+<text x="572.0" y="502" font-family="Segoe UI, Arial, sans-serif" font-size="12" font-weight="400" fill="#47634F" text-anchor="middle">+ distinct options</text>
+<rect x="301.25" y="586" width="173.5" height="40" rx="2" fill="#FCFAF1"/>
+<text x="388.0" y="600" font-family="Segoe UI, Arial, sans-serif" font-size="12" font-weight="400" fill="#47634F" text-anchor="middle">Committed state, next</text>
+<text x="388.0" y="618" font-family="Segoe UI, Arial, sans-serif" font-size="12" font-weight="400" fill="#47634F" text-anchor="middle">planned move + events</text>
+<rect x="117.25" y="694" width="173.5" height="40" rx="2" fill="#FCFAF1"/>
+<text x="204.0" y="708" font-family="Segoe UI, Arial, sans-serif" font-size="12" font-weight="400" fill="#47634F" text-anchor="middle">Immutable GameUiState</text>
+<text x="204.0" y="726" font-family="Segoe UI, Arial, sans-serif" font-size="12" font-weight="400" fill="#47634F" text-anchor="middle">+ render snapshots</text>
+<rect x="485.25" y="846" width="173.5" height="40" rx="2" fill="#FCFAF1"/>
+<text x="572.0" y="860" font-family="Segoe UI, Arial, sans-serif" font-size="12" font-weight="400" fill="#47634F" text-anchor="middle">Record best with mode</text>
+<text x="572.0" y="878" font-family="Segoe UI, Arial, sans-serif" font-size="12" font-weight="400" fill="#47634F" text-anchor="middle">and score</text>
+<rect x="500.25" y="942" width="143.5" height="40" rx="2" fill="#FCFAF1"/>
+<text x="572.0" y="956" font-family="Segoe UI, Arial, sans-serif" font-size="12" font-weight="400" fill="#47634F" text-anchor="middle">Persisted best or</text>
+<text x="572.0" y="974" font-family="Segoe UI, Arial, sans-serif" font-size="12" font-weight="400" fill="#47634F" text-anchor="middle">storage failure</text>
+<g data-node="UI"><rect x="44" y="132" width="136" height="80" rx="8" fill="#FFFFFF" stroke="#9BAA9E" stroke-width="1.4"/>
+<text x="112.0" y="168" font-family="Segoe UI, Arial, sans-serif" font-size="16" font-weight="600" fill="#023E21" text-anchor="middle">Game UI</text>
+</g>
+<g data-node="VM"><rect x="228" y="132" width="136" height="80" rx="8" fill="#FFFFFF" stroke="#9BAA9E" stroke-width="1.4"/>
+<text x="296.0" y="168" font-family="Segoe UI, Arial, sans-serif" font-size="16" font-weight="600" fill="#023E21" text-anchor="middle">GameViewModel</text>
+</g>
+<g data-node="Engine"><rect x="412" y="132" width="136" height="80" rx="8" fill="#FFFFFF" stroke="#9BAA9E" stroke-width="1.4"/>
+<text x="480.0" y="168" font-family="Segoe UI, Arial, sans-serif" font-size="16" font-weight="600" fill="#023E21" text-anchor="middle">Game engine</text>
+</g>
+<g data-node="Math"><rect x="596" y="132" width="136" height="80" rx="8" fill="#FFFFFF" stroke="#9BAA9E" stroke-width="1.4"/>
+<text x="664.0" y="168" font-family="Segoe UI, Arial, sans-serif" font-size="16" font-weight="600" fill="#023E21" text-anchor="middle">Math engine</text>
+</g>
+<g data-node="Repo"><rect x="780" y="132" width="136" height="80" rx="8" fill="#FFFFFF" stroke="#9BAA9E" stroke-width="1.4"/>
+<text x="848.0" y="168" font-family="Segoe UI, Arial, sans-serif" font-size="16" font-weight="600" fill="#023E21" text-anchor="middle">Preferences</text>
+<text x="848.0" y="190" font-family="Segoe UI, Arial, sans-serif" font-size="16" font-weight="600" fill="#023E21" text-anchor="middle">repository</text>
+</g>
+<line x1="48" y1="1092" x2="912" y2="1092" stroke="#9BAA9E"/>
+<text x="48" y="1116" font-family="Segoe UI, Arial, sans-serif" font-size="12" font-weight="400" fill="#47634F" text-anchor="start">Solid: request/command. Dashed: returned state or response. Time flows downward.</text>
+<text x="48" y="1134" font-family="Segoe UI, Arial, sans-serif" font-size="12" font-weight="400" fill="#47634F" text-anchor="start">One authoritative state; no UI or renderer decides gameplay outcomes.</text></svg>

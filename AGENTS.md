@@ -14,7 +14,7 @@
 - Product discovery and the browser gameplay/smooth-joins v3 snake baseline are complete. Native implementation has not yet been verified.
 - The prepared design system is in `docs/design-system/`. Home styling and the moving snake are approved; the seven-screen gallery and loading motion remain proposals awaiting review.
 - **Progress source:** `docs/task-tracker.md` contains the roadmap checklists, current milestone, active work and evidence links. Read it to choose the next approved scope; initialize incrementally rather than implementing the whole roadmap at once.
-- Architecture is documented for review in `docs/architecture.md`, with an interactive component diagram in `docs/diagrams/architecture.html`. Review it before drafting implementation tasks; Android initialization has not started.
+- Architecture is documented in `docs/architecture.md`, with embedded PNG diagrams and editable sources in `docs/diagrams/architecture-figures/`. The interactive component map is optional. Read the architecture before task planning; the tracker and worklogs establish current implementation and approval status.
 - The user-defined documentation/workflow below is being prepared for review. No feature proposal or implementation task has been approved merely by adding these instructions; use the existing PRD development roadmap to choose the next proposal scope.
 - Home shows both Classic and MDAS best scores with explicit mode labels (user confirmed 2026-11-20); retain the prepared panel styling.
 - MDAS difficulty is selectable: Easy guides ages 6–7, Medium 8–9, Hard 10–12. Read PRD Section 2.2 for skills/operator limits; agree numeric bounds and selection UI before implementation. Automatic progression remains deferred.
@@ -81,6 +81,14 @@ Project records use the existing templates; read the relevant template before dr
 | Worklog | `docs/worklog/TEMPLATE-worklog.md` | Actual task result, changed files, decisions, unresolved work, verification pointers and next-session handoff |
 
 Create filled records beside their templates, e.g. `P-001-android-foundation.md`, `T-001-project-setup.md`, `DD-001-application-id.md`, `ISS-001-<topic>.md` and `docs/worklog/T-001-YYYY-MM-DD.md`. Templates are reusable sources, not status trackers; leave them unchanged unless the user requests template changes. Link records by ID and path; use an `FR-nnn` only if that requirement actually exists. The tracker carries the PRD's milestone order and owns ongoing progress; proposals/tasks refine it. Keep routine status/checkbox updates out of the PRD; edit the PRD only when requirements change.
+
+## Documentation Diagrams
+- Use the locally installed `diagram-design` skill for new or redrawn documentation diagrams. Embed finished **PNG images directly in Markdown** so they are readable in Android Studio's document preview. Mermaid may be retained as optional source; an external viewer or browser must not be required to read the diagram. Interactive HTML versions are optional supplements.
+- Keep images and editable HTML/SVG sources together under `docs/diagrams/<topic>/`, with matching descriptive basenames and regeneration instructions. Update sources and exports together; use relative image paths and meaningful alt text in Markdown.
+- Use the established forest/cream documentation styling, readable labels and offline system or bundled fonts. Documentation typography does not replace the application's approved design system. Split dense diagrams into focused figures instead of shrinking text.
+- Preserve components, relationships, fields, guards, message order and proposal/approval status when redrawing. Record any split, abbreviation, merge or omission in the accompanying diagram README; a visual conversion does not approve architectural or product changes.
+- Before delivery, run the skill's applicable accessibility/layout/connector checks, inspect the rendered images for readable text and traceable arrows, and verify image links and exports. Keep diagram validation distinct from native Android verification.
+- For requested diagram creation or presentation-only conversion, proceed with the established style without separate style or per-diagram approval prompts (Dev confirmed 2026-11-21). Product/scope changes and implementation retain their existing approval gates.
 
 ## Coding Conventions
 - Kotlin only. PascalCase types/composables, camelCase functions/properties, SCREAMING_SNAKE_CASE constants; descriptive names tied to game concepts.
@@ -233,7 +241,8 @@ Keep context small: start from the active proposal/task and follow its precise l
 | `docs/decisions/TEMPLATE-decision.md` | When recording a substantive decision, alternatives, rationale or superseding choice |
 | `docs/issues/TEMPLATE-issue.md` | When capturing a bug, technical debt or unresolved limitation |
 | `docs/worklog/TEMPLATE-worklog.md` | Before documenting a task result and handoff at implementation-session end |
-| `docs/diagrams/architecture.html` | Interactive view of the proposed in-process components |
+| `docs/diagrams/architecture-figures/README.md` | Before creating or updating architecture figures: source mapping, documentation style, regeneration commands and verification |
+| `docs/diagrams/architecture.html` | Optional interactive view of the proposed in-process components; the architecture Markdown contains directly viewable diagrams |
 | `docs/design-system/README.md` | Before any screen/component styling |
 | `docs/design-system/tokens.json` | Implementing theme values and component metrics |
 | `docs/design-system/screen-designs.md` | Screen flows and proposed phone/tablet layouts |

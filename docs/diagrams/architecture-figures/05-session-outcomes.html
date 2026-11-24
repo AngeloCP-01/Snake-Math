@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en"><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1"><title>Session lifecycle: results, retry and disposal</title><style>html,body{margin:0;padding:0;background:#FCFAF1;color:#023E21;}.frame{width:100%;min-width:0;max-width:100%;}.diagram-container{width:100%;overflow-x:auto;}svg{display:block;width:960px;min-width:960px;height:1000px;}@media print{.diagram-container{overflow-x:visible;}svg{width:100%;min-width:0;height:auto;}}</style></head><body><main class="frame"><div class="diagram-container"><svg viewBox="0 0 960 1000" xmlns="http://www.w3.org/2000/svg" role="img" aria-labelledby="05-session-outcomes-title 05-session-outcomes-desc"><title id="05-session-outcomes-title">Session lifecycle: results, retry and disposal</title><desc id="05-session-outcomes-desc">Classic self-hit or five incorrect MDAS answers cause game over; Classic board completion succeeds; retry returns to ready and Home disposes the session.</desc><defs><marker id="arrow" markerWidth="8" markerHeight="6" refX="7" refY="3" orient="auto"><polygon points="0 0, 8 3, 0 6" fill="#47634F"/></marker><marker id="arrow-accent" markerWidth="8" markerHeight="6" refX="7" refY="3" orient="auto"><polygon points="0 0, 8 3, 0 6" fill="#155E2B"/></marker><marker id="arrow-link" markerWidth="8" markerHeight="6" refX="7" refY="3" orient="auto"><polygon points="0 0, 8 3, 0 6" fill="#47634F"/></marker></defs><rect width="960" height="1000" fill="#FCFAF1"/><text x="48" y="48" font-family="Segoe UI, Arial, sans-serif" font-size="28" font-weight="600" fill="#023E21" text-anchor="start">Session lifecycle: results, retry and disposal</text>
+<text x="48" y="76" font-family="Segoe UI, Arial, sans-serif" font-size="12" font-weight="400" fill="#47634F" text-anchor="start">SNAKE &amp; MATH / PROPOSED ARCHITECTURE</text>
+<path d="M 736 236 L 736 312 Q 736 320 728 320 L 488 320 Q 480 320 480 328 L 480 428" fill="none" stroke="#47634F" stroke-width="1.5" marker-end="url(#arrow)"/>
+<path d="M 832 236 L 832 428" fill="none" stroke="#47634F" stroke-width="1.5" marker-end="url(#arrow)"/>
+<path d="M 352 476 L 320 476 Q 312 476 312 468 L 312 212 Q 312 204 304 204 L 288 204" fill="none" stroke="#47634F" stroke-width="1.5" marker-end="url(#arrow)"/>
+<path d="M 880 476 L 912 476 Q 920 476 920 468 L 920 120 Q 920 112 912 112 L 264 112 Q 256 112 256 120 L 256 140" fill="none" stroke="#47634F" stroke-width="1.5" marker-end="url(#arrow)"/>
+<path d="M 64 188 L 48 188 Q 40 188 40 196 L 40 812 Q 40 820 48 820 L 352 820" fill="none" stroke="#47634F" stroke-width="1.5" marker-end="url(#arrow)"/>
+<path d="M 192 524 L 192 736 Q 192 744 200 744 L 408 744 Q 416 744 416 752 L 416 780" fill="none" stroke="#47634F" stroke-width="1.5" marker-end="url(#arrow)"/>
+<path d="M 480 524 L 480 780" fill="none" stroke="#47634F" stroke-width="1.5" marker-end="url(#arrow)"/>
+<path d="M 768 524 L 768 720 Q 768 728 760 728 L 552 728 Q 544 728 544 736 L 544 780" fill="none" stroke="#47634F" stroke-width="1.5" marker-end="url(#arrow)"/>
+<rect x="516.5" y="260" width="151.0" height="40" rx="2" fill="#FCFAF1"/>
+<text x="592" y="274" font-family="Segoe UI, Arial, sans-serif" font-size="12" font-weight="400" fill="#47634F" text-anchor="middle">CLASSIC SELF-HIT /</text>
+<text x="592" y="292" font-family="Segoe UI, Arial, sans-serif" font-size="12" font-weight="400" fill="#47634F" text-anchor="middle">5TH WRONG ANSWER</text>
+<rect x="730.5" y="358" width="91.0" height="22" rx="2" fill="#FCFAF1"/>
+<text x="776" y="372" font-family="Segoe UI, Arial, sans-serif" font-size="12" font-weight="400" fill="#47634F" text-anchor="middle">BOARD FULL</text>
+<rect x="198.25" y="330" width="83.5" height="22" rx="2" fill="#FCFAF1"/>
+<text x="240" y="344" font-family="Segoe UI, Arial, sans-serif" font-size="12" font-weight="400" fill="#47634F" text-anchor="middle">TRY AGAIN</text>
+<rect x="550.25" y="78" width="83.5" height="22" rx="2" fill="#FCFAF1"/>
+<text x="592" y="92" font-family="Segoe UI, Arial, sans-serif" font-size="12" font-weight="400" fill="#47634F" text-anchor="middle">TRY AGAIN</text>
+<rect x="127.75" y="782" width="128.5" height="22" rx="2" fill="#FCFAF1"/>
+<text x="192" y="796" font-family="Segoe UI, Arial, sans-serif" font-size="12" font-weight="400" fill="#47634F" text-anchor="middle">HOME / DISPOSAL</text>
+<rect x="200" y="660" width="76.0" height="40" rx="2" fill="#FCFAF1"/>
+<text x="208" y="674" font-family="Segoe UI, Arial, sans-serif" font-size="12" font-weight="400" fill="#47634F" text-anchor="start">HOME /</text>
+<text x="208" y="692" font-family="Segoe UI, Arial, sans-serif" font-size="12" font-weight="400" fill="#47634F" text-anchor="start">DISPOSAL</text>
+<rect x="488" y="638" width="46.0" height="22" rx="2" fill="#FCFAF1"/>
+<text x="496" y="652" font-family="Segoe UI, Arial, sans-serif" font-size="12" font-weight="400" fill="#47634F" text-anchor="start">HOME</text>
+<rect x="665.0" y="690" width="46.0" height="22" rx="2" fill="#FCFAF1"/>
+<text x="688" y="704" font-family="Segoe UI, Arial, sans-serif" font-size="12" font-weight="400" fill="#47634F" text-anchor="middle">HOME</text>
+<g data-node="READY"><rect x="64" y="140" width="224" height="96" rx="8" fill="#FFFFFF" stroke="#9BAA9E" stroke-width="1.4"/>
+<text x="176.0" y="176" font-family="Segoe UI, Arial, sans-serif" font-size="16" font-weight="600" fill="#023E21" text-anchor="middle">READY</text>
+<text x="176.0" y="200" font-family="Segoe UI, Arial, sans-serif" font-size="12" font-weight="400" fill="#47634F" text-anchor="middle">Retry waits for a swipe</text>
+</g>
+<g data-node="RUNNING"><rect x="656" y="140" width="224" height="96" rx="8" fill="#FFFFFF" stroke="#9BAA9E" stroke-width="1.4"/>
+<text x="768.0" y="176" font-family="Segoe UI, Arial, sans-serif" font-size="16" font-weight="600" fill="#023E21" text-anchor="middle">RUNNING</text>
+<text x="768.0" y="200" font-family="Segoe UI, Arial, sans-serif" font-size="12" font-weight="400" fill="#47634F" text-anchor="middle">Active round</text>
+</g>
+<g data-node="PAUSED"><rect x="64" y="428" width="224" height="96" rx="8" fill="#FFFFFF" stroke="#9BAA9E" stroke-width="1.4"/>
+<text x="176.0" y="464" font-family="Segoe UI, Arial, sans-serif" font-size="16" font-weight="600" fill="#023E21" text-anchor="middle">PAUSED</text>
+<text x="176.0" y="488" font-family="Segoe UI, Arial, sans-serif" font-size="12" font-weight="400" fill="#47634F" text-anchor="middle">Can return Home</text>
+</g>
+<g data-node="GAME_OVER"><rect x="352" y="428" width="256" height="96" rx="8" fill="#F0F6CF" stroke="#155E2B" stroke-width="1.4"/>
+<text x="480.0" y="464" font-family="Segoe UI, Arial, sans-serif" font-size="16" font-weight="600" fill="#023E21" text-anchor="middle">GAME_OVER</text>
+<text x="480.0" y="488" font-family="Segoe UI, Arial, sans-serif" font-size="12" font-weight="400" fill="#47634F" text-anchor="middle">Classic self-hit / MDAS zero lives</text>
+</g>
+<g data-node="COMPLETED"><rect x="656" y="428" width="224" height="96" rx="8" fill="#FFFFFF" stroke="#9BAA9E" stroke-width="1.4"/>
+<text x="768.0" y="464" font-family="Segoe UI, Arial, sans-serif" font-size="16" font-weight="600" fill="#023E21" text-anchor="middle">COMPLETED</text>
+<text x="768.0" y="488" font-family="Segoe UI, Arial, sans-serif" font-size="12" font-weight="400" fill="#47634F" text-anchor="middle">Classic board filled</text>
+</g>
+<g data-node="END"><rect x="352" y="780" width="256" height="80" rx="8" fill="#FFFFFF" stroke="#9BAA9E" stroke-width="1.4"/>
+<text x="480.0" y="816" font-family="Segoe UI, Arial, sans-serif" font-size="16" font-weight="600" fill="#023E21" text-anchor="middle">Session disposed</text>
+<text x="480.0" y="840" font-family="Segoe UI, Arial, sans-serif" font-size="12" font-weight="400" fill="#47634F" text-anchor="middle">End marker, not a GameStatus</text>
+</g>
+<line x1="48" y1="900" x2="912" y2="900" stroke="#9BAA9E"/>
+<text x="48" y="924" font-family="Segoe UI, Arial, sans-serif" font-size="12" font-weight="400" fill="#47634F" text-anchor="start">All four original disposal paths remain: READY, PAUSED, GAME_OVER and COMPLETED.</text>
+<text x="48" y="942" font-family="Segoe UI, Arial, sans-serif" font-size="12" font-weight="400" fill="#47634F" text-anchor="start">Retry keeps the selected mode, MDAS difficulty and board profile; a new round starts READY.</text></svg></div></main></body></html>

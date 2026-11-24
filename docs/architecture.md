@@ -1,10 +1,10 @@
 # Snake & Math — Android architecture
 
-**Status:** Proposed implementation architecture for review, 2026-11-20. The repository currently contains product/design references and agent guidance, not a native Android application. This document defines the system before implementation tasks are drafted.
+**Status:** Updated 2026-11-21. The native foundation and Compose setup exist through T-002; actual versions and historical native verification are in the [T-002 worklog](worklog/T-002-2026-11-21.md). The package contract in Section 4 is accepted through [P-003](requirements/P-003-package-structure.md) and [DD-005](decisions/DD-005-package-structure.md). Detailed construction, navigation, lifecycle and other engineering choices remain proposed for review; package agreement does not approve them.
 
 **Read alongside:** [PRD](snake-math-prd.md), [Android handoff](android-prototype-handoff.md), [design system](design-system/README.md), [screen layouts](design-system/screen-designs.md).
 
-**Explore:** [Interactive component diagram](diagrams/architecture.html) · [Editable diagram specification](diagrams/architecture.json). The diagrams below describe the same proposed system at different levels. Boxes represent in-process components; there is no backend.
+**Diagrams:** All figures below are embedded PNG images, viewable directly in Markdown preview. [Editable sources and verification](diagrams/architecture-figures/README.md) are kept alongside them. The [interactive component diagram](diagrams/architecture.html) and its [specification](diagrams/architecture.json) remain optional references. Figures describe the proposed system; there is no backend, and their review status is unchanged.
 
 ## 1. Intent and boundaries
 
@@ -28,7 +28,7 @@ The following are proposed engineering choices, not additional product approvals
 
 - Use one shared `GameViewModel` and gameplay composition parameterized by mode. Feature-specific HUDs and actions remain in `feature/classic/` and `feature/mdas/`.
 - Treat pause and results as state-driven overlays inside the game destination. They share the same ViewModel and frozen board.
-- Use explicit constructor injection and a small application container initially. Add no Hilt, Room, generic event bus or per-action use-case layer by default.
+- Use explicit constructor injection; introduce a small application container only when concrete application-wide wiring needs it. Add no Hilt, Room, generic event bus or per-action use-case layer by default.
 - Use a pure transition API: an input state and command produce a new state plus domain events. The ViewModel owns the current state; the engine has no independent mutable copy.
 - Persist a best score when the score increases, rather than depending on the player reaching or leaving results.
 - Start with a device profile derived from stable form-factor information; resize presentation independently and retain the round's selected grid.
@@ -37,30 +37,13 @@ These choices expand the PRD's recommendations into implementable boundaries wit
 
 ## 3. System and dependency map
 
-```mermaid
-flowchart TB
-    UI[Compose screens and swipe input]
-    VM[GameViewModel: session and StateFlow]
-    ENGINE[Pure Kotlin game engine]
-    MATH[Pure Kotlin math engine]
-    DRAW[Canvas renderer and prepared artwork]
-    REPO[Preferences repository]
-    STORE[(Preferences DataStore)]
-    UI -->|commands| VM
-    VM -->|immutable UI state| UI
-    VM -->|state plus command| ENGINE
-    ENGINE -->|new state and domain events| VM
-    ENGINE -->|generate and validate questions| MATH
-    UI -->|render snapshots and fraction| DRAW
-    VM -->|observe bests; record score| REPO
-    REPO -->|Flow reads; atomic writes| STORE
-```
+![System map: Compose sends commands to GameViewModel, which delegates to pure Kotlin engines and a preferences repository.](diagrams/architecture-figures/01-system.png)
 
 This diagram shows runtime interactions. The interactive diagram shows the call/delegation directions, with return values omitted for clarity. Home, mode selection and Settings also use the same preferences repository through their own ViewModels; the main diagram emphasizes gameplay.
 
 | Package/component | Owns | Must stay outside it |
 |---|---|---|
-| `app/` | Activity, root composition, application container, navigation, lifecycle/device adapters | Game rules and drawing geometry |
+| `app/` | Activity and root composition; future navigation and conditional application container/lifecycle/device adapters | Game rules and drawing geometry |
 | `core/model/` | Grid points, directions, mode, configuration, immutable game state, events | Android types and screen dimensions |
 | `core/game/` | Command validation, ticks, turn queue, collision/growth/scoring/lives, placement and completion | Canvas, coroutine jobs and DataStore |
 | `core/math/` | Structured expression generation/evaluation, exact division and unique options | UI text parsing, resource access and platform randomness |
@@ -71,65 +54,55 @@ This diagram shows runtime interactions. The interactive diagram shows the call/
 | `data/preferences/` | A single Preferences DataStore instance, keys and storage error handling | Navigation and game rules |
 | `feature/` | Route-level ViewModels, screen state, screen content and UI event forwarding | Persistence APIs in Composables and duplicated engines |
 
-Compile-time dependency direction is presentation → core models/engines and repository contracts; repository implementation → DataStore; drawing → core models. Engines may depend on math and shared models, but never on presentation, Android, DataStore or a ViewModel. No circular package dependencies.
+Allowed dependency direction is presentation → core models/engines and repository contracts; repository implementation → preferences storage; drawing → core models. Repository contracts expose plain Kotlin values/Flow, not DataStore types. Core models do not depend on engines or presentation. Game logic may use math and shared models; math may use shared models. Engines never depend on `app`, `feature`, `core/ui`, `data`, Android or resources. Avoid circular package dependencies. These boundaries require review inside the single module; no new build enforcement is added.
 
 ## 4. Package structure and construction
 
-The namespace/application ID is still an initialization decision. `<package>` is a placeholder, not a proposed release identifier.
+The namespace/application ID is `com.acp.snakemath`, accepted in [DD-001](decisions/DD-001-application-identity.md). This is the canonical package map for the existing single `:app` module. Only the two production files marked existing are present today. All other entries are planned responsibilities; create each directory only when approved work adds its first useful file. Do not add empty classes, package READMEs or placeholder files to populate this tree.
 
 ```text
-app/src/main/java/<package>/
+app/src/main/java/com/acp/snakemath/
 ├── app/
-│   ├── MainActivity.kt
-│   ├── SnakeMathApp.kt
-│   ├── AppContainer.kt
-│   ├── navigation/
-│   └── device/                   # DeviceProfile, orientation/lifecycle adapters
-├── core/
-│   ├── model/                    # GameState, GameConfig, commands, events
-│   ├── game/                     # GameEngine, movement and spawn policies
-│   ├── math/                     # Expressions, generator and evaluator
+│   ├── MainActivity.kt           # Existing: launcher and Compose host
+│   ├── SnakeMathApp.kt           # Existing: stateless root and private preview
+│   ├── AppContainer.kt           # Planned, conditional: application-wide wiring
+│   ├── navigation/              # Planned: routing and navigation boundaries
+│   └── device/                  # Planned, conditional: platform adapters
+├── core/                        # Planned
+│   ├── model/                   # Immutable shared grid/domain values
+│   ├── game/                    # Movement, turns, collisions, spawning, score/lives
+│   ├── math/                    # Arithmetic generation/evaluation and answers
 │   └── ui/
-│       ├── theme/
-│       ├── components/
-│       └── drawing/              # BoardTransform, RenderFrame, snake/apples
-├── data/
-│   ├── repository/               # PreferencesRepository + implementation
-│   └── preferences/              # DataStore creation and typed mapping
-├── feature/
-│   ├── home/
-│   ├── modes/
-│   ├── game/                     # Shared GameViewModel, host and overlays
-│   ├── classic/                  # Classic HUD/content
-│   ├── mdas/                     # Question/lives HUD/content
-│   ├── settings/
-│   └── results/                  # Stateless results presentation
-└── MainApplication.kt            # Creates the application container
+│       ├── theme/               # Colors, typography, dimensions and shapes
+│       ├── components/          # Reusable presentation, state and callbacks
+│       └── drawing/             # Canvas geometry, interpolation, prepared artwork
+├── data/                        # Planned
+│   ├── repository/              # Repository contracts and implementations initially
+│   └── preferences/             # DataStore construction, keys and storage mapping
+├── feature/                     # Planned: screen content/state and route ViewModels
+│   ├── home/                    # Home presentation
+│   ├── modes/                   # Mode selection presentation
+│   ├── game/                    # Shared game owner/host and pause presentation
+│   ├── classic/                 # Classic HUD/content
+│   ├── mdas/                    # Question/lives HUD/content
+│   ├── settings/                # Settings presentation
+│   └── results/                 # Results presentation
+└── MainApplication.kt           # Planned, conditional: application-wide setup
 ```
 
-The application container constructs one preferences repository/DataStore and engine factories. A ViewModel factory creates a new game owner per game back-stack entry. Engines receive explicit configuration and injectable random sources. Screen content receives values and callbacks; only route-level code obtains ViewModels and collects flows. A separate pause or results ViewModel would duplicate the session and is unnecessary.
+`MainApplication.kt`, `app/AppContainer.kt` and `app/device/` are conditional on concrete needs in future approved setup/device/lifecycle tasks. Their appearance here does not require creation or approve construction APIs. The existing Activity, stateless root and private `SnakeMathAppPreview` stay in `app/`.
 
-Models use Kotlin types; coroutine ownership belongs to ViewModels and adapters. A dedicated domain Gradle module can later enforce these existing boundaries without changing game behavior.
+Section 3 defines responsibilities and allowed dependency directions. Models and game/math engines remain pure Kotlin without Android, Compose, resource or persistence dependencies. Drawing consumes snapshots/models and never decides gameplay outcomes; reusable components forward events without repository access. Feature packages own presentation and appropriate route-level ViewModels, without duplicating the shared game session.
+
+Tests mirror production packages under `app/src/test/java/com/acp/snakemath/` or `app/src/androidTest/java/com/acp/snakemath/`. The existing `app/MainActivityTest.kt` in the instrumented tree matches the production `app` package; no empty unit-test tree is needed. Future bundled fonts go in `app/src/main/res/font/`; approved runtime PNGs go in `app/src/main/res/drawable-nodpi/`, following the [asset allowlist](assets/README.md). This task copies no assets.
+
+Detailed construction remains proposed: an application container, if needed, could construct the preferences repository/DataStore and engine factories, with a ViewModel factory creating one game owner per game back-stack entry. Engines receive explicit configuration and injectable randomness; screen content receives values/callbacks, and route-level code obtains ViewModels and collects flows. These construction, ViewModel and navigation APIs need their own approved tasks. A future module split remains deferred; package boundaries currently rely on review.
 
 ## 5. Navigation and screen ownership
 
 Use one Activity and Navigation Compose with four destinations: Home, Modes, Game(mode, difficulty), Settings. Difficulty applies only to MDAS and is selected before creating the round; Classic does not use an arithmetic level. Use stable typed route arguments when supported by the selected compatible navigation version. Mode/difficulty are route data; a mutable game state is never a navigation argument. Difficulty-selection UI must be reconciled with the prepared mode-selection design before its implementation tasks are drafted; a separate screen is not assumed here.
 
-```mermaid
-flowchart LR
-    START[Startup readiness] --> HOME[Home]
-    HOME -->|PLAY| MODES[Mode selection]
-    HOME -->|SETTINGS| SETTINGS[Settings]
-    SETTINGS -->|Back or Home| HOME
-    MODES -->|Back| HOME
-    MODES -->|Classic or MDAS| GAME[Game destination]
-    GAME -->|Pause or system Back| PAUSE[Pause overlay]
-    PAUSE -->|Resume or Restart| GAME
-    PAUSE -->|Home; dispose session| HOME
-    GAME -->|Game over or completion| RESULT[Results overlay]
-    RESULT -->|Try Again; same mode| GAME
-    RESULT -->|Home or system Back| HOME
-```
+![Navigation: Home opens Modes or Settings; Game owns pause and results overlays with retry and Home paths.](diagrams/architecture-figures/02-navigation.png)
 
 | Visual screen | State owner | Data and behavior |
 |---|---|---|
@@ -151,46 +124,7 @@ The user confirmed on 2026-11-20 that Home displays both mode best scores, clear
 
 The ViewModel holds one immutable `GameState`. Screens and Canvas receive snapshots, never a mutable engine handle. `GameEngine.create(config, random)` produces a ready state; `GameEngine.reduce(state, command, random)` produces a `StepResult(state, events)`. These names describe contracts rather than code already present.
 
-```mermaid
-classDiagram
-    class GameConfig {
-        mode
-        mdasDifficulty
-        columns
-        rows
-        tickInterval
-        initialLength
-        scorePerApple
-        initialLives
-    }
-    class GameState {
-        sessionId
-        tickIndex
-        status
-        snakeCells
-        direction
-        queuedTurns
-        plannedMove
-        score
-        modeState
-    }
-    class ClassicState {
-        applePosition
-    }
-    class MdasState {
-        lives
-        question
-        answerApples
-    }
-    class StepResult {
-        nextState
-        events
-    }
-    GameState --> GameConfig : fixed round configuration
-    GameState --> ClassicState : when Classic
-    GameState --> MdasState : when MDAS
-    StepResult --> GameState : next snapshot
-```
+![Conceptual model: StepResult returns GameState with fixed GameConfig and ClassicState or MdasState; all original fields are shown.](diagrams/architecture-figures/03-domain-model.png)
 
 Use a sealed mode-specific state so Classic cannot accidentally expose an MDAS question/lives field. The math engine returns a question with a structured expression, correct value and three unpositioned options (stable IDs and distinct integer values). The game engine owns `answerApples`, a separate list mapping each option ID to exactly one grid position. Positions are stored only in that list, never duplicated inside the question. Presentation joins values to placements by option ID and styles all options identically. Generate/evaluate tokens or an expression tree, not executable expression strings. Format `×` and `÷` for display separately.
 
@@ -204,25 +138,13 @@ Events describe transitions such as apple collected, correct answer, wrong answe
 
 ## 7. Session lifecycle
 
-```mermaid
-stateDiagram-v2
-    [*] --> READY: Create round
-    READY --> RUNNING: First valid swipe
-    READY --> PAUSED: Pause or background
-    RUNNING --> PAUSED: Pause, Back or background
-    PAUSED --> READY: Resume if paused before start
-    PAUSED --> RUNNING: Explicit Resume if previously running
-    RUNNING --> RUNNING: Border wrap or MDAS body pass-through
-    RUNNING --> GAME_OVER: Classic self-hit or fifth incorrect MDAS answer
-    RUNNING --> COMPLETED: Classic board filled
-    PAUSED --> READY: Restart
-    GAME_OVER --> READY: Try Again
-    COMPLETED --> READY: Try Again
-    READY --> [*]: Home or disposal
-    PAUSED --> [*]: Home or disposal
-    GAME_OVER --> [*]: Home
-    COMPLETED --> [*]: Home
-```
+**Start, pause and explicit resume**
+
+![Lifecycle controls: READY starts on the first swipe, RUNNING pauses on background or Back, and explicit resume restores the prior status.](diagrams/architecture-figures/04-session-controls.png)
+
+**Results, retry and disposal**
+
+![Lifecycle outcomes: Classic self-hit or fifth incorrect MDAS answer causes GAME_OVER; filling Classic completes it; retry returns to READY and Home disposes the session.](diagrams/architecture-figures/05-session-outcomes.png)
 
 A lifecycle adapter reports foreground eligibility to the ViewModel; the ViewModel does not hold an Activity, LifecycleOwner or Context. Losing the resumed/interactive lifecycle pauses an active round, cancels the tick job and freezes the current visual phase. Retain the planned move, turn queue and elapsed active interval time in memory, as the prototype does. Pause is idempotent. Returning to the foreground never automatically resumes a paused game.
 
@@ -238,31 +160,13 @@ At interval start, the engine selects at most one queued direction, wraps the de
 
 On a delayed wake-up, advance one cell and schedule the next interval from the current monotonic time. Do not execute a burst of missed ticks. Tick delay and randomness are injectable for deterministic tests; browser timing thresholds are calibration references rather than Android pixel measurements.
 
-```mermaid
-sequenceDiagram
-    actor Player
-    participant UI as Game UI
-    participant VM as GameViewModel
-    participant Engine as Game engine
-    participant Math as Math engine
-    participant Repo as Preferences repository
-    Player->>UI: Swipe
-    UI->>VM: Turn(direction)
-    VM->>Engine: Reduce current state and command
-    Engine-->>VM: Queue updated, active move stays fixed
-    Note over VM: Single owned tick job, foreground and RUNNING only
-    VM->>Engine: Commit planned move at interval end
-    opt MDAS needs next question
-        Engine->>Math: Generate and validate structured expression/options
-        Math-->>Engine: Exact integer question and distinct options
-    end
-    Engine-->>VM: Committed state, next planned move and events
-    VM-->>UI: Immutable GameUiState and render snapshots
-    opt Score increased
-        VM->>Repo: Record best with mode and score
-        Repo-->>VM: Observed persisted best or storage failure
-    end
-```
+**Queue the input**
+
+![Input sequence: Player swipe reaches Game UI, GameViewModel and the engine; the queued turn does not change the active move.](diagrams/architecture-figures/06-input-sequence.png)
+
+**Commit the tick and publish state**
+
+![Tick sequence: commit the planned move, optionally generate an MDAS question, publish immutable state, then optionally record the best score.](diagrams/architecture-figures/07-tick-sequence.png)
 
 An incorrect MDAS answer deducts exactly one life and, if lives remain, replaces the question without growth or a pose reset. Self-overlap alone changes neither lives nor question/apples, score or status; normal movement continues. A terminal MDAS result occurs only when an incorrect answer reduces lives to zero. A body crossing can still collect an apple, which uses the normal answer rule.
 
@@ -274,18 +178,7 @@ MDAS has no body obstacles or trapped-pose reset. Place three answers on distinc
 
 The renderer takes a `RenderFrame`: the current committed cells, engine-produced planned move, active interval fraction and enough visited route history to preserve the approved head/body/tail path. It interpolates forward from the committed pose toward that fixed plan, matching the browser, rather than lagging between two already committed snapshots. For a lethal Classic self-collision plan, hold head/tail positions until the interval commits the collision while retaining the prototype's head-rotation easing; for growth, advance the head while holding the tail. MDAS body crossings interpolate normally. Engine data remains grid-based; renderer caches derive geometry without feeding it back into rules. Restart and the Classic-only fairness pose reset replace visual history and reset the fraction rather than animating across the board. Borders and MDAS body crossings never clear visual history.
 
-```mermaid
-flowchart LR
-    SNAP[Committed state and planned move] --> FRAME[RenderFrame and route history]
-    CLOCK[Monotonic frame clock] -->|fraction only| FRAME
-    FRAME --> ROUTE[Rounded centerline and tangents]
-    ROUTE --> BODY[Continuous shaded body and tail]
-    ROUTE --> HEAD[Prepared feathered atlas head]
-    FRAME --> APPLES[Apples and number labels]
-    BODY --> CANVAS[Compose Canvas]
-    HEAD --> CANVAS
-    APPLES --> CANVAS
-```
+![Rendering flow: committed state and a visual clock feed RenderFrame, shared route geometry, continuous body and tail, atlas head and answer apples into Compose Canvas.](diagrams/architecture-figures/08-rendering.png)
 
 Wrap-around requires a native extension to the non-wrapping browser route: retain unwrapped/lifted path coordinates or explicit seam metadata, then draw translated copies clipped to the board. A rightward move from the last column continues right beyond that boundary and reappears at the left, rather than connecting the two cell centers with a line through the field. All head/body/tail copies use the same route and tangents. Clip visible art at the playable boundary; verify head and tail wrapping independently and during turns. MDAS self-crossings may overlap geometrically; draw answer apples/numbers above the body and the head above the apples. Retain enough ordered route history for the actual snake length, including repeated cells, rather than truncating it at board area. Long-session memory/frame cost needs profiling without adding an unapproved MDAS length limit, penalty or reset.
 
@@ -339,13 +232,13 @@ Use local JUnit tests for pure engines and coroutine tests for ViewModel schedul
 
 ## 12. Decisions left for initialization and review
 
-- Application ID/namespace, supported SDK floor, target/compile SDK and compatible stable Gradle/AGP/Kotlin/Compose versions remain initialization decisions. Verify together rather than copying WorkoutTracker versions.
+- Foundation decisions are accepted: [DD-001 identity](decisions/DD-001-application-identity.md), [DD-002 minimum Android](decisions/DD-002-minimum-android-version.md), [DD-003 build baseline](decisions/DD-003-foundation-build-baseline.md), [DD-004 Compose configuration](decisions/DD-004-compose-configuration.md) and [DD-005 package contract](decisions/DD-005-package-structure.md). T-002 established the native Compose foundation; consult its [worklog](worklog/T-002-2026-11-21.md) and current build files for actual versions and verification evidence.
 - Home best-score meaning is confirmed: show both Classic and MDAS with labels. Fresh-install sound/music defaults and system-Back behavior remain explicit engineering proposals for architecture review.
 - The MDAS age bands/skill levels are confirmed. Final numeric bounds and the difficulty-selection UI within the prepared flow need definition before generator/selection implementation tasks.
 - Native swipe threshold, font scaling, renderer sampling density and visual tuning are implementation calibrations against the supplied references.
 - Loading-motion approval, production audio/icon/logo assets and publication provenance remain tracked in the existing design/asset documents. Do not invent their approval or expand runtime asset allowlists.
 
-After architecture review, draft implementation tasks against the PRD's milestone sequence and the verification contracts above. Android initialization and feature implementation are not performed by this document.
+Continue proposal/task review against the PRD's milestone sequence and the verification contracts above. Android initialization and Compose setup are complete through T-002; the accepted package contract does not approve future feature implementation or the remaining detailed architecture proposals.
 
 ## 13. Reference precedence and external guidance
 

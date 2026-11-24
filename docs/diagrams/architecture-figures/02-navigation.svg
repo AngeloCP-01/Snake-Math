@@ -1,0 +1,77 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg viewBox="0 0 960 960" xmlns="http://www.w3.org/2000/svg" role="img" aria-labelledby="02-navigation-title 02-navigation-desc" id="d-02-navigation-root"><title id="02-navigation-title">Navigation and screen ownership</title><desc id="02-navigation-desc">Home opens mode selection or Settings; one game destination owns pause and results overlays.</desc><defs>
+      <style>#d-02-navigation-root { color: #023E21; }
+      #d-02-navigation-root .diagram-container { width:100%;overflow-x:auto; }
+      @media print {
+#d-02-navigation-root .diagram-container { overflow-x:visible; }
+}</style><marker id="d-02-navigation-arrow" markerWidth="8" markerHeight="6" refX="7" refY="3" orient="auto"><polygon points="0 0, 8 3, 0 6" fill="#47634F"/></marker><marker id="d-02-navigation-arrow-accent" markerWidth="8" markerHeight="6" refX="7" refY="3" orient="auto"><polygon points="0 0, 8 3, 0 6" fill="#155E2B"/></marker><marker id="d-02-navigation-arrow-link" markerWidth="8" markerHeight="6" refX="7" refY="3" orient="auto"><polygon points="0 0, 8 3, 0 6" fill="#47634F"/></marker></defs><rect width="960" height="960" fill="#FCFAF1"/><text x="48" y="48" font-family="Segoe UI, Arial, sans-serif" font-size="28" font-weight="600" fill="#023E21" text-anchor="start">Navigation and screen ownership</text>
+<text x="48" y="76" font-family="Segoe UI, Arial, sans-serif" font-size="12" font-weight="400" fill="#47634F" text-anchor="start">SNAKE &amp; MATH / PROPOSED ARCHITECTURE</text>
+<path d="M 208 184 L 208 260" fill="none" stroke="#47634F" stroke-width="1.5" marker-end="url(#d-02-navigation-arrow)"/>
+<path d="M 336 300 L 368 300" fill="none" stroke="#47634F" stroke-width="1.5" marker-end="url(#d-02-navigation-arrow)"/>
+<path d="M 432 260 L 432 228 Q 432 220 424 220 L 312 220 Q 304 220 304 228 L 304 260" fill="none" stroke="#47634F" stroke-width="1.5" marker-end="url(#d-02-navigation-arrow)"/>
+<path d="M 624 300 L 656 300" fill="none" stroke="#47634F" stroke-width="1.5" marker-end="url(#d-02-navigation-arrow)"/>
+<path d="M 160 356 L 160 536" fill="none" stroke="#47634F" stroke-width="1.5" marker-end="url(#d-02-navigation-arrow)"/>
+<path d="M 256 536 L 256 356" fill="none" stroke="#47634F" stroke-width="1.5" marker-end="url(#d-02-navigation-arrow)"/>
+<path d="M 712 356 L 712 424 Q 712 432 704 432 L 440 432 Q 432 432 432 440 L 432 536" fill="none" stroke="#47634F" stroke-width="1.5" marker-end="url(#d-02-navigation-arrow)"/>
+<path d="M 624 600 L 632 600 Q 640 600 640 592 L 640 440 a 8 8 0 0 1 0 -16 L 640 340 Q 640 332 648 332 L 656 332" fill="none" stroke="#47634F" stroke-width="1.5" marker-end="url(#d-02-navigation-arrow)"/>
+<path d="M 400 536 L 400 492 Q 400 484 392 484 L 312 484 Q 304 484 304 476 L 304 356" fill="none" stroke="#47634F" stroke-width="1.5" marker-end="url(#d-02-navigation-arrow)"/>
+<path d="M 744 356 L 744 536" fill="none" stroke="#47634F" stroke-width="1.5" marker-end="url(#d-02-navigation-arrow)"/>
+<path d="M 848 536 L 848 356" fill="none" stroke="#47634F" stroke-width="1.5" marker-end="url(#d-02-navigation-arrow)"/>
+<path d="M 784 632 L 784 748 Q 784 756 776 756 L 56 756 Q 48 756 48 748 L 48 324 Q 48 316 56 316 L 80 316" fill="none" stroke="#47634F" stroke-width="1.5" marker-end="url(#d-02-navigation-arrow)"/>
+<rect x="249.25" y="210" width="53.5" height="22" rx="2" fill="#FCFAF1"/>
+<text x="276" y="224" font-family="Segoe UI, Arial, sans-serif" font-size="12" font-weight="400" fill="#47634F" text-anchor="middle">READY</text>
+<rect x="329.0" y="230" width="46.0" height="22" rx="2" fill="#FCFAF1"/>
+<text x="352" y="244" font-family="Segoe UI, Arial, sans-serif" font-size="12" font-weight="400" fill="#47634F" text-anchor="middle">PLAY</text>
+<rect x="345.0" y="188" width="46.0" height="22" rx="2" fill="#FCFAF1"/>
+<text x="368" y="202" font-family="Segoe UI, Arial, sans-serif" font-size="12" font-weight="400" fill="#47634F" text-anchor="middle">BACK</text>
+<rect x="590.75" y="230" width="98.5" height="22" rx="2" fill="#FCFAF1"/>
+<text x="640" y="244" font-family="Segoe UI, Arial, sans-serif" font-size="12" font-weight="400" fill="#47634F" text-anchor="middle">SELECT MODE</text>
+<rect x="70.0" y="418" width="76.0" height="22" rx="2" fill="#FCFAF1"/>
+<text x="108" y="432" font-family="Segoe UI, Arial, sans-serif" font-size="12" font-weight="400" fill="#47634F" text-anchor="middle">SETTINGS</text>
+<rect x="177.5" y="432" width="61.0" height="40" rx="2" fill="#FCFAF1"/>
+<text x="208" y="446" font-family="Segoe UI, Arial, sans-serif" font-size="12" font-weight="400" fill="#47634F" text-anchor="middle">BACK /</text>
+<text x="208" y="464" font-family="Segoe UI, Arial, sans-serif" font-size="12" font-weight="400" fill="#47634F" text-anchor="middle">HOME</text>
+<rect x="519.0" y="396" width="106.0" height="22" rx="2" fill="#FCFAF1"/>
+<text x="572" y="410" font-family="Segoe UI, Arial, sans-serif" font-size="12" font-weight="400" fill="#47634F" text-anchor="middle">PAUSE / BACK</text>
+<rect x="534.0" y="452" width="76.0" height="40" rx="2" fill="#FCFAF1"/>
+<text x="572" y="466" font-family="Segoe UI, Arial, sans-serif" font-size="12" font-weight="400" fill="#47634F" text-anchor="middle">RESUME /</text>
+<text x="572" y="484" font-family="Segoe UI, Arial, sans-serif" font-size="12" font-weight="400" fill="#47634F" text-anchor="middle">RESTART</text>
+<rect x="329.0" y="502" width="46.0" height="22" rx="2" fill="#FCFAF1"/>
+<text x="352" y="516" font-family="Segoe UI, Arial, sans-serif" font-size="12" font-weight="400" fill="#47634F" text-anchor="middle">HOME</text>
+<rect x="760" y="360" width="53.5" height="40" rx="2" fill="#FCFAF1"/>
+<text x="768" y="374" font-family="Segoe UI, Arial, sans-serif" font-size="12" font-weight="400" fill="#47634F" text-anchor="start">ROUND</text>
+<text x="768" y="392" font-family="Segoe UI, Arial, sans-serif" font-size="12" font-weight="400" fill="#47634F" text-anchor="start">ENDS</text>
+<rect x="864" y="470" width="83.5" height="22" rx="2" fill="#FCFAF1"/>
+<text x="872" y="484" font-family="Segoe UI, Arial, sans-serif" font-size="12" font-weight="400" fill="#47634F" text-anchor="start">TRY AGAIN</text>
+<rect x="430.75" y="722" width="98.5" height="22" rx="2" fill="#FCFAF1"/>
+<text x="480" y="736" font-family="Segoe UI, Arial, sans-serif" font-size="12" font-weight="400" fill="#47634F" text-anchor="middle">HOME / BACK</text>
+<g data-node="START"><rect x="80" y="112" width="256" height="72" rx="8" fill="#FFFFFF" stroke="#9BAA9E" stroke-width="1.4"/>
+<text x="208.0" y="148" font-family="Segoe UI, Arial, sans-serif" font-size="16" font-weight="600" fill="#023E21" text-anchor="middle">Startup readiness</text>
+</g>
+<g data-node="HOME"><rect x="80" y="260" width="256" height="96" rx="8" fill="#F0F6CF" stroke="#155E2B" stroke-width="1.4"/>
+<text x="208.0" y="296" font-family="Segoe UI, Arial, sans-serif" font-size="16" font-weight="600" fill="#023E21" text-anchor="middle">Home</text>
+<text x="208.0" y="320" font-family="Segoe UI, Arial, sans-serif" font-size="12" font-weight="400" fill="#47634F" text-anchor="middle">PLAY / Settings</text>
+</g>
+<g data-node="MODES"><rect x="368" y="260" width="256" height="96" rx="8" fill="#FFFFFF" stroke="#9BAA9E" stroke-width="1.4"/>
+<text x="496.0" y="296" font-family="Segoe UI, Arial, sans-serif" font-size="16" font-weight="600" fill="#023E21" text-anchor="middle">Mode selection</text>
+<text x="496.0" y="320" font-family="Segoe UI, Arial, sans-serif" font-size="12" font-weight="400" fill="#47634F" text-anchor="middle">Classic or MDAS + difficulty</text>
+</g>
+<g data-node="GAME"><rect x="656" y="260" width="256" height="96" rx="8" fill="#FFFFFF" stroke="#9BAA9E" stroke-width="1.4"/>
+<text x="784.0" y="296" font-family="Segoe UI, Arial, sans-serif" font-size="16" font-weight="600" fill="#023E21" text-anchor="middle">Game destination</text>
+<text x="784.0" y="320" font-family="Segoe UI, Arial, sans-serif" font-size="12" font-weight="400" fill="#47634F" text-anchor="middle">Fixed mode and round profile</text>
+</g>
+<g data-node="SETTINGS"><rect x="80" y="536" width="256" height="96" rx="8" fill="#FFFFFF" stroke="#9BAA9E" stroke-width="1.4"/>
+<text x="208.0" y="572" font-family="Segoe UI, Arial, sans-serif" font-size="16" font-weight="600" fill="#023E21" text-anchor="middle">Settings</text>
+<text x="208.0" y="596" font-family="Segoe UI, Arial, sans-serif" font-size="12" font-weight="400" fill="#47634F" text-anchor="middle">Back or Home</text>
+</g>
+<g data-node="PAUSE"><rect x="368" y="536" width="256" height="96" rx="8" fill="#FFFFFF" stroke="#9BAA9E" stroke-width="1.4"/>
+<text x="496.0" y="572" font-family="Segoe UI, Arial, sans-serif" font-size="16" font-weight="600" fill="#023E21" text-anchor="middle">Pause overlay</text>
+<text x="496.0" y="596" font-family="Segoe UI, Arial, sans-serif" font-size="12" font-weight="400" fill="#47634F" text-anchor="middle">Same game owner / frozen board</text>
+</g>
+<g data-node="RESULT"><rect x="656" y="536" width="256" height="96" rx="8" fill="#FFFFFF" stroke="#9BAA9E" stroke-width="1.4"/>
+<text x="784.0" y="572" font-family="Segoe UI, Arial, sans-serif" font-size="16" font-weight="600" fill="#023E21" text-anchor="middle">Results overlay</text>
+<text x="784.0" y="596" font-family="Segoe UI, Arial, sans-serif" font-size="12" font-weight="400" fill="#47634F" text-anchor="middle">Same game owner / final score</text>
+</g>
+<line x1="48" y1="860" x2="912" y2="860" stroke="#9BAA9E"/>
+<text x="48" y="884" font-family="Segoe UI, Arial, sans-serif" font-size="12" font-weight="400" fill="#47634F" text-anchor="start">Pause / Back = Pause control or system Back. Round ends = game over or completion.</text>
+<text x="48" y="902" font-family="Segoe UI, Arial, sans-serif" font-size="12" font-weight="400" fill="#47634F" text-anchor="start">Try Again retains the mode. Home disposes the session. Pause/results are not new rounds.</text></svg>

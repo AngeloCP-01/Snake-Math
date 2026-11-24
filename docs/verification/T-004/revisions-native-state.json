@@ -1,0 +1,11 @@
+{
+  "api": "34",
+  "device": "sdk_gphone64_x86_64",
+  "size": "Physical size: 1440x3120",
+  "density": "Physical density: 560",
+  "font_scale": "1.0",
+  "serial": "emulator-5554",
+  "captured_utc": "2026-11-24T11:22:16.552788+00:00",
+  "readiness": "Home PLAY visible in UI hierarchy after Wait on System UI ANR",
+  "launch_command_result": "am start -W timed out while system dialog obscured splash; actual Home subsequently visible"
+}

@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg viewBox="0 0 960 820" xmlns="http://www.w3.org/2000/svg" role="img" aria-labelledby="06-input-sequence-title 06-input-sequence-desc" id="d-06-input-sequence-root"><title id="06-input-sequence-title">Commands and ticks: queueing a swipe</title><desc id="06-input-sequence-desc">Time runs top to bottom; message order, optional branches and returned values follow the architecture source.</desc><defs>
+      <style>#d-06-input-sequence-root { color: #023E21; }
+      #d-06-input-sequence-root .diagram-container { width:100%;overflow-x:auto; }
+      @media print {
+#d-06-input-sequence-root .diagram-container { overflow-x:visible; }
+}</style><marker id="d-06-input-sequence-arrow" markerWidth="8" markerHeight="6" refX="7" refY="3" orient="auto"><polygon points="0 0, 8 3, 0 6" fill="#47634F"/></marker><marker id="d-06-input-sequence-arrow-accent" markerWidth="8" markerHeight="6" refX="7" refY="3" orient="auto"><polygon points="0 0, 8 3, 0 6" fill="#155E2B"/></marker><marker id="d-06-input-sequence-arrow-link" markerWidth="8" markerHeight="6" refX="7" refY="3" orient="auto"><polygon points="0 0, 8 3, 0 6" fill="#47634F"/></marker></defs><rect width="960" height="820" fill="#FCFAF1"/><text x="48" y="48" font-family="Segoe UI, Arial, sans-serif" font-size="28" font-weight="600" fill="#023E21" text-anchor="start">Commands and ticks: queueing a swipe</text>
+<text x="48" y="76" font-family="Segoe UI, Arial, sans-serif" font-size="12" font-weight="400" fill="#47634F" text-anchor="start">SNAKE &amp; MATH / PROPOSED ARCHITECTURE</text>
+<line x1="112" y1="212" x2="112" y2="640" stroke="#9BAA9E" stroke-dasharray="4 4"/>
+<line x1="356" y1="212" x2="356" y2="640" stroke="#9BAA9E" stroke-dasharray="4 4"/>
+<line x1="604" y1="212" x2="604" y2="640" stroke="#9BAA9E" stroke-dasharray="4 4"/>
+<line x1="848" y1="212" x2="848" y2="640" stroke="#9BAA9E" stroke-dasharray="4 4"/>
+<path d="M 112 300 L 356 300" fill="none" stroke="#47634F" stroke-width="1.5" marker-end="url(#d-06-input-sequence-arrow)"/>
+<path d="M 356 396 L 604 396" fill="none" stroke="#47634F" stroke-width="1.5" marker-end="url(#d-06-input-sequence-arrow)"/>
+<path d="M 604 492 L 848 492" fill="none" stroke="#47634F" stroke-width="1.5" marker-end="url(#d-06-input-sequence-arrow)"/>
+<path d="M 848 604 L 604 604" fill="none" stroke="#47634F" stroke-width="1.5" stroke-dasharray="5 4" marker-end="url(#d-06-input-sequence-arrow)"/>
+<rect x="207.25" y="264" width="53.5" height="22" rx="2" fill="#FCFAF1"/>
+<text x="234.0" y="278" font-family="Segoe UI, Arial, sans-serif" font-size="12" font-weight="400" fill="#47634F" text-anchor="middle">Swipe</text>
+<rect x="415.75" y="360" width="128.5" height="22" rx="2" fill="#FCFAF1"/>
+<text x="480.0" y="374" font-family="Segoe UI, Arial, sans-serif" font-size="12" font-weight="400" fill="#47634F" text-anchor="middle">Turn(direction)</text>
+<rect x="643.0" y="438" width="166.0" height="40" rx="2" fill="#FCFAF1"/>
+<text x="726.0" y="452" font-family="Segoe UI, Arial, sans-serif" font-size="12" font-weight="400" fill="#47634F" text-anchor="middle">Reduce current state</text>
+<text x="726.0" y="470" font-family="Segoe UI, Arial, sans-serif" font-size="12" font-weight="400" fill="#47634F" text-anchor="middle">and command</text>
+<rect x="620.5" y="550" width="211.0" height="40" rx="2" fill="#FCFAF1"/>
+<text x="726.0" y="564" font-family="Segoe UI, Arial, sans-serif" font-size="12" font-weight="400" fill="#47634F" text-anchor="middle">Queue updated; active move</text>
+<text x="726.0" y="582" font-family="Segoe UI, Arial, sans-serif" font-size="12" font-weight="400" fill="#47634F" text-anchor="middle">stays fixed</text>
+<g data-node="Player"><rect x="44" y="132" width="136" height="80" rx="8" fill="#FFFFFF" stroke="#9BAA9E" stroke-width="1.4"/>
+<text x="112.0" y="168" font-family="Segoe UI, Arial, sans-serif" font-size="16" font-weight="600" fill="#023E21" text-anchor="middle">Player</text>
+</g>
+<g data-node="UI"><rect x="288" y="132" width="136" height="80" rx="8" fill="#FFFFFF" stroke="#9BAA9E" stroke-width="1.4"/>
+<text x="356.0" y="168" font-family="Segoe UI, Arial, sans-serif" font-size="16" font-weight="600" fill="#023E21" text-anchor="middle">Game UI</text>
+</g>
+<g data-node="VM"><rect x="536" y="132" width="136" height="80" rx="8" fill="#FFFFFF" stroke="#9BAA9E" stroke-width="1.4"/>
+<text x="604.0" y="168" font-family="Segoe UI, Arial, sans-serif" font-size="16" font-weight="600" fill="#023E21" text-anchor="middle">GameViewModel</text>
+</g>
+<g data-node="Engine"><rect x="780" y="132" width="136" height="80" rx="8" fill="#FFFFFF" stroke="#9BAA9E" stroke-width="1.4"/>
+<text x="848.0" y="168" font-family="Segoe UI, Arial, sans-serif" font-size="16" font-weight="600" fill="#023E21" text-anchor="middle">Game engine</text>
+</g>
+<text x="80" y="684" font-family="Segoe UI, Arial, sans-serif" font-size="12" font-weight="400" fill="#47634F" text-anchor="start">The single owned tick job runs only while foreground-eligible and RUNNING.</text>
+<line x1="48" y1="720" x2="912" y2="720" stroke="#9BAA9E"/>
+<text x="48" y="744" font-family="Segoe UI, Arial, sans-serif" font-size="12" font-weight="400" fill="#47634F" text-anchor="start">Solid: request/command. Dashed: returned state or response. Time flows downward.</text>
+<text x="48" y="762" font-family="Segoe UI, Arial, sans-serif" font-size="12" font-weight="400" fill="#47634F" text-anchor="start">One authoritative state; no UI or renderer decides gameplay outcomes.</text></svg>

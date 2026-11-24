@@ -1,0 +1,30 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<testsuites tests="12" failures="0" errors="0" skipped="0" time="0.000" timestamp="2026-11-22T14:42:50" hostname="localhost">
+  <testsuite name="com.acp.snakemath.app.MainActivityTest" tests="1" failures="0" errors="0" skipped="0" time="9.282" timestamp="2026-11-22T14:42:50" hostname="localhost">
+    <properties>
+      <property name="device" value="emulator-5554" />
+    </properties>
+    <testcase name="launcherDisplaysHome" classname="com.acp.snakemath.app.MainActivityTest" time="9.282" />
+  </testsuite>
+  <testsuite name="com.acp.snakemath.app.navigation.SnakeMathNavigationTest" tests="3" failures="0" errors="0" skipped="0" time="20.791" timestamp="2026-11-22T14:42:50" hostname="localhost">
+    <properties>
+      <property name="device" value="emulator-5554" />
+    </properties>
+    <testcase name="playOpensModesAndBackReturnsHome" classname="com.acp.snakemath.app.navigation.SnakeMathNavigationTest" time="8.194" />
+    <testcase name="homeIsStartAndRapidActionsKeepOneTarget" classname="com.acp.snakemath.app.navigation.SnakeMathNavigationTest" time="6.217" />
+    <testcase name="settingsOpensSettingsAndSystemBackReturnsHome" classname="com.acp.snakemath.app.navigation.SnakeMathNavigationTest" time="6.380" />
+  </testsuite>
+  <testsuite name="com.acp.snakemath.feature.home.HomeScreenTest" tests="8" failures="0" errors="0" skipped="0" time="42.150" timestamp="2026-11-22T14:42:50" hostname="localhost">
+    <properties>
+      <property name="device" value="emulator-5554" />
+    </properties>
+    <testcase name="homeFitsReferencePhoneWithoutScrolling" classname="com.acp.snakemath.feature.home.HomeScreenTest" time="5.258" />
+    <testcase name="actionsDispatchSeparateCallbacks" classname="com.acp.snakemath.feature.home.HomeScreenTest" time="5.018" />
+    <testcase name="homeFitsSmallPhoneWithoutScrolling" classname="com.acp.snakemath.feature.home.HomeScreenTest" time="6.007" />
+    <testcase name="missingScoresAreUnavailable" classname="com.acp.snakemath.feature.home.HomeScreenTest" time="4.652" />
+    <testcase name="homeFitsSmallPhoneWithLargeTextWithoutScrolling" classname="com.acp.snakemath.feature.home.HomeScreenTest" time="4.854" />
+    <testcase name="scoresRetainModeAssociation" classname="com.acp.snakemath.feature.home.HomeScreenTest" time="6.360" />
+    <testcase name="homeFitsTabletWithoutScrolling" classname="com.acp.snakemath.feature.home.HomeScreenTest" time="4.722" />
+    <testcase name="homeFitsReferencePhoneWithLargeTextWithoutScrolling" classname="com.acp.snakemath.feature.home.HomeScreenTest" time="5.279" />
+  </testsuite>
+</testsuites>

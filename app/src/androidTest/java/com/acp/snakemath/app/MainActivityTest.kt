@@ -14,8 +14,9 @@ class MainActivityTest {
     val composeRule = createAndroidComposeRule<MainActivity>()
 
     @Test
-    fun launcherDisplaysComposeSetupMarker() {
-        composeRule.onNodeWithText("Snake & Math").assertIsDisplayed()
-        composeRule.onNodeWithText("Compose ready").assertIsDisplayed()
+    fun launcherDisplaysHome() {
+        composeRule.onNodeWithText("PLAY").assertIsDisplayed()
+        composeRule.onNodeWithText("Classic best").assertIsDisplayed()
+        composeRule.onNodeWithText("MDAS best").assertIsDisplayed()
     }
 }

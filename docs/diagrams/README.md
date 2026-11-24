@@ -1,6 +1,6 @@
 # Architecture diagram artifacts
 
-Read [the architecture document](../architecture.md) for component contracts, decisions, navigation, state, timing and rendering diagrams. All diagrams describe a proposed native implementation, not existing Android code.
+Read [the architecture document](../architecture.md) for component contracts, decisions, navigation, state, timing and rendering diagrams. Its figures are now embedded PNGs, readable directly in Markdown preview; [editable sources, regeneration and verification](architecture-figures/README.md) accompany them. The diagrams describe proposed feature architecture; the current native foundation is recorded separately in the tracker.
 
 - [Interactive component map](architecture.html): self-contained HTML; supports light/dark viewing, zoom, tracing and exports.
 - [Editable specification](architecture.json): Archify architecture schema, version 1.
@@ -23,7 +23,7 @@ Generated with the installed archify skill on 2026-11-20. One focused label-plac
 | Perceptual visual review | Passed: all four endpoint light/dark screenshots inspected for label/node fit, route clarity and balanced composition |
 | Correction rounds | 1 |
 
-The six Mermaid blocks in `docs/architecture.md` also passed parsing and SVG rendering with the locally cached Mermaid library in headless Chrome: system interactions, navigation, domain model, session lifecycle, tick sequence and rendering flow. A separate Android builder review checked the architecture against the approved prototype; the interval planning, pause behavior, placement ownership and fairness-reset details are reflected in the final document. The Home panel decision was subsequently confirmed by the user and recorded in the architecture and screen notes.
+The six former Mermaid blocks (now archived in [source-diagrams.json](architecture-figures/source-diagrams.json)) also passed parsing and SVG rendering with the locally cached Mermaid library in headless Chrome during the 2026-11-20 review: system interactions, navigation, domain model, session lifecycle, tick sequence and rendering flow. A separate Android builder review checked the architecture against the approved prototype; the interval planning, pause behavior, placement ownership and fairness-reset details are reflected in the final document. The Home panel decision was subsequently confirmed by the user and recorded in the architecture and screen notes. This is historical evidence; the new PNGs have their own linked verification record.
 
 Automated browser checking initially could not launch Chrome inside the sandbox; the successful rerun used the same artifact outside the sandbox. The automated receipt correctly retains `visualReview: pending`: its scope is measurement and capture. The separate image-based review is recorded above rather than changing the machine receipt.
 

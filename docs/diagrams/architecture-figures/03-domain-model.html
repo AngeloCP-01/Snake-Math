@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="en"><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1"><title>Domain state and transition contract</title><style>html,body{margin:0;padding:0;background:#FCFAF1;color:#023E21;}.frame{width:100%;min-width:0;max-width:100%;}.diagram-container{width:100%;overflow-x:auto;}svg{display:block;width:960px;min-width:960px;height:1080px;}@media print{.diagram-container{overflow-x:visible;}svg{width:100%;min-width:0;height:auto;}}</style></head><body><main class="frame"><div class="diagram-container"><svg viewBox="0 0 960 1080" xmlns="http://www.w3.org/2000/svg" role="img" aria-labelledby="03-domain-model-title 03-domain-model-desc"><title id="03-domain-model-title">Domain state and transition contract</title><desc id="03-domain-model-desc">StepResult returns a GameState with fixed configuration and Classic or MDAS-specific state; all original fields are retained.</desc><defs><marker id="arrow" markerWidth="8" markerHeight="6" refX="7" refY="3" orient="auto"><polygon points="0 0, 8 3, 0 6" fill="#47634F"/></marker><marker id="arrow-accent" markerWidth="8" markerHeight="6" refX="7" refY="3" orient="auto"><polygon points="0 0, 8 3, 0 6" fill="#155E2B"/></marker><marker id="arrow-link" markerWidth="8" markerHeight="6" refX="7" refY="3" orient="auto"><polygon points="0 0, 8 3, 0 6" fill="#47634F"/></marker></defs><rect width="960" height="1080" fill="#FCFAF1"/><text x="48" y="48" font-family="Segoe UI, Arial, sans-serif" font-size="28" font-weight="600" fill="#023E21" text-anchor="start">Domain state and transition contract</text>
+<text x="48" y="76" font-family="Segoe UI, Arial, sans-serif" font-size="12" font-weight="400" fill="#47634F" text-anchor="start">SNAKE &amp; MATH / PROPOSED ARCHITECTURE</text>
+<path d="M 672 216 L 672 284" fill="none" stroke="#47634F" stroke-width="1.5" marker-end="url(#arrow)"/>
+<path d="M 480 460 L 304 460" fill="none" stroke="#47634F" stroke-width="1.5" marker-end="url(#arrow)"/>
+<path d="M 544 636 L 544 708 Q 544 716 536 716 L 248 716 Q 240 716 240 724 L 240 780" fill="none" stroke="#47634F" stroke-width="1.5" marker-end="url(#arrow)"/>
+<path d="M 736 636 L 736 780" fill="none" stroke="#47634F" stroke-width="1.5" marker-end="url(#arrow)"/>
+<rect x="743.25" y="242" width="113.5" height="22" rx="2" fill="#FCFAF1"/>
+<text x="800" y="256" font-family="Segoe UI, Arial, sans-serif" font-size="12" font-weight="400" fill="#47634F" text-anchor="middle">NEXT SNAPSHOT</text>
+<rect x="335.25" y="394" width="113.5" height="40" rx="2" fill="#FCFAF1"/>
+<text x="392" y="408" font-family="Segoe UI, Arial, sans-serif" font-size="12" font-weight="400" fill="#47634F" text-anchor="middle">FIXED ROUND</text>
+<text x="392" y="426" font-family="Segoe UI, Arial, sans-serif" font-size="12" font-weight="400" fill="#47634F" text-anchor="middle">CONFIGURATION</text>
+<rect x="331.0" y="678" width="106.0" height="22" rx="2" fill="#FCFAF1"/>
+<text x="384" y="692" font-family="Segoe UI, Arial, sans-serif" font-size="12" font-weight="400" fill="#47634F" text-anchor="middle">WHEN CLASSIC</text>
+<rect x="774.25" y="686" width="83.5" height="22" rx="2" fill="#FCFAF1"/>
+<text x="816" y="700" font-family="Segoe UI, Arial, sans-serif" font-size="12" font-weight="400" fill="#47634F" text-anchor="middle">WHEN MDAS</text>
+<g data-node="StepResult"><rect x="480" y="104" width="384" height="112" rx="8" fill="#FFFFFF" stroke="#9BAA9E" stroke-width="1.4"/>
+<text x="500" y="134" font-family="Segoe UI, Arial, sans-serif" font-size="16" font-weight="600" fill="#023E21" text-anchor="start">StepResult</text>
+<line x1="480" y1="152" x2="864" y2="152" stroke="#9BAA9E"/>
+<text x="500" y="180" font-family="Consolas, monospace" font-size="14" font-weight="400" fill="#023E21" text-anchor="start">nextState</text>
+<text x="500" y="200" font-family="Consolas, monospace" font-size="14" font-weight="400" fill="#023E21" text-anchor="start">events</text>
+</g>
+<g data-node="GameConfig"><rect x="48" y="284" width="256" height="328" rx="8" fill="#FFFFFF" stroke="#9BAA9E" stroke-width="1.4"/>
+<text x="68" y="314" font-family="Segoe UI, Arial, sans-serif" font-size="16" font-weight="600" fill="#023E21" text-anchor="start">GameConfig</text>
+<line x1="48" y1="332" x2="304" y2="332" stroke="#9BAA9E"/>
+<text x="68" y="360" font-family="Consolas, monospace" font-size="14" font-weight="400" fill="#023E21" text-anchor="start">mode</text>
+<text x="68" y="380" font-family="Consolas, monospace" font-size="14" font-weight="400" fill="#023E21" text-anchor="start">mdasDifficulty</text>
+<text x="68" y="400" font-family="Consolas, monospace" font-size="14" font-weight="400" fill="#023E21" text-anchor="start">columns</text>
+<text x="68" y="420" font-family="Consolas, monospace" font-size="14" font-weight="400" fill="#023E21" text-anchor="start">rows</text>
+<text x="68" y="440" font-family="Consolas, monospace" font-size="14" font-weight="400" fill="#023E21" text-anchor="start">tickInterval</text>
+<text x="68" y="460" font-family="Consolas, monospace" font-size="14" font-weight="400" fill="#023E21" text-anchor="start">initialLength</text>
+<text x="68" y="480" font-family="Consolas, monospace" font-size="14" font-weight="400" fill="#023E21" text-anchor="start">scorePerApple</text>
+<text x="68" y="500" font-family="Consolas, monospace" font-size="14" font-weight="400" fill="#023E21" text-anchor="start">initialLives</text>
+</g>
+<g data-node="GameState"><rect x="480" y="284" width="384" height="352" rx="8" fill="#F0F6CF" stroke="#155E2B" stroke-width="1.4"/>
+<text x="500" y="314" font-family="Segoe UI, Arial, sans-serif" font-size="16" font-weight="600" fill="#023E21" text-anchor="start">GameState</text>
+<line x1="480" y1="332" x2="864" y2="332" stroke="#9BAA9E"/>
+<text x="500" y="360" font-family="Consolas, monospace" font-size="14" font-weight="400" fill="#023E21" text-anchor="start">sessionId</text>
+<text x="500" y="380" font-family="Consolas, monospace" font-size="14" font-weight="400" fill="#023E21" text-anchor="start">tickIndex</text>
+<text x="500" y="400" font-family="Consolas, monospace" font-size="14" font-weight="400" fill="#023E21" text-anchor="start">status</text>
+<text x="500" y="420" font-family="Consolas, monospace" font-size="14" font-weight="400" fill="#023E21" text-anchor="start">snakeCells</text>
+<text x="500" y="440" font-family="Consolas, monospace" font-size="14" font-weight="400" fill="#023E21" text-anchor="start">direction</text>
+<text x="500" y="460" font-family="Consolas, monospace" font-size="14" font-weight="400" fill="#023E21" text-anchor="start">queuedTurns</text>
+<text x="500" y="480" font-family="Consolas, monospace" font-size="14" font-weight="400" fill="#023E21" text-anchor="start">plannedMove</text>
+<text x="500" y="500" font-family="Consolas, monospace" font-size="14" font-weight="400" fill="#023E21" text-anchor="start">score</text>
+<text x="500" y="520" font-family="Consolas, monospace" font-size="14" font-weight="400" fill="#023E21" text-anchor="start">modeState</text>
+</g>
+<g data-node="ClassicState"><rect x="96" y="780" width="288" height="112" rx="8" fill="#FFFFFF" stroke="#9BAA9E" stroke-width="1.4"/>
+<text x="116" y="810" font-family="Segoe UI, Arial, sans-serif" font-size="16" font-weight="600" fill="#023E21" text-anchor="start">ClassicState</text>
+<line x1="96" y1="828" x2="384" y2="828" stroke="#9BAA9E"/>
+<text x="116" y="856" font-family="Consolas, monospace" font-size="14" font-weight="400" fill="#023E21" text-anchor="start">applePosition</text>
+</g>
+<g data-node="MdasState"><rect x="592" y="780" width="288" height="160" rx="8" fill="#FFFFFF" stroke="#9BAA9E" stroke-width="1.4"/>
+<text x="612" y="810" font-family="Segoe UI, Arial, sans-serif" font-size="16" font-weight="600" fill="#023E21" text-anchor="start">MdasState</text>
+<line x1="592" y1="828" x2="880" y2="828" stroke="#9BAA9E"/>
+<text x="612" y="856" font-family="Consolas, monospace" font-size="14" font-weight="400" fill="#023E21" text-anchor="start">lives</text>
+<text x="612" y="876" font-family="Consolas, monospace" font-size="14" font-weight="400" fill="#023E21" text-anchor="start">question</text>
+<text x="612" y="896" font-family="Consolas, monospace" font-size="14" font-weight="400" fill="#023E21" text-anchor="start">answerApples</text>
+</g>
+<line x1="48" y1="980" x2="912" y2="980" stroke="#9BAA9E"/>
+<text x="48" y="1004" font-family="Segoe UI, Arial, sans-serif" font-size="12" font-weight="400" fill="#47634F" text-anchor="start">Conceptual fields, not finalized Kotlin signatures. No inheritance or cardinality is implied.</text>
+<text x="48" y="1022" font-family="Segoe UI, Arial, sans-serif" font-size="12" font-weight="400" fill="#47634F" text-anchor="start">A sealed mode-specific state separates Classic apples from MDAS lives, questions and answers.</text></svg></div></main></body></html>

@@ -1,22 +1,25 @@
 # Snake & Math — Task tracker
 
-**Updated:** 2026-11-21
+**Updated:** 2026-11-24
 **Purpose:** The single place to check development progress. The milestone order and checklist items below come from [PRD Part 6 — Development Roadmap](snake-math-prd.md#part-6--development-roadmap). Keep the PRD focused on product requirements; update progress here.
 
 ## Current position
 
 - **Completed baseline:** Milestone 0's initial browser discovery and visual references.
-- **Current milestone:** Milestone 1 — Android Project Foundation; M1.1 and M1.2 complete; next scope is M1.3 planning.
+- **Current milestone:** Milestone 1 — Android Project Foundation; M1.1–M1.3 complete. M1.4–M1.6 implemented in T-004, with remaining native/Studio validation.
 - **Native implementation:** T-001 scaffold verified: build/lint passed (0 errors / 5 warnings), unit-test task `NO-SOURCE`, blank launcher observed on API 34 emulator, and actual Studio sync passed with JBR 25. Dev confirmed Rabbit 2 | 2026.2.2 Patch 2 from Help → About.
-- **Approved implementation tasks:** T-001, completed on 2026-11-21; [T-002](requirements/T-002-compose-configuration.md), separately approved by Dev on 2026-11-21 with implementation/native checks recorded in the T-002 worklog.
-- **Active implementation task:** None. [T-002](requirements/T-002-compose-configuration.md) completed on 2026-11-21: build/lint, API 34 tests/font scaling and Dev-confirmed Studio sync/preview. [Worklog](worklog/T-002-2026-11-21.md).
-- **Agreed proposals:** [P-001 — Kotlin Android foundation](requirements/P-001-kotlin-android-foundation.md), agreed on 2026-11-20 by Dev (M1.1); [P-002 — Compose configuration](requirements/P-002-jetpack-compose-configuration.md), agreed on 2026-11-21 by Dev (M1.2).
-- **Execution profile:** `sol-medium`, confirmed by Dev on 2026-11-21; exact runtime model ID unavailable.
+- **Approved implementation tasks:** T-001, completed on 2026-11-21; [T-002](requirements/T-002-compose-configuration.md), separately approved by Dev on 2026-11-21 with implementation/native checks recorded in the T-002 worklog; [T-003](requirements/T-003-package-structure.md), authorized by Dev on 2026-11-21 and complete.
+- **Active implementation task:** [T-004](requirements/T-004-theme-navigation-home.md), review corrections verified on 2026-11-24. ISS-003–ISS-005 and README are fixed in commit `600596d`, published in [PR #3](https://github.com/AngeloCP-01/Snake-Math/pull/3); final build/lint and 25 API 34 tests passed, with no remaining findings in the fresh read-only correction review. [Changes/evidence for independent review](verification/T-004/review-fixes.md). T-004 remains partial for broader device/Studio coverage; publication is now authorized as described below.
+- **Agreed proposals:** [P-001 — Kotlin Android foundation](requirements/P-001-kotlin-android-foundation.md), agreed on 2026-11-20 by Dev (M1.1); [P-002 — Compose configuration](requirements/P-002-jetpack-compose-configuration.md), agreed on 2026-11-21 by Dev (M1.2); [P-003 — Package structure](requirements/P-003-package-structure.md), agreed on 2026-11-21 by Dev (M1.3).
+- **Last implementation profile:** T-004 `sol-high`, confirmed by Dev on 2026-11-22; exact runtime model ID unavailable.
 - **Confirmed proposal choices:** Application ID and namespace `com.acp.snakemath`; minimum Android API 23 / Android 6.0 (Dev, 2026-11-20; P-001 D1–D2).
-- **Supporting decisions:** [DD-001 identity](decisions/DD-001-application-identity.md), [DD-002 minimum Android](decisions/DD-002-minimum-android-version.md), [DD-003 foundation build](decisions/DD-003-foundation-build-baseline.md).
+- **Supporting decisions:** [DD-001 identity](decisions/DD-001-application-identity.md), [DD-002 minimum Android](decisions/DD-002-minimum-android-version.md), [DD-003 foundation build](decisions/DD-003-foundation-build-baseline.md), [DD-005 package contract/audit](decisions/DD-005-package-structure.md).
 - **Result evidence:** [T-001 worklog](worklog/T-001-2026-11-21.md); environment limitations [ISS-001](issues/ISS-001-sandbox-gradle-access.md) and [ISS-002](issues/ISS-002-emulator-startup-instability.md).
 - **Approved M1.2 records:** P-002 agreed; accepted [DD-004 — Compose configuration](decisions/DD-004-compose-configuration.md); [T-002 — Configure Jetpack Compose](requirements/T-002-compose-configuration.md) separately approved by Dev on 2026-11-21 (“task approved”).
-- **Next action:** Begin separate Session A planning for M1.3 (package structure), using the PRD/architecture and existing templates. T-002 is complete; no M1.3 implementation authorized.
+- **Active planning:** Session A complete for combined M1.4 theme, M1.5 navigation and M1.6 basic Home: [P-004](requirements/P-004-theme-navigation-home.md), [T-004](requirements/T-004-theme-navigation-home.md). Dev waived planning approval pauses for this work unit on 2026-11-22; [DD-006](decisions/DD-006-combined-foundation-planning.md) records the scope. These are planned documents, not a claim that their unseen contents were approved for implementation.
+- **Next action:** Review [PR #3](https://github.com/AngeloCP-01/Snake-Math/pull/3) from `feature/m1-theme-navigation-home` to `main`, opened on 2026-11-24 under Dev's explicit publication authorization. Implementation commit: `600596d`; prerequisite T-003 commit `1b7c59b` is included. Merge remains Dev's decision. Pre-publication 25-test/build/lint evidence is linked in the [handoff](verification/T-004/review-fixes.md). Retain API 23/API 36, complete rotation and Studio coverage as pending. M1.7 and later milestones retain their planning gates.
+- **Component editing:** All six shared components now include standalone themed previews, requested by Dev for manual refinement; preview compilation passed. HomeScreen retains its responsive sizing overrides. See [T-004 worklog](worklog/T-004-2026-11-22.md).
+- **Documentation maintenance (2026-11-21):** Dev requested replacing all architecture Mermaid diagrams with directly viewable images. The six source diagrams are presented as eight embedded PNG figures, with [editable sources and verification](diagrams/architecture-figures/README.md). This presentation update does not advance the roadmap or approve the remaining architecture proposals.
 
 This is a roadmap tracker, not a detailed implementation plan or approval to start coding. Detailed proposals/tasks live in [requirements](requirements/); decisions, blockers and results link to their own records. Initial browser approval does not establish native behavior, testing or performance.
 
@@ -25,7 +28,7 @@ This is a roadmap tracker, not a detailed implementation plan or approval to sta
 | Milestone | Status | Proposal / task / worklog links |
 |---|---|---|
 | [0 — Product Discovery and Technical Planning](#milestone-0--product-discovery-and-technical-planning) | Initial prototype baseline complete; native planning review remains | [Handoff](android-prototype-handoff.md), [architecture draft](architecture.md) |
-| [1 — Android Project Foundation](#milestone-1--android-project-foundation) | In progress; M1.1–M1.2 done, next M1.3 planning | [P-001 agreed](requirements/P-001-kotlin-android-foundation.md); [T-001 done](requirements/T-001-project-setup.md); [worklog](worklog/T-001-2026-11-21.md); [P-002 agreed](requirements/P-002-jetpack-compose-configuration.md); [T-002 approved](requirements/T-002-compose-configuration.md) |
+| [1 — Android Project Foundation](#milestone-1--android-project-foundation) | In progress; M1.1–M1.3 done; M1.4–M1.6 implemented; validation partial | [P-001 agreed](requirements/P-001-kotlin-android-foundation.md); [T-001 done](requirements/T-001-project-setup.md); [worklog](worklog/T-001-2026-11-21.md); [P-002 agreed](requirements/P-002-jetpack-compose-configuration.md); [T-002 done](requirements/T-002-compose-configuration.md); [P-003 agreed](requirements/P-003-package-structure.md); [T-003 done](requirements/T-003-package-structure.md); [P-004 planned](requirements/P-004-theme-navigation-home.md); [T-004 partial](requirements/T-004-theme-navigation-home.md); [DD-006 planning waiver](decisions/DD-006-combined-foundation-planning.md) |
 | [2 — Classic Game Engine](#milestone-2--classic-game-engine) | Not started | No proposal/task records yet |
 | [3 — Custom Snake Rendering](#milestone-3--custom-snake-rendering) | Not started | No proposal/task records yet |
 | [4 — Classic Gameplay UI](#milestone-4--classic-gameplay-ui) | Not started | No proposal/task records yet |
@@ -63,10 +66,10 @@ This is a roadmap tracker, not a detailed implementation plan or approval to sta
 
 - [x] **M1.1** Create Kotlin Android project. — [T-001](requirements/T-001-project-setup.md), [worklog](worklog/T-001-2026-11-21.md).
 - [x] **M1.2** Configure Jetpack Compose. — Done; build/lint, API 34 red/green and full connected tests, native font-scale check passed; Dev confirmed Studio sync/preview on 2026-11-21. [Worklog](worklog/T-002-2026-11-21.md). Approved records: [P-002 agreed](requirements/P-002-jetpack-compose-configuration.md), [T-002 approved](requirements/T-002-compose-configuration.md), [DD-004](decisions/DD-004-compose-configuration.md).
-- [ ] **M1.3** Establish package structure.
-- [ ] **M1.4** Create application theme.
-- [ ] **M1.5** Implement navigation.
-- [ ] **M1.6** Create basic home screen.
+- [x] **M1.3** Establish package structure. — Done through [T-003](requirements/T-003-package-structure.md), authorized by Dev on 2026-11-21; documentation/source audit and preserved-source checks in the [worklog](worklog/T-003-2026-11-21.md).
+- [ ] **M1.4** Create application theme. — Implemented; fonts/assets verified, API 23 rendering pending. [T-004 worklog](worklog/T-004-2026-11-22.md).
+- [x] **M1.5** Implement navigation. — Typed shell, repeated/stale callbacks and Back verified in final 25-test API 34 suite; [evidence](verification/T-004/review-fixes.md). Full gameplay flow remains M1.7.
+- [ ] **M1.6** Create basic home screen. — Implemented with dual-score labels and proposed tablet composition; remaining visual/rotation/Studio validation in [worklog](worklog/T-004-2026-11-22.md).
 - [ ] **M1.7** Add the PLAY → mode selection → gameplay flow.
 
 ## Milestone 2 — Classic Game Engine
@@ -129,7 +132,7 @@ This is a roadmap tracker, not a detailed implementation plan or approval to sta
 
 ## Detailed records
 
-P-001–P-002, T-001–T-002, DD-001–DD-004, ISS-001–ISS-002 and the T-001 worklog are linked above. Keep implementation detail and actual verification evidence in those records.
+P-001–P-004, T-001–T-004, DD-001–DD-006, ISS-001–ISS-002 and the T-001/T-002 worklogs are linked above. P-003 is agreed; T-003 is complete. See the [T-003 worklog](worklog/T-003-2026-11-21.md). P-004/T-004 were planned under DD-006; Dev authorized Session B on 2026-11-22. T-004 is partial, with implementation/build/API 34 evidence in its worklog. Keep implementation detail and actual verification evidence in those records.
 
 | Record | Folder | Template |
 |---|---|---|

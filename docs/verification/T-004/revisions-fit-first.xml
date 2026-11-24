@@ -1,0 +1,112 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<testsuites tests="25" failures="6" errors="0" skipped="0" time="0.000" timestamp="2026-11-22T15:33:30" hostname="localhost">
+  <testsuite name="com.acp.snakemath.app.MainActivityTest" tests="1" failures="0" errors="0" skipped="0" time="11.542" timestamp="2026-11-22T15:33:30" hostname="localhost">
+    <properties>
+      <property name="device" value="emulator-5554" />
+    </properties>
+    <testcase name="launcherDisplaysHome" classname="com.acp.snakemath.app.MainActivityTest" time="11.542" />
+  </testsuite>
+  <testsuite name="com.acp.snakemath.app.navigation.SnakeMathNavigationTest" tests="8" failures="0" errors="0" skipped="0" time="49.659" timestamp="2026-11-22T15:33:30" hostname="localhost">
+    <properties>
+      <property name="device" value="emulator-5554" />
+    </properties>
+    <testcase name="staleSettingsActionCannotStackAfterModes" classname="com.acp.snakemath.app.navigation.SnakeMathNavigationTest" time="6.924" />
+    <testcase name="playOpensModesAndBackReturnsHome" classname="com.acp.snakemath.app.navigation.SnakeMathNavigationTest" time="7.328" />
+    <testcase name="homeIsStartAndRapidActionsKeepOneTarget" classname="com.acp.snakemath.app.navigation.SnakeMathNavigationTest" time="6.305" />
+    <testcase name="repeatedModesBackRetainsHome" classname="com.acp.snakemath.app.navigation.SnakeMathNavigationTest" time="5.502" />
+    <testcase name="staleModesBackCannotPopSettings" classname="com.acp.snakemath.app.navigation.SnakeMathNavigationTest" time="6.745" />
+    <testcase name="settingsOpensSettingsAndSystemBackReturnsHome" classname="com.acp.snakemath.app.navigation.SnakeMathNavigationTest" time="5.032" />
+    <testcase name="stalePlayActionCannotStackAfterSettings" classname="com.acp.snakemath.app.navigation.SnakeMathNavigationTest" time="5.919" />
+    <testcase name="repeatedSettingsBackRetainsHome" classname="com.acp.snakemath.app.navigation.SnakeMathNavigationTest" time="5.904" />
+  </testsuite>
+  <testsuite name="com.acp.snakemath.core.ui.components.HomeComponentsTest" tests="3" failures="0" errors="0" skipped="0" time="16.235" timestamp="2026-11-22T15:33:30" hostname="localhost">
+    <properties>
+      <property name="device" value="emulator-5554" />
+    </properties>
+    <testcase name="scorePanelKeepsTrophyBesideBothModeValues" classname="com.acp.snakemath.core.ui.components.HomeComponentsTest" time="4.576" />
+    <testcase name="settingsHasMinimumWidthAndVisibleCreamIcon" classname="com.acp.snakemath.core.ui.components.HomeComponentsTest" time="7.289" />
+    <testcase name="playHasVisibleTopGloss" classname="com.acp.snakemath.core.ui.components.HomeComponentsTest" time="4.370" />
+  </testsuite>
+  <testsuite name="com.acp.snakemath.core.ui.components.HomeLogoTest" tests="1" failures="0" errors="0" skipped="0" time="4.811" timestamp="2026-11-22T15:33:30" hostname="localhost">
+    <properties>
+      <property name="device" value="emulator-5554" />
+    </properties>
+    <testcase name="titleRowsHaveCompactBaselineSpacing" classname="com.acp.snakemath.core.ui.components.HomeLogoTest" time="4.811" />
+  </testsuite>
+  <testsuite name="com.acp.snakemath.feature.home.HomeFitAssertionsTest" tests="3" failures="0" errors="0" skipped="0" time="17.591" timestamp="2026-11-22T15:33:30" hostname="localhost">
+    <properties>
+      <property name="device" value="emulator-5554" />
+    </properties>
+    <testcase name="separationRejectsOverlappingSiblings" classname="com.acp.snakemath.feature.home.HomeFitAssertionsTest" time="7.029" />
+    <testcase name="containmentRejectsChildHiddenByClipping" classname="com.acp.snakemath.feature.home.HomeFitAssertionsTest" time="5.337" />
+    <testcase name="textCheckRejectsInternalOverflow" classname="com.acp.snakemath.feature.home.HomeFitAssertionsTest" time="5.225" />
+  </testsuite>
+  <testsuite name="com.acp.snakemath.feature.home.HomeScreenTest" tests="9" failures="6" errors="0" skipped="0" time="63.372" timestamp="2026-11-22T15:33:30" hostname="localhost">
+    <properties>
+      <property name="device" value="emulator-5554" />
+    </properties>
+    <testcase name="homeFitsReferencePhoneWithoutScrolling" classname="com.acp.snakemath.feature.home.HomeScreenTest" time="5.079">
+      <failure>java.lang.AssertionError: Text overflows: PLAY
+	at org.junit.Assert.fail(Assert.java:89)
+	at org.junit.Assert.assertTrue(Assert.java:42)
+	at org.junit.Assert.assertFalse(Assert.java:65)
+	at com.acp.snakemath.feature.home.HomeFitAssertionsKt.assertTextFits(HomeFitAssertions.kt:28)
+	at com.acp.snakemath.feature.home.HomeScreenTest.assertFits(HomeScreenTest.kt:51)
+	at com.acp.snakemath.feature.home.HomeScreenTest.homeFitsReferencePhoneWithoutScrolling(HomeScreenTest.kt:29)
+</failure>
+    </testcase>
+    <testcase name="actionsDispatchSeparateCallbacks" classname="com.acp.snakemath.feature.home.HomeScreenTest" time="8.032" />
+    <testcase name="homeFitsSmallPhoneWithoutScrolling" classname="com.acp.snakemath.feature.home.HomeScreenTest" time="6.478">
+      <failure>java.lang.AssertionError: Text overflows: PLAY
+	at org.junit.Assert.fail(Assert.java:89)
+	at org.junit.Assert.assertTrue(Assert.java:42)
+	at org.junit.Assert.assertFalse(Assert.java:65)
+	at com.acp.snakemath.feature.home.HomeFitAssertionsKt.assertTextFits(HomeFitAssertions.kt:28)
+	at com.acp.snakemath.feature.home.HomeScreenTest.assertFits(HomeScreenTest.kt:51)
+	at com.acp.snakemath.feature.home.HomeScreenTest.homeFitsSmallPhoneWithoutScrolling(HomeScreenTest.kt:28)
+</failure>
+    </testcase>
+    <testcase name="missingScoresAreUnavailable" classname="com.acp.snakemath.feature.home.HomeScreenTest" time="10.380" />
+    <testcase name="homeFitsSmallPhoneWithLargeTextWithoutScrolling" classname="com.acp.snakemath.feature.home.HomeScreenTest" time="5.561">
+      <failure>java.lang.AssertionError: Text overflows: PLAY
+	at org.junit.Assert.fail(Assert.java:89)
+	at org.junit.Assert.assertTrue(Assert.java:42)
+	at org.junit.Assert.assertFalse(Assert.java:65)
+	at com.acp.snakemath.feature.home.HomeFitAssertionsKt.assertTextFits(HomeFitAssertions.kt:28)
+	at com.acp.snakemath.feature.home.HomeScreenTest.assertFits(HomeScreenTest.kt:51)
+	at com.acp.snakemath.feature.home.HomeScreenTest.homeFitsSmallPhoneWithLargeTextWithoutScrolling(HomeScreenTest.kt:32)
+</failure>
+    </testcase>
+    <testcase name="homeFitsTabletWithLargeTextWithoutScrolling" classname="com.acp.snakemath.feature.home.HomeScreenTest" time="6.571">
+      <failure>java.lang.AssertionError: Text overflows: PLAY
+	at org.junit.Assert.fail(Assert.java:89)
+	at org.junit.Assert.assertTrue(Assert.java:42)
+	at org.junit.Assert.assertFalse(Assert.java:65)
+	at com.acp.snakemath.feature.home.HomeFitAssertionsKt.assertTextFits(HomeFitAssertions.kt:28)
+	at com.acp.snakemath.feature.home.HomeScreenTest.assertFits(HomeScreenTest.kt:51)
+	at com.acp.snakemath.feature.home.HomeScreenTest.homeFitsTabletWithLargeTextWithoutScrolling(HomeScreenTest.kt:31)
+</failure>
+    </testcase>
+    <testcase name="scoresRetainModeAssociation" classname="com.acp.snakemath.feature.home.HomeScreenTest" time="12.174" />
+    <testcase name="homeFitsTabletWithoutScrolling" classname="com.acp.snakemath.feature.home.HomeScreenTest" time="4.475">
+      <failure>java.lang.AssertionError: Text overflows: PLAY
+	at org.junit.Assert.fail(Assert.java:89)
+	at org.junit.Assert.assertTrue(Assert.java:42)
+	at org.junit.Assert.assertFalse(Assert.java:65)
+	at com.acp.snakemath.feature.home.HomeFitAssertionsKt.assertTextFits(HomeFitAssertions.kt:28)
+	at com.acp.snakemath.feature.home.HomeScreenTest.assertFits(HomeScreenTest.kt:51)
+	at com.acp.snakemath.feature.home.HomeScreenTest.homeFitsTabletWithoutScrolling(HomeScreenTest.kt:30)
+</failure>
+    </testcase>
+    <testcase name="homeFitsReferencePhoneWithLargeTextWithoutScrolling" classname="com.acp.snakemath.feature.home.HomeScreenTest" time="4.622">
+      <failure>java.lang.AssertionError: Text overflows: PLAY
+	at org.junit.Assert.fail(Assert.java:89)
+	at org.junit.Assert.assertTrue(Assert.java:42)
+	at org.junit.Assert.assertFalse(Assert.java:65)
+	at com.acp.snakemath.feature.home.HomeFitAssertionsKt.assertTextFits(HomeFitAssertions.kt:28)
+	at com.acp.snakemath.feature.home.HomeScreenTest.assertFits(HomeScreenTest.kt:51)
+	at com.acp.snakemath.feature.home.HomeScreenTest.homeFitsReferencePhoneWithLargeTextWithoutScrolling(HomeScreenTest.kt:33)
+</failure>
+    </testcase>
+  </testsuite>
+</testsuites>
