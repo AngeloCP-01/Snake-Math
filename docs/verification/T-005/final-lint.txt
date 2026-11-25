@@ -1,0 +1,145 @@
+C:\Users\ThinkPad\StudioProjects\Snake-Math\app\build.gradle.kts:17: Warning: Not targeting the latest versions of Android; compatibility modes apply. Consider testing and updating this version. Consult the android.os.Build.VERSION_CODES javadoc for details. [OldTargetApi]
+        targetSdk = 36
+        ~~~~~~~~~~~~~~
+
+   Explanation for issues of type "OldTargetApi":
+   When your application or sdk runs on a version of Android that is more
+   recent than your targetSdk specifies that it has been tested with, various
+   compatibility modes kick in. This ensures that your application continues
+   to work, but it may look out of place. For example, if the targetSdk is
+   less than 14, your app may get an option button in the UI.
+
+   To fix this issue, set the targetSdk to the highest available value. Then
+   test your app to make sure everything works correctly. You may want to
+   consult the compatibility notes to see what changes apply to each version
+   you are adding support for:
+   https://developer.android.com/reference/android/os/Build.VERSION_CODES.html
+   as well as follow this guide:
+   https://developer.android.com/distribute/best-practices/develop/target-sdk.
+   html
+
+   https://developer.android.com/distribute/best-practices/develop/target-sdk.html
+
+C:\Users\ThinkPad\StudioProjects\Snake-Math\app\src\main\AndroidManifest.xml:4: Warning: Attribute appCategory is only used in API level 26 and higher (current min is 23) [UnusedAttribute]
+        android:appCategory="game"
+        ~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+   Explanation for issues of type "UnusedAttribute":
+   This check finds attributes set in XML files that were introduced in a
+   version newer than the oldest version targeted by your application (with
+   the minSdkVersion attribute).
+
+   This is not an error; the application will simply ignore the attribute.
+   However, if the attribute is important to the appearance or functionality
+   of your application, you should consider finding an alternative way to
+   achieve the same result with only available attributes, and then you can
+   optionally create a copy of the layout in a layout-vNN folder which will be
+   used on API NN or higher where you can take advantage of the newer
+   attribute.
+
+   Note: This check does not only apply to attributes. For example, some tags
+   can be unused too, such as the new <tag> element in layouts introduced in
+   API 21.
+
+C:\Users\ThinkPad\StudioProjects\Snake-Math\gradle\wrapper\gradle-wrapper.properties:4: Warning: A newer version of Gradle than 9.6.0 is available: 9.9.2 [AndroidGradlePluginVersion]
+distributionUrl=https\://services.gradle.org/distributions/gradle-9.6.0-bin.zip
+                ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+C:\Users\ThinkPad\StudioProjects\Snake-Math\gradle\libs.versions.toml:3: Warning: A newer version of com.android.application than 9.4.0 is available: 9.5.2. (There is also a newer version of 9.4.𝑥 available, if upgrading to 9.5.2 is difficult: 9.4.1) [AndroidGradlePluginVersion]
+agp = "9.4.0"
+      ~~~~~~~
+
+   Explanation for issues of type "AndroidGradlePluginVersion":
+   This detector looks for usage of the Android Gradle Plugin where the
+   version you are using is not the current stable release. Using older
+   versions is fine, and there are cases where you deliberately want to stick
+   with an older version. However, you may simply not be aware that a more
+   recent version is available, and that is what this lint check helps find.
+
+C:\Users\ThinkPad\StudioProjects\Snake-Math\app\build.gradle.kts:11: Warning: A newer version of compileSdk than 36 is available: 37 [GradleDependency]
+    compileSdk = 36
+    ~~~~~~~~~~~~~~~
+C:\Users\ThinkPad\StudioProjects\Snake-Math\gradle\libs.versions.toml:5: Warning: A newer version of androidx.compose:compose-bom than 2025.11.01 is available: 2026.11.01 [GradleDependency]
+compose-bom = "2025.11.01"
+              ~~~~~~~~~~~~
+C:\Users\ThinkPad\StudioProjects\Snake-Math\gradle\libs.versions.toml:6: Warning: A newer version of androidx.activity:activity-compose than 1.11.0 is available: 1.13.0 [GradleDependency]
+activity = "1.11.0"
+           ~~~~~~~~
+C:\Users\ThinkPad\StudioProjects\Snake-Math\gradle\libs.versions.toml:9: Warning: A newer version of androidx.navigation:navigation-compose than 2.9.7 is available: 2.10.2 [GradleDependency]
+navigation = "2.9.7"
+             ~~~~~~~
+C:\Users\ThinkPad\StudioProjects\Snake-Math\gradle\libs.versions.toml:9: Warning: A newer version of androidx.navigation:navigation-testing than 2.9.7 is available: 2.10.2 [GradleDependency]
+navigation = "2.9.7"
+             ~~~~~~~
+
+   Explanation for issues of type "GradleDependency":
+   This detector looks for usages of libraries where the version you are using
+   is not the current stable release. Using older versions is fine, and there
+   are cases where you deliberately want to stick with an older version.
+   However, you may simply not be aware that a more recent version is
+   available, and that is what this lint check helps find.
+
+C:\Users\ThinkPad\StudioProjects\Snake-Math\gradle\libs.versions.toml:4: Warning: A newer version of org.jetbrains.kotlin.plugin.compose than 2.2.10 is available: 2.4.21 [NewerVersionAvailable]
+kotlin = "2.2.10"
+         ~~~~~~~~
+C:\Users\ThinkPad\StudioProjects\Snake-Math\gradle\libs.versions.toml:4: Warning: A newer version of org.jetbrains.kotlin.plugin.serialization than 2.2.10 is available: 2.4.21 [NewerVersionAvailable]
+kotlin = "2.2.10"
+         ~~~~~~~~
+C:\Users\ThinkPad\StudioProjects\Snake-Math\gradle\libs.versions.toml:10: Warning: A newer version of org.jetbrains.kotlinx:kotlinx-serialization-json than 1.9.0 is available: 1.13.0 [NewerVersionAvailable]
+serialization = "1.9.0"
+                ~~~~~~~
+
+   Explanation for issues of type "NewerVersionAvailable":
+   This detector checks with a central repository to see if there are newer
+   versions available for the dependencies used by this project. This is
+   similar to the GradleDependency check, which checks for newer versions
+   available in the Android SDK tools and libraries, but this works with any
+   MavenCentral dependency, and connects to the library every time, which
+   makes it more flexible but also much slower.
+
+C:\Users\ThinkPad\StudioProjects\Snake-Math\app\src\main\res\raw\baloo2_license.txt: Warning: The resource R.raw.baloo2_license appears to be unused [UnusedResources]
+C:\Users\ThinkPad\StudioProjects\Snake-Math\app\src\main\res\raw\nunito_license.txt: Warning: The resource R.raw.nunito_license appears to be unused [UnusedResources]
+
+   Explanation for issues of type "UnusedResources":
+   Unused resources make applications larger and slow down builds.
+
+
+   The unused resource check can ignore tests. If you want to include
+   resources that are only referenced from tests, consider packaging them in a
+   test source set instead.
+
+   You can include test sources in the unused resource check by setting the
+   system property lint.unused-resources.include-tests=true, and to exclude
+   them (usually for performance reasons), use
+   lint.unused-resources.exclude-tests=true.
+
+   Available options:
+
+   **skip-libraries** (default is true):
+   Whether the unused resource check should skip reporting unused resources in libraries.
+
+   Many libraries will declare resources that are part of the library surface; other modules depending on the library will also reference the resources. To avoid reporting all these resources as unused (in the context of a library), the unused resource check normally skips reporting unused resources in libraries. Instead, run the unused resource check on the consuming app module (along with `checkDependencies=true`).
+
+   However, there are cases where you want to check that all the resources declared in a library are used; in that case, you can disable the skip option.
+
+   To configure this option, use a `lint.xml` file with an <option> like this:
+
+   ```xml
+   <lint>
+       <issue id="UnusedResources">
+           <option name="skip-libraries" value="true" />
+       </issue>
+   </lint>
+   ```
+
+C:\Users\ThinkPad\StudioProjects\Snake-Math\app\src\main\AndroidManifest.xml:3: Warning: Should explicitly set android:icon, there is no default [MissingApplicationIcon]
+    <application
+     ~~~~~~~~~~~
+
+   Explanation for issues of type "MissingApplicationIcon":
+   You should set an icon for the application as whole because there is no
+   default. This attribute must be set as a reference to a drawable resource
+   containing the image (for example @drawable/icon).
+
+   https://developer.android.com/studio/publish/preparing#publishing-configure
+
+0 errors, 15 warnings

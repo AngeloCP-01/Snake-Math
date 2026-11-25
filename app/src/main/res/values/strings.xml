@@ -1,4 +1,21 @@
 <resources>
+    <string name="choose_mode">CHOOSE YOUR MODE</string>
+    <string name="classic_mode">CLASSIC APPLE</string>
+    <string name="mdas_mode">MDAS LEARNING</string>
+    <string name="classic_mode_copy">Wrap around the edges. Avoid your own body.</string>
+    <string name="mdas_mode_copy">Solve the question. Find its apple. Five lives to keep learning.</string>
+    <string name="play_classic">PLAY CLASSIC</string>
+    <string name="play_mdas">PLAY MDAS</string>
+    <string name="easy">Easy</string>
+    <string name="selected_level">Selected</string>
+    <string name="medium">Medium</string>
+    <string name="hard">Hard</string>
+    <string name="easy_guidance">Ages 6–7 · Addition and subtraction</string>
+    <string name="medium_guidance">Ages 8–9 · Addition, subtraction, multiplication and exact division</string>
+    <string name="hard_guidance">Ages 10–12 · Mixed operations and order of operations</string>
+    <string name="gameplay_unavailable">Gameplay is not available yet.</string>
+    <string name="back_modes">Back to modes</string>
+    <string name="home">Home</string>
     <string name="app_name">Snake &amp; Math</string>
     <string name="logo_snake">SNAKE</string>
     <string name="logo_math">&amp; MATH</string>

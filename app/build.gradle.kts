@@ -31,6 +31,7 @@ android {
 }
 
 dependencies {
+    testImplementation(libs.junit)
     implementation(libs.navigation.compose)
     implementation(libs.serialization.json)
     androidTestImplementation(libs.navigation.testing)
