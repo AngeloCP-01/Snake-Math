@@ -37,8 +37,11 @@ class SnakeMathNavigationTest {
         return controller
     }
 
-    private fun clickAction(label: String): () -> Boolean =
-        rule.onNodeWithText(label).fetchSemanticsNode().config[SemanticsActions.OnClick].action!!
+    private fun clickAction(label: String): () -> Boolean {
+        val node = rule.onNodeWithText(label)
+        if (label == "Back to Home") node.performScrollTo()
+        return node.fetchSemanticsNode().config[SemanticsActions.OnClick].action!!
+    }
 
     private fun assertRepeatedBack(label: String) {
         val controller = controlledHost()
@@ -59,7 +62,7 @@ class SnakeMathNavigationTest {
                 else controller.currentDestination?.hasRoute<Settings>() == true)
             assertEquals(1, controller.currentBackStack.value.count { it.destination.hasRoute<Modes>() || it.destination.hasRoute<Settings>() })
         }
-        rule.onNodeWithText("Back to Home").performClick()
+        rule.onNodeWithText("Back to Home").performScrollTo().performClick()
         rule.runOnIdle { assertTrue(controller.currentDestination?.hasRoute<Home>() == true) }
     }
 
@@ -67,7 +70,7 @@ class SnakeMathNavigationTest {
         val controller = controlledHost()
         rule.onNodeWithText("PLAY").performClick()
         val staleBack = clickAction("Back to Home")
-        rule.onNodeWithText("Back to Home").performClick()
+        rule.onNodeWithText("Back to Home").performScrollTo().performClick()
         rule.onNodeWithText("Settings").performClick()
         rule.runOnIdle { staleBack() }
         rule.runOnIdle { assertTrue(controller.currentDestination?.hasRoute<Settings>() == true) }
@@ -94,7 +97,7 @@ class SnakeMathNavigationTest {
                     if (label == "PLAY") it.destination.hasRoute<Modes>() else it.destination.hasRoute<Settings>()
                 })
             }
-            rule.onNodeWithText("Back to Home").performClick()
+            rule.onNodeWithText("Back to Home").performScrollTo().performClick()
             rule.runOnIdle { assertTrue(controller.currentDestination!!.hasRoute<Home>()) }
         }
     }
@@ -102,7 +105,7 @@ class SnakeMathNavigationTest {
     @Test fun playOpensModesAndBackReturnsHome() {
         rule.onNodeWithText("PLAY").performClick()
         rule.onNodeWithText("Modes").assertIsDisplayed()
-        rule.onNodeWithText("Back to Home").performClick()
+        rule.onNodeWithText("Back to Home").performScrollTo().performClick()
         rule.onNodeWithText("PLAY").assertIsDisplayed()
     }
 

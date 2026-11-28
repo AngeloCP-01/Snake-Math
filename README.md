@@ -1,5 +1,10 @@
 # Snake & Math
 
+T-005 adds Home → PLAY → Modes with inline MDAS difficulty and an explicitly
+non-playable destination. Gameplay engines and persisted best scores are still future
+work. See the [T-005 verification record](docs/verification/T-005/README.md) and
+[worklog](docs/worklog/T-005-2026-11-24.md) for actual native coverage and remaining checks.
+
 Native Android Snake game project using Kotlin and Jetpack Compose. The T-004
 foundation hosts a responsive, non-scrolling Home with bundled fonts/artwork,
 separate Classic/MDAS best-score labels and a tighter two-line title. PLAY and

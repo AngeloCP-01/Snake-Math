@@ -1,0 +1,20 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<testsuites tests="2" failures="1" errors="0" skipped="0" time="0.000" timestamp="2026-11-24T12:57:31" hostname="localhost">
+  <testsuite name="com.acp.snakemath.feature.modes.ModesScreenTest" tests="2" failures="1" errors="0" skipped="0" time="14.464" timestamp="2026-11-24T12:57:31" hostname="localhost">
+    <properties>
+      <property name="device" value="emulator-5554" />
+    </properties>
+    <testcase name="unavailableScoresAndSelectionDoNotStartGame" classname="com.acp.snakemath.feature.modes.ModesScreenTest" time="10.228">
+      <failure>java.lang.AssertionError: Failed: assertExists.
+Reason: Expected exactly '1' node but could not find any node that satisfies: (Text + InputText + EditableText contains 'Selected' (ignoreCase: false))
+
+	at androidx.compose.ui.test.SemanticsNodeInteraction.fetchOneOrThrow(SemanticsNodeInteraction.kt:178)
+	at androidx.compose.ui.test.SemanticsNodeInteraction.fetchOneOrThrow$default(SemanticsNodeInteraction.kt:150)
+	at androidx.compose.ui.test.SemanticsNodeInteraction.assertExists(SemanticsNodeInteraction.kt:125)
+	at androidx.compose.ui.test.SemanticsNodeInteraction.assertExists$default(SemanticsNodeInteraction.kt:124)
+	at com.acp.snakemath.feature.modes.ModesScreenTest.unavailableScoresAndSelectionDoNotStartGame(ModesScreenTest.kt:38)
+</failure>
+    </testcase>
+    <testcase name="displaysIndependentScoresAndModeActions" classname="com.acp.snakemath.feature.modes.ModesScreenTest" time="4.236" />
+  </testsuite>
+</testsuites>

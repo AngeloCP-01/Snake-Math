@@ -1,0 +1,23 @@
+[
+    {
+        "case":  "modes-hard",
+        "oldPid":  "31735",
+        "newPid":  "31985",
+        "task":  "451",
+        "launch":  "Starting: Intent { act=android.intent.action.MAIN cat=[android.intent.category.LAUNCHER] flg=0x10200000 cmp=com.acp.snakemath/.app.MainActivity }\nStatus: ok\nLaunchState: COLD\nActivity: com.acp.snakemath/.app.MainActivity\nTotalTime: 6383\nWaitTime: 6391\nComplete"
+    },
+    {
+        "case":  "classic-from-hard",
+        "oldPid":  "31985",
+        "newPid":  "32487",
+        "task":  "451",
+        "launch":  "Starting: Intent { act=android.intent.action.MAIN cat=[android.intent.category.LAUNCHER] flg=0x10200000 cmp=com.acp.snakemath/.app.MainActivity }\nStatus: ok\nLaunchState: COLD\nActivity: com.acp.snakemath/.app.MainActivity\nTotalTime: 6183\nWaitTime: 6192\nComplete"
+    },
+    {
+        "case":  "mdas-hard",
+        "oldPid":  "32487",
+        "newPid":  "724",
+        "task":  "451",
+        "launch":  "Starting: Intent { act=android.intent.action.MAIN cat=[android.intent.category.LAUNCHER] flg=0x10200000 cmp=com.acp.snakemath/.app.MainActivity }\nStatus: ok\nLaunchState: COLD\nActivity: com.acp.snakemath/.app.MainActivity\nTotalTime: 6089\nWaitTime: 6101\nComplete"
+    }
+]
